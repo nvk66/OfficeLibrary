@@ -1,34 +1,24 @@
 package ru.officelibrary.officelibrary.model;
 
-import lombok.NoArgsConstructor;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
 
-//@Builder
+@Builder
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "genres")
 public class Genre {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long genreID;
 
     @Column
+    @NotNull
     private String genreName;
-
-    public long getGenreID() {
-        return genreID;
-    }
-
-    public void setGenreID(long genreID) {
-        this.genreID = genreID;
-    }
-
-    public String getGenreName() {
-        return genreName;
-    }
-
-    public void setGenreName(String genreName) {
-        this.genreName = genreName;
-    }
 }

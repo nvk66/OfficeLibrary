@@ -1,41 +1,51 @@
 package ru.officelibrary.officelibrary.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Builder
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userID;
+    private long userId;
 
-    @Column
+    @Column(name = "name")
+    @NotNull
     private String name;
 
-    @Column
+    @Column(name = "last_name")
+    @NotNull
     private String lastName;
 
-    @Column
+    @Column(name = "patronymic_name")
+    @NotNull
     private String patronymicName;
 
-    @Column
+    @Column(name = "birth_date")
+    @NotNull
     private Date birthDate;
 
     @Column
-    private UserType userType;
+    @NotNull
+    private Long roleId;
 
-    public int getUserID() {
-        return userID;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -70,11 +80,17 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeEntity [id=" + userId + ", lastName=" + lastName + ", name=" + name +
+                ", patronymicName=" + patronymicName + ", birthDate=" + birthDate + "]";
     }
 }
