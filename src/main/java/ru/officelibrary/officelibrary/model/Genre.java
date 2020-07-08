@@ -14,11 +14,27 @@ import javax.persistence.*;
 @Table(name = "genres")
 public class Genre {
     @Id
-    @NotNull
+//    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long genreID;
+    private long genreId;
 
     @Column
     @NotNull
     private String genreName;
+
+    public String getGenreName() {
+        return genreName;
+    }
+
+    public void setGenreName(String genreName) {
+        this.genreName = genreName;
+    }
+
+    public long getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(long genreId) {
+        this.genreId = genreId;
+    }
 }

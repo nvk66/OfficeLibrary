@@ -4,11 +4,12 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Builder
 @Getter
 @Setter
-//@Entity
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "history")
@@ -18,19 +19,33 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long historyID;
 
-    @NotNull
-    @Column
-//    @OneToOne
-//    @JoinColumn(name = "userID")
+//    @NotNull
+//    @Column
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
-    @Column
-//    @OneToOne
-//    @JoinColumn(name = "bookID")
+//    @NotNull
+//    @Column
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
     private Book book;
 
     @NotNull
     @Column
     private Status status;
+
+    @NotNull
+    @Column
+    private Date startDate;
+
+    @NotNull
+    @Column
+    private Date dueTo;
+
+    @NotNull
+    @Column
+    private Date returnDate;
+
+
 }

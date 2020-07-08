@@ -35,8 +35,8 @@ public class AdminService {
         adminRepository.deleteById(id);
     }
 
-//    public User findUserByBookIDAndBusyStatus(long bookID){
-//        return adminRepository.findUserByBookIDAndBusyStatusParams(bookID);
+//    public List<User> search(long bookId){
+//        return adminRepository.search(bookId);
 //    }
 
     public List<User> listAll() {

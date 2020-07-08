@@ -38,6 +38,10 @@
                 <td><form:input path="birthDate" /></td>
             </tr>
             <tr>
+                <td>Role: </td>
+                <td><form:input path="role" /></td>
+            </tr>
+            <tr>
                 <td colspan="2"><input type="submit" value="Save"></td>
             </tr>
         </table>

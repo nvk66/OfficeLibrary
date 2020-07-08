@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: alexey
-  Date: 07.07.2020
-  Time: 13:24
+  Date: 08.07.2020
+  Time: 08:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -13,17 +13,17 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Edit Customer</title>
+    <title>Edit Book</title>
 </head>
 <body>
 <div align="center">
-    <h2>Edit Customer</h2>
-    <form:form action="save" method="post" modelAttribute="user">
+    <h2>Edit Book</h2>
+    <form:form action="save" method="post" modelAttribute="author">
         <table border="0" cellpadding="5">
             <tr>
                 <td>ID: </td>
-                <td>${user.userId}
-                    <form:hidden path="userId"/>
+                <td>${author.authorID}
+                    <form:hidden path="authorID"/>
                 </td>
             </tr>
             <tr>
@@ -39,14 +39,14 @@
                 <td><form:input path="patronymicName" /></td>
             </tr>
             <tr>
-                <td>BirthDate: </td>
-                <td><form:input path="birthDate" /></td>
+                <td>BirthYear: </td>
+                <td><form:input path="birthYear" /></td>
             </tr>
             <tr>
-                <td>Role: </td>
-                <td><form:input path="role" /></td>
+                <td>Biography: </td>
+                <td><form:input path="biography" /></td>
             </tr>
-                <td colspan="2"><input type="submit" value="Save"></td>
+            <td colspan="2"><input type="submit" value="Save"></td>
             </tr>
         </table>
     </form:form>

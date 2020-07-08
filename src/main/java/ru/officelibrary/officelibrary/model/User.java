@@ -36,9 +36,10 @@ public class User implements Serializable {
     @NotNull
     private Date birthDate;
 
-    @Column
+//    @Column
     @NotNull
-    private Long roleId;
+    @OneToOne
+    private Role role;
 
     public long getUserId() {
         return userId;
@@ -80,12 +81,12 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

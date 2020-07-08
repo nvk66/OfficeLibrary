@@ -7,15 +7,13 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-//@Entity
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "role")
 public class Role {
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private long roleId;
@@ -23,5 +21,19 @@ public class Role {
     @Column
     private String role;
 
+    public long getRoleId() {
+        return roleId;
+    }
 
+    public void setRoleId(long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
