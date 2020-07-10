@@ -16,10 +16,10 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private long roleId;
+    private Long roleId;
 
     @Column
-    private String role;
+    private UserType role;
 
     public long getRoleId() {
         return roleId;
@@ -29,11 +29,12 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public String getRole() {
-        return role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserType role) {
         this.role = role;
     }
+
 }

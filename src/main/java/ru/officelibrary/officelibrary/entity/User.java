@@ -91,7 +91,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "EmployeeEntity [id=" + userId + ", lastName=" + lastName + ", name=" + name +
+        return "User [id=" + userId + ", lastName=" + lastName + ", name=" + name +
                 ", patronymicName=" + patronymicName + ", birthDate=" + birthDate + "]";
     }
 }

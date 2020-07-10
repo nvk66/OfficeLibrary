@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Builder
 @Entity
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class Author {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long authorID;
+    private long authorId;
 
     @Column
     @NotNull
@@ -43,12 +44,12 @@ public class Author {
     @NotNull
     private String biography;
 
-    public long getAuthorID() {
-        return authorID;
+    public long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthorID(long authorID) {
-        this.authorID = authorID;
+    public void setAuthorId(long authorID) {
+        this.authorId = authorID;
     }
 
     public String getName() {
@@ -90,4 +91,10 @@ public class Author {
     public void setBiography(String biography) {
         this.biography = biography;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Author [id=" + authorId + ", lastName=" + lastName + ", name=" + name +
+//                ", patronymicName=" + patronymicName + ", birthYear=" + birthYear + ", biography=" + biography + "]";
+//    }
 }

@@ -37,4 +37,9 @@ public class Genre {
     public void setGenreId(long genreId) {
         this.genreId = genreId;
     }
+
+    @Override
+    public String toString() {
+        return "Genre [id=" + genreId + ", genreName=" + genreName + "]";
+    }
 }
