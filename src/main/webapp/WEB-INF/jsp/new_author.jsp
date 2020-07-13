@@ -13,11 +13,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>New Book</title>
+    <title>New Author</title>
 </head>
 <body>
 <div align="center">
-    <h2>New Book</h2>
+    <h2><a href="/author">Book</a></h2>
+    <h2>New Author</h2>
     <form:form action="save" method="post" modelAttribute="author">
         <table border="0" cellpadding="5">
             <tr>
@@ -33,12 +34,12 @@
                 <td><form:input path="patronymicName" /></td>
             </tr>
             <tr>
-                <td>PublishingYear: </td>
+                <td>BirthYear: </td>
                 <td><form:input path="birthYear" /></td>
             </tr>
             <tr>
-                <td>Genres: </td>
-                <td><form:input path="biography" /></td>
+                <td>Biography: </td>
+                <td><form:textarea path="biography" /></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Save"></td>

@@ -3,7 +3,7 @@ package ru.officelibrary.officelibrary.dto.mapper;
 import org.mapstruct.Mapper;
 import ru.officelibrary.officelibrary.dto.request.BookDtoRequest;
 import ru.officelibrary.officelibrary.dto.response.BookDtoResponse;
-import ru.officelibrary.officelibrary.model.Book;
+import ru.officelibrary.officelibrary.entity.Book;
 
 @Mapper
 public interface BookMapper {

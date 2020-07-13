@@ -3,19 +3,12 @@ package ru.officelibrary.officelibrary.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.officelibrary.officelibrary.model.Author;
-import ru.officelibrary.officelibrary.model.Book;
-import ru.officelibrary.officelibrary.model.Genre;
-import ru.officelibrary.officelibrary.model.User;
-import ru.officelibrary.officelibrary.service.AdminAuthorService;
-import ru.officelibrary.officelibrary.service.AdminBookService;
-import ru.officelibrary.officelibrary.service.AdminGenreService;
-import ru.officelibrary.officelibrary.service.AdminService;
+import ru.officelibrary.officelibrary.dto.request.BookDtoRequest;
+import ru.officelibrary.officelibrary.dto.request.UserDtoRequest;
+import ru.officelibrary.officelibrary.entity.*;
+import ru.officelibrary.officelibrary.service.*;
 
 import java.util.List;
 import java.util.Map;
@@ -27,32 +20,55 @@ public class MainController {
     //    private final AdminRepository adminRepository;
     @Autowired
     private AdminService adminService;
+    @Autowired
     private AdminBookService adminBookService;
+    @Autowired
     private AdminAuthorService adminAuthorService;
+    @Autowired
     private AdminGenreService adminGenreService;
+    @Autowired
+    private RoleService roleService;
 
+    @RequestMapping("/user")
+    public ModelAndView userHome(ModelMap model) {
+//        List<User> userList = adminService.userList();
+//        model.put("userList", userList);
+//        return "user";
+        List<User> listUser = adminService.userList();
+        ModelAndView mav = new ModelAndView("user");
+        mav.addObject("listUser", listUser);
+        return mav;
+    }
 
     @RequestMapping("/")
-    public String welcome(ModelMap model) {
-        List<User> listUser = adminService.userList();
-        model.put("list", listUser);
+    public String welcome() {
+//        model.put("message", "Welcome");
         return "index";
     }
 
-    @RequestMapping(value = "/new")
+    @RequestMapping(value = "user/new")
     public String newUserForm(Map<String, Object> model) {
-        User users = new User();
-        model.put("user", users);
+//        User users = new User();
+        UserDtoRequest userDtoRequest= new UserDtoRequest();
+        model.put("user", userDtoRequest);
+        List<Role> roleList = roleService.roleList();
+        model.put("role", roleList);
         return "new_user";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("user") User user) {
+    @RequestMapping(value = "user/new/save", method = RequestMethod.POST)
+    public String saveUser(@ModelAttribute("user") UserDtoRequest userDtoRequest) {
+        User user = new User();
+        user.setLastName(userDtoRequest.getLastName());
+        user.setName(userDtoRequest.getName());
+        user.setPatronymicName(userDtoRequest.getPatronymicName());
+        user.setBirthDate(userDtoRequest.getBirthDate());
+        user.setRole(roleService.findGenreByIdList(userDtoRequest.getRoleIds()));
         adminService.addUser(user);
-        return "redirect:/";
+        return "redirect:/user";
     }
 
-    @RequestMapping("/edit")
+    @RequestMapping("user/edit")
     public ModelAndView editUserForm(@RequestParam long id) {
         ModelAndView mav = new ModelAndView("edit_user");
         User user = adminService.getByID(id);
@@ -63,18 +79,37 @@ public class MainController {
     @RequestMapping("/delete")
     public String deleteUserForm(@RequestParam long id) {
         adminService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "book/new")
     public String newBookForm(Map<String, Object> model) {
-        Book book = new Book();
-        model.put("book", book);
+        BookDtoRequest bookDtoRequest = new BookDtoRequest();
+        model.put("book", bookDtoRequest);
+        List<Genre> genreList = adminGenreService.getAll();
+        List<Author> authorList = adminAuthorService.getAll();
+        model.put("genreList", genreList);
+        model.put("authorList", authorList);
         return "new_book";
     }
 
-    @RequestMapping(value = "book/save", method = RequestMethod.POST)
-    public String saveBook(@ModelAttribute("book") Book book) {
+    @RequestMapping("/book")
+    public ModelAndView bookHome() {
+        List<Book> listBook = adminBookService.getAll();
+        ModelAndView mav = new ModelAndView("book");
+        mav.addObject("listBook", listBook);
+        List<Author> authorList = adminAuthorService.getAll();
+        mav.addObject("author", authorList);
+        return mav;
+    }
+
+    @PostMapping(value = "book/new/save")
+    public String saveBook(@ModelAttribute("book") BookDtoRequest bookDtoRequest) {
+        Book book = new Book();
+        book.setBookName(bookDtoRequest.getBookName());
+        book.setAuthors(adminAuthorService.findAuthorByIdList(bookDtoRequest.getAuthorIds()));
+        book.setGenres(adminGenreService.findGenreByIdList(bookDtoRequest.getGenreIds()));
+        book.setPublishingYear(bookDtoRequest.getPublishingYear());
         adminBookService.addBook(book);
         return "redirect:/book";
     }
@@ -87,18 +122,18 @@ public class MainController {
         return mav;
     }
 
-    @RequestMapping("/book")
-    public ModelAndView bookHome() {
-        List<Book> listBook = adminBookService.getAll();
-        ModelAndView mav = new ModelAndView("book");
-        mav.addObject("listBook", listBook);
-        return mav;
-    }
-
     @RequestMapping("book/delete")
     public String deleteDeleteForm(@RequestParam long id) {
-        adminService.deleteUser(id);
+        adminBookService.deleteBook(id);
         return "redirect:book";
+    }
+
+    @RequestMapping("book/search")
+    public ModelAndView search(@RequestParam long id) {
+        List<Book> result = adminBookService.search(id);
+        ModelAndView mav = new ModelAndView("search");
+        mav.addObject("result", result);
+        return mav;
     }
 
     @RequestMapping("/author")
@@ -132,7 +167,7 @@ public class MainController {
 
     @RequestMapping("author/delete")
     public String deleteAuthorForm(@RequestParam long id) {
-        adminService.deleteUser(id);
+        adminAuthorService.deleteAuthor(id);
         return "redirect:author";
     }
 
@@ -163,6 +198,12 @@ public class MainController {
         Genre genre = adminGenreService.getById(id);
         mav.addObject("genres", genre);
         return mav;
+    }
+
+    @RequestMapping("genre/delete")
+    public String deleteGenreForm(@RequestParam long id) {
+        adminGenreService.deleteGenre(id);
+        return "redirect:/genre";
     }
 
 //    @RequestMapping("/search")

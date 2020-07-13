@@ -1,4 +1,4 @@
-package ru.officelibrary.officelibrary.model;
+package ru.officelibrary.officelibrary.entity;
 
 import lombok.*;
 
@@ -19,22 +19,21 @@ public class Role {
     private Long roleId;
 
     @Column
-    private UserType role;
+    private String roleName;
 
-    public long getRoleId() {
+    public Long getRoleId() {
         return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
     }
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public void setRole(UserType role) {
-        this.role = role;
+    public String getRoleName() {
+        return roleName;
     }
 
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 }

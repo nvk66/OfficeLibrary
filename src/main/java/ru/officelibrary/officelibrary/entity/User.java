@@ -1,4 +1,4 @@
-package ru.officelibrary.officelibrary.model;
+package ru.officelibrary.officelibrary.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -36,10 +37,13 @@ public class User implements Serializable {
     @NotNull
     private Date birthDate;
 
-//    @Column
     @NotNull
-    @OneToOne
-    private Role role;
+    @ManyToMany(fetch=FetchType.EAGER,
+            cascade= {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role;
 
     public long getUserId() {
         return userId;
@@ -81,17 +85,17 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public Role getRole() {
+    public Set<Role> getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Set<Role> role) {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + userId + ", lastName=" + lastName + ", name=" + name +
-                ", patronymicName=" + patronymicName + ", birthDate=" + birthDate + "]";
-    }
+    //    @Override
+//    public String toString() {
+//        return "User [id=" + userId + ", lastName=" + lastName + ", name=" + name +
+//                ", patronymicName=" + patronymicName + ", birthDate=" + birthDate + "]";
+//    }
 }

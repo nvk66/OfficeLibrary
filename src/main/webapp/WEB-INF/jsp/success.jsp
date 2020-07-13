@@ -7,10 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<html>
 <head>
-    <title>$Title$</title>
+    <title>Success</title>
 </head>
 <body>
-$END$
+Action was successful.
 </body>
 </html>

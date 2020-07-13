@@ -5,7 +5,7 @@
   Time: 08:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -18,6 +18,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 </head>
 <body>
 <div align="center">
+    <%@include file="head.jsp"%>
     <h2>Genre</h2>
     <form method="get" action="search">
         <input type="text" name="keyword" />
@@ -36,9 +37,9 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>${genre.genreId}</td>
                 <td>${genre.genreName}</td>
                 <td>
-                    <a href="/edit?id=${genre.genreId}">Edit</a>
+                    <a href="/genre/edit?id=${genre.genreId}">Edit</a>
 
-                    <a href="/delete?id=${genre.genreId}">Delete</a>
+                    <a href="/genre/delete?id=${genre.genreId}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

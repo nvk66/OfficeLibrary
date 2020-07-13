@@ -1,9 +1,10 @@
-package ru.officelibrary.officelibrary.model;
+package ru.officelibrary.officelibrary.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @ToString
 @Builder
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "authors")
-public class Author {
+public class Author implements Serializable {
 //    Автор
 //    ФИО
 //    год рождение
@@ -21,6 +22,7 @@ public class Author {
 
     @Id
     @NotNull
+    @ToString.Exclude
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long authorId;
 
@@ -42,6 +44,7 @@ public class Author {
 
     @Column
     @NotNull
+    @ToString.Exclude
     private String biography;
 
     public long getAuthorId() {
@@ -97,4 +100,8 @@ public class Author {
 //        return "Author [id=" + authorId + ", lastName=" + lastName + ", name=" + name +
 //                ", patronymicName=" + patronymicName + ", birthYear=" + birthYear + ", biography=" + biography + "]";
 //    }
+
+    public String concat(){
+        return this.lastName + " " + this.name + " " + this.patronymicName;
+    }
 }

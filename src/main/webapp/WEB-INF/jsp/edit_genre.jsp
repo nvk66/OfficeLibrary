@@ -18,11 +18,11 @@
 <body>
 <div align="center">
     <h2>Edit Genre</h2>
-    <form:form action="save" method="post" modelAttribute="genre">
+    <form:form action="save" method="post" modelAttribute="genres">
         <table border="0" cellpadding="5">
             <tr>
                 <td>ID: </td>
-                <td>${genre.genreId}
+                <td>${genres.genreId}
                     <form:hidden path="genreId"/>
                 </td>
             </tr>

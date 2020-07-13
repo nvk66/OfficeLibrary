@@ -16,15 +16,27 @@
     <title>New Genre</title>
 </head>
 <body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+    function checkParams() {
+        const genreName = $('#genreName').val();
+
+        if(genreName.length != 0) {
+            $('#submit').removeAttr('disabled');
+        } else {
+            $('#submit').attr('disabled', 'disabled');
+        }
+    }
+</script>
 <div align="center">
+    <h2><a href="/genre">Genre</a></h2>
     <h2>New Genre</h2>
     <form:form action="save" method="post" modelAttribute="genres">
         <table border="0" cellpadding="5">
             <tr>
                 <td>Name: </td>
-                <td><form:input path="genreName" /></td>
+                <td><form:input path="genreName" id="genreName" onkeypress="checkParams()" /></td>
             </tr>
-                <td colspan="2"><input type="submit" value="Save"></td>
+                <td colspan="2"><input type="button" id="submit" value="Save" disabled></td>
             </tr>
         </table>
     </form:form>

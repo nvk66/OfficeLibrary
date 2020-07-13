@@ -22,8 +22,8 @@
         <table border="0" cellpadding="5">
             <tr>
                 <td>ID: </td>
-                <td>${author.authorID}
-                    <form:hidden path="authorID"/>
+                <td>${author.authorId}
+                    <form:hidden path="authorId"/>
                 </td>
             </tr>
             <tr>

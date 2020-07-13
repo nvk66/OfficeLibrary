@@ -39,7 +39,9 @@
             </tr>
             <tr>
                 <td>Role: </td>
-                <td><form:input path="role" /></td>
+                <td>
+                    <form:select path="roleIds" items="${role}" multiple="true" itemLabel="roleName" itemValue="roleId"/>
+                </td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Save"></td>

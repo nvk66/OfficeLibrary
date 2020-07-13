@@ -3,7 +3,7 @@ package ru.officelibrary.officelibrary.dto.mapper;
 import org.mapstruct.Mapper;
 import ru.officelibrary.officelibrary.dto.request.AuthorDtoRequest;
 import ru.officelibrary.officelibrary.dto.response.AuthorDtoResponse;
-import ru.officelibrary.officelibrary.model.Author;
+import ru.officelibrary.officelibrary.entity.Author;
 
 @Mapper
 public interface AuthorMapper {

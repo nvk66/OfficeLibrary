@@ -21,20 +21,28 @@
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
-            <th>LastName</th>
-            <th>Name</th>
-            <th>PatronymicName</th>
-            <th>BirthDate</th>
-            <th>Role</th>
+            <th>BookName</th>
+            <th>Authors</th>
+            <th>Genres</th>
+            <th>PublishingYear</th>
+            <th>Actions</th>
         </tr>
-        <c:forEach items="${result}" var="user">
+        <c:forEach items="${result}" var="book">
             <tr>
-                <td>${user.userId}</td>
-                <td>${user.lastName}</td>
-                <td>${user.name}</td>
-                <td>${user.patronymicName}</td>
-                <td>${user.birthDate}</td>
-                <td>${user.role.role}</td>
+                <td>${book.bookId}</td>
+                <td>${book.bookName}</td>
+                <td>
+                    <c:forEach items="${book.authors}" var="author">
+                        <p>${author.concat()}</p>
+                    </c:forEach>
+                </td>
+                <td>
+                    <c:forEach items="${book.genres}" var="genres">
+                        <p>${genres.genreName}</p>
+                    </c:forEach>
+                </td>
+                <td>${book.publishingYear}</td>
+                <td> <a href="/book/reserve?id=${book.bookId}">Reserve</a></td>
             </tr>
         </c:forEach>
     </table>

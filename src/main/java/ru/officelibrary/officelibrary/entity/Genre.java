@@ -1,10 +1,13 @@
-package ru.officelibrary.officelibrary.model;
+package ru.officelibrary.officelibrary.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
+@ToString(exclude = "genreId")
 @Builder
 @Entity
 @NoArgsConstructor
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "genres")
-public class Genre {
+public class Genre implements Serializable {
     @Id
 //    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +23,8 @@ public class Genre {
 
     @Column
     @NotNull
+//    @UniqueElements
+    @Size(min = 3, max = 40)
     private String genreName;
 
     public String getGenreName() {
@@ -38,8 +43,8 @@ public class Genre {
         this.genreId = genreId;
     }
 
-    @Override
-    public String toString() {
-        return "Genre [id=" + genreId + ", genreName=" + genreName + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "Genre [id=" + genreId + ", genreName=" + genreName + "]";
+//    }
 }

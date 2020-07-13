@@ -1,7 +1,8 @@
-package ru.officelibrary.officelibrary.model;
+package ru.officelibrary.officelibrary.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import ru.officelibrary.officelibrary.model.Status;
 
 import javax.persistence.*;
 import java.sql.Date;

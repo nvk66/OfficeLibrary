@@ -5,7 +5,7 @@
   Time: 19:45
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -18,6 +18,8 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 </head>
 <body>
 <div align="center">
+    <%@include file="head.jsp"%>
+
     <h2>Authors</h2>
     <form method="get" action="search">
         <input type="text" name="keyword" />
@@ -37,16 +39,16 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <%--        <jsp:useBean id="listBook" scope="request" type="java.util.List"/>--%>
         <c:forEach items="${listAuthor}" var="author">
             <tr>
-                <td>${author.authorID}</td>
+                <td>${author.authorId}</td>
                 <td>${author.lastName}</td>
                 <td>${author.name}</td>
                 <td>${author.patronymicName}</td>
                 <td>${author.birthYear}</td>
-                <td>${author.biography}</td>
+                <td width="35%">${author.biography}</td>
                 <td>
-                    <a href="/edit?id=${author.authorID}">Edit</a>
+                    <a href="/author/edit?id=${author.authorId}">Edit</a>
 
-                    <a href="/delete?id=${author.authorID}">Delete</a>
+                    <a href="/author/delete?id=${author.authorId}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -1,4 +1,4 @@
-package ru.officelibrary.officelibrary.model;
+package ru.officelibrary.officelibrary.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+@Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,7 +42,6 @@ public class Book {
     @NotNull
     private Set<Genre> genres;
 
-//    @Column
     @NotNull
     @ManyToMany(fetch=FetchType.EAGER,
             cascade= {CascadeType.DETACH, CascadeType.MERGE,
