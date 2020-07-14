@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alexey
-  Date: 07.07.2020
-  Time: 13:39
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -22,7 +15,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 </script>
 <body>
 <div align="center">
-    <%@include file="head.jsp"%>
+    <%@include file="navigation.jsp"%>
     <h2>Books</h2>
 <%--            <form:select path="author" items="${author}" size="1" itemValue="authorId" id="searchAuthor">--%>
 <%--&lt;%&ndash;                <form:options>&ndash;%&gt;--%>
@@ -44,7 +37,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <h3><a href="/book/new/">New Book</a></h3>
     <table border="1" cellpadding="5">
         <tr>
-            <th>ID</th>
+<%--            <th>ID</th>--%>
             <th>BookName</th>
             <th>Authors</th>
             <th>Genres</th>
@@ -54,11 +47,11 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <%--        <jsp:useBean id="listBook" scope="request" type="java.util.List"/>--%>
         <c:forEach items="${listBook}" var="book">
             <tr>
-                <td>${book.bookId}</td>
+<%--                <td>${book.bookId}</td>--%>
                 <td>${book.bookName}</td>
                 <td>
                     <c:forEach items="${book.authors}" var="author">
-                        <p>${author.concat()}</p>
+                        <p><a href="/book/search?id=${author.authorId}"> ${author.concat()}<a/></p>
                     </c:forEach>
                 </td>
                 <td>
@@ -72,6 +65,8 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     <a href="/book/edit?id=${book.bookId}">Edit</a>
 
                     <a href="/book/delete?id=${book.bookId}">Delete</a>
+
+                    <a href="/book/reserve?id=${book.bookId}">Reserve</a>
                 </td>
             </tr>
         </c:forEach>

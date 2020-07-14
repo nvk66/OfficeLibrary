@@ -1,7 +1,7 @@
 package ru.officelibrary.officelibrary.dto.response;
 
 import lombok.*;
-import ru.officelibrary.officelibrary.model.UserType;
+import ru.officelibrary.officelibrary.common.UserType;
 
 import java.sql.Date;
 

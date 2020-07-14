@@ -18,7 +18,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 </head>
 <body>
 <div align="center">
-    <%@include file="head.jsp"%>
+    <%@include file="navigation.jsp"%>
     <h2>Genre</h2>
     <form method="get" action="search">
         <input type="text" name="keyword" />

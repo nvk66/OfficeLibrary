@@ -2,6 +2,7 @@ package ru.officelibrary.officelibrary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,6 +104,26 @@ public class MainController {
         return mav;
     }
 
+    @RequestMapping("/book/{id}")
+    public String viewBook(@PathVariable long id, Model model) {
+        model.addAttribute("book", adminBookService.get(id));
+        return "selected_book";
+    }
+
+    @RequestMapping("/author/{id}")
+    public String viewAuthor(@PathVariable long id, Model model) {
+        model.addAttribute("author", adminAuthorService.get(id));
+//        model.addAttribute("book", adminBookService.search(id));
+        return "selected_author";
+    }
+
+    @RequestMapping("/genre/{id}")
+    public String viewGenre(@PathVariable long id, Model model) {
+        model.addAttribute("genre", adminGenreService.getById(id));
+//        model.addAttribute("book", adminBookService.search(id));
+        return "selected_genre";
+    }
+
     @PostMapping(value = "book/new/save")
     public String saveBook(@ModelAttribute("book") BookDtoRequest bookDtoRequest) {
         Book book = new Book();
@@ -171,40 +192,88 @@ public class MainController {
         return "redirect:author";
     }
 
-    @RequestMapping("/genre")
-    public ModelAndView genreHome() {
-        List<Genre> listGenre = adminGenreService.getAll();
-        ModelAndView mav = new ModelAndView("genre");
-        mav.addObject("listGenre", listGenre);
-        return mav;
-    }
+//    @RequestMapping("/genre")
+//    public ModelAndView genreHome() {
+//        List<Genre> listGenre = adminGenreService.getAll();
+//        ModelAndView mav = new ModelAndView("genre");
+//        mav.addObject("listGenre", listGenre);
+//        return mav;
+//    }
+//
+////    @RequestMapping(value = "genre/new")
+////    public String newGenreForm(Map<String, Object> model) {
+////        Genre genre = new Genre();
+////        model.put("genres", genre);
+////        return "new_genre";
+////    }
+////
+////    @RequestMapping(value = "genre/save", method = RequestMethod.POST)
+////    public String saveGenre(@ModelAttribute("genres") Genre genre) {
+////        adminGenreService.addGenre(genre);
+////        return "redirect:/genre";
+////    }
+//
+//    @GetMapping(value = "genre/new")
+//    public ModelAndView newGenreForm(ModelAndView model) {
+//        Genre genre = new Genre();
+//        model.addObject("genres", genre);
+//        model.setViewName("");
+//    }
+//
+////    @RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
+////    public ModelAndView newContact(ModelAndView model) {
+////        Employee employee = new Employee();
+////        model.addObject("employee", employee);
+////        model.setViewName("EmployeeForm");
+////        return model;
+////    }
+////
+////    @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
+////    public ModelAndView saveEmployee(@ModelAttribute Employee employee) {
+////        if (employee.getId() == 0) { // if employee id is 0 then creating the
+////            // employee other updating the employee
+////            employeeService.addEmployee(employee);
+////        } else {
+////            employeeService.updateEmployee(employee);
+////        }
+////        return new ModelAndView("redirect:/");
+////    }
+////    @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
+////    public ModelAndView editContact(HttpServletRequest request) {
+////        int employeeId = Integer.parseInt(request.getParameter("id"));
+////        Employee employee = employeeService.getEmployee(employeeId);
+////        ModelAndView model = new ModelAndView("EmployeeForm");
+////        model.addObject("employee", employee);
+////
+////        return model;
+////    }
+//
+//    @RequestMapping("genre/edit")
+//    public ModelAndView editGenreForm(@RequestParam long id) {
+//        ModelAndView mav = new ModelAndView("edit_genre");
+//        Genre genre = adminGenreService.getById(id);
+//        mav.addObject("genres", genre);
+//        return mav;
+//    }
+//
+//    @RequestMapping("genre/delete")
+//    public String deleteGenreForm(@RequestParam long id) {
+//        adminGenreService.deleteGenre(id);
+//        return "redirect:/genre";
+//    }
 
-    @RequestMapping(value = "genre/new")
-    public String newGenreForm(Map<String, Object> model) {
-        Genre genre = new Genre();
-        model.put("genres", genre);
-        return "new_genre";
-    }
-
-    @RequestMapping(value = "genre/save", method = RequestMethod.POST)
-    public String saveGenre(@ModelAttribute("genres") Genre genre) {
-        adminGenreService.addGenre(genre);
-        return "redirect:/genre";
-    }
-
-    @RequestMapping("genre/edit")
-    public ModelAndView editGenreForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("edit_genre");
-        Genre genre = adminGenreService.getById(id);
-        mav.addObject("genres", genre);
-        return mav;
-    }
-
-    @RequestMapping("genre/delete")
-    public String deleteGenreForm(@RequestParam long id) {
-        adminGenreService.deleteGenre(id);
-        return "redirect:/genre";
-    }
+//    @RequestMapping(value = "book/reserve")
+//    public String newReservationForm(Map<String, Object> model) {
+//        History history = new History();
+//        model.put("reserve", history);
+//        return "new_genre";
+//    }
+//
+//    @PostMapping(value = "genre/save")
+//    public String saveReservation(@ModelAttribute("genres") Genre genre) {
+//        adminGenreService.addGenre(genre);
+//        return "redirect:/genre";
+//    }
 
 //    @RequestMapping("/search")
 //    public ModelAndView search(@RequestParam long bookId) {
