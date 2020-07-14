@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.Genre;
-import ru.officelibrary.officelibrary.repository.AdminGenreRepository;
+import ru.officelibrary.officelibrary.repository.GenreRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 @Service
 @Transactional
-public class AdminGenreService {
+public class GenreService {
     @Autowired
-    private AdminGenreRepository adminGenreRepository;
+    private GenreRepository genreRepository;
 
-    public AdminGenreService(AdminGenreRepository adminGenreRepository) {
-        this.adminGenreRepository = adminGenreRepository;
+    public GenreService(GenreRepository genreRepository) {
+        this.genreRepository = genreRepository;
     }
 
     public boolean isGenreAlreadyExists(String genre){
@@ -31,22 +31,22 @@ public class AdminGenreService {
     }
 
     public Genre addGenre(Genre genre){
-        return adminGenreRepository.save(genre);
+        return genreRepository.save(genre);
     }
 
     public void deleteGenre(long id){
-        adminGenreRepository.delete(getById(id));
+        genreRepository.delete(getById(id));
     }
 
     public Genre getById(long id){
-        return adminGenreRepository.findById(id).get();
+        return genreRepository.findById(id).get();
     }
 
     public List<Genre> getAll(){
-        return (List<Genre>) adminGenreRepository.findAll();
+        return (List<Genre>) genreRepository.findAll();
     }
 
     public Set<Genre> findGenreByIdList(String [] ids){
-        return adminGenreRepository.findGenreByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
+        return genreRepository.findGenreByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
     }
 }

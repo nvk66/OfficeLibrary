@@ -1,7 +1,7 @@
 package ru.officelibrary.officelibrary.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.officelibrary.officelibrary.service.AdminGenreService;
+import ru.officelibrary.officelibrary.service.GenreService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueGenreValidator implements ConstraintValidator<UniqueGenre, String> {
 
     @Autowired
-    private AdminGenreService adminGenreService;
+    private GenreService genreService;
 
     @Override
     public void initialize(UniqueGenre constraintAnnotation) {
@@ -17,6 +17,6 @@ public class UniqueGenreValidator implements ConstraintValidator<UniqueGenre, St
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return s != null && adminGenreService.isGenreAlreadyExists(s);
+        return s != null && genreService.isGenreAlreadyExists(s);
     }
 }

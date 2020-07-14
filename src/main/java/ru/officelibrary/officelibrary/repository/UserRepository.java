@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.officelibrary.officelibrary.entity.User;
 
 @Repository
-public interface AdminRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 }

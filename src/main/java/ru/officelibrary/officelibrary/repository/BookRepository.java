@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public interface AdminBookRepository extends CrudRepository<Book, Long> {
+public interface BookRepository extends CrudRepository<Book, Long> {
 
     @Query(value = "SELECT b FROM Book b WHERE b.authors IN :author", nativeQuery = true)
     List<Book> search(@Param("author") Set<Author> author);

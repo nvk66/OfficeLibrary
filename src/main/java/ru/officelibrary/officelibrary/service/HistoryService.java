@@ -4,30 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.History;
-import ru.officelibrary.officelibrary.repository.AdminHistoryRepository;
+import ru.officelibrary.officelibrary.repository.HistoryRepository;
 
 import java.util.List;
 
 @Service
 @Transactional
-public class AdminHistoryService {
+public class HistoryService {
     @Autowired
-    private AdminHistoryRepository adminHistoryRepository;
+    private HistoryRepository historyRepository;
 
-    public AdminHistoryService(AdminHistoryRepository adminHistoryRepository) {
-        this.adminHistoryRepository = adminHistoryRepository;
+    public HistoryService(HistoryRepository historyRepository) {
+        this.historyRepository = historyRepository;
     }
 
     public History addHistory(History history){
-        return adminHistoryRepository.save(history);
+        return historyRepository.save(history);
     }
 
     public History getById(long id){
-        return adminHistoryRepository.findById(id).get();
+        return historyRepository.findById(id).get();
     }
 
     public List<History> getAll(){
-        return (List<History>) adminHistoryRepository.findAll();
+        return (List<History>) historyRepository.findAll();
     }
 
 //    public List<History> search(Long id) {

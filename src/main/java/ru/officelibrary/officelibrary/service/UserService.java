@@ -5,34 +5,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.User;
-import ru.officelibrary.officelibrary.repository.AdminRepository;
+import ru.officelibrary.officelibrary.repository.UserRepository;
 
 import java.util.List;
 
 @Service
 @Transactional
-public class AdminService {
+public class UserService {
 
     @Autowired
-    private static AdminRepository adminRepository;
+    private static UserRepository userRepository;
 
-    public AdminService(AdminRepository adminRepository) {
-        AdminService.adminRepository = adminRepository;
+    public UserService(UserRepository userRepository) {
+        UserService.userRepository = userRepository;
     }
 
     public User addUser(User user) {
-        return adminRepository.save(user);
+        return userRepository.save(user);
     }
 
     public void deleteUser(long id) {
-        adminRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     public List<User> userList() {
-        return (List<User>) adminRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     public User getByID(long id){
-        return adminRepository.findById(id).get();
+        return userRepository.findById(id).get();
     }
 }
