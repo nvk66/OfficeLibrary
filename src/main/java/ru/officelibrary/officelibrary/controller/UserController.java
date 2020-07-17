@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.officelibrary.officelibrary.dto.request.UserDtoRequest;
+import ru.officelibrary.officelibrary.entity.Role;
 import ru.officelibrary.officelibrary.entity.User;
-import ru.officelibrary.officelibrary.service.BookService;
+import ru.officelibrary.officelibrary.service.RoleService;
 import ru.officelibrary.officelibrary.service.UserService;
 
 import java.util.List;
@@ -13,10 +15,9 @@ import java.util.List;
 @Controller
 public class UserController {
     @Autowired
-    private BookService bookService;
+    private RoleService roleService;
     @Autowired
     private UserService userService;
-
 
     @RequestMapping("/user")
     public ModelAndView userHome() {
@@ -28,8 +29,11 @@ public class UserController {
 
     @GetMapping(value = "user/new")
     public ModelAndView newUserForm(ModelAndView model) {
-        User user = new User();
-        model.addObject("user", user);
+//        User user = new User();
+        UserDtoRequest userDtoRequest = new UserDtoRequest();
+        model.addObject("user", userDtoRequest);
+        List<Role> roleList = roleService.roleList();
+        model.addObject("roleList", roleList);
         model.setViewName("UserForm");
         return model;
     }
@@ -38,12 +42,26 @@ public class UserController {
     public ModelAndView editUserForm(@RequestParam long id) {
         ModelAndView mav = new ModelAndView("UserForm");
         User user = userService.getByID(id);
-        mav.addObject("user", user);
+        UserDtoRequest userDtoRequest = new UserDtoRequest();
+        userDtoRequest.setLastName(user.getLastName());
+        userDtoRequest.setPatronymicName(user.getPatronymicName());
+        userDtoRequest.setName(user.getName());
+        userDtoRequest.setBirthDate(user.getBirthDate());
+        userDtoRequest.setUserId(user.getUserId());
+        userDtoRequest.setRoleIds((String[]) user.getRole().stream().map(Role::getRoleId).toArray());
+        mav.addObject("user", userDtoRequest);
         return mav;
     }
 
     @PostMapping(value = "user/save")
-    public ModelAndView saveUser(@ModelAttribute User user) {
+    public ModelAndView saveUser(@ModelAttribute UserDtoRequest userDtoRequest) {
+        User user = new User();
+        user.setUserId(userDtoRequest.getUserId());
+        user.setLastName(userDtoRequest.getLastName());
+        user.setName(userDtoRequest.getName());
+        user.setPatronymicName(userDtoRequest.getPatronymicName());
+        user.setBirthDate(userDtoRequest.getBirthDate());
+        user.setRole(roleService.findGenreByIdList(userDtoRequest.getRoleIds()));
         if (user.getUserId() == 0) {
             userService.addUser(user);
         } else {

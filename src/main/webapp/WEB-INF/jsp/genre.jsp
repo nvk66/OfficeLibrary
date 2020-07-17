@@ -15,6 +15,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Genre</title>
+    <%@include file="boot.jsp" %>
 </head>
 <body>
 <div align="center">

@@ -35,4 +35,8 @@ public class UserService {
     public User getByID(long id){
         return userRepository.findById(id).get();
     }
+
+    public User findUserByIdId(String ids){
+        return userRepository.findUserById(ids);
+    }
 }

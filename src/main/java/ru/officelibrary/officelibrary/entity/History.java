@@ -2,7 +2,6 @@ package ru.officelibrary.officelibrary.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
-import ru.officelibrary.officelibrary.common.Status;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -18,7 +17,7 @@ public class History {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long historyID;
+    private long historyId;
 
 //    @NotNull
 //    @Column
@@ -34,7 +33,7 @@ public class History {
 
     @NotNull
     @Column
-    private Status status;
+    private String stats;
 
     @NotNull
     @Column
@@ -42,17 +41,17 @@ public class History {
 
     @NotNull
     @Column
-    private Date dueTo;
+    private Date dueDate;
 
     @Column
     private Date returnDate;
 
-    public long getHistoryID() {
-        return historyID;
+    public long getHistoryId() {
+        return historyId;
     }
 
-    public void setHistoryID(long historyID) {
-        this.historyID = historyID;
+    public void setHistoryId(long historyID) {
+        this.historyId = historyID;
     }
 
     public User getUser() {
@@ -71,12 +70,12 @@ public class History {
         this.book = book;
     }
 
-    public Status getStatus() {
-        return status;
+    public String getStats() {
+        return stats;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStats(String status) {
+        this.stats = status;
     }
 
     public Date getStartDate() {
@@ -87,12 +86,12 @@ public class History {
         this.startDate = startDate;
     }
 
-    public Date getDueTo() {
-        return dueTo;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public void setDueTo(Date dueTo) {
-        this.dueTo = dueTo;
+    public void setDueDate(Date dueTo) {
+        this.dueDate = dueTo;
     }
 
     public Date getReturnDate() {

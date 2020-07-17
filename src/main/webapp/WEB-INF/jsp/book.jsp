@@ -8,6 +8,8 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Books</title>
+    <%@include file="boot.jsp" %>
+
 </head>
 <script>
     var author = document.getElementById('searchAuthor');
@@ -51,7 +53,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>${book.bookName}</td>
                 <td>
                     <c:forEach items="${book.authors}" var="author">
-                        <p><a href="/book/search?id=${author.authorId}"> ${author.concat()}<a/></p>
+                        <p><a href="/book/search/${author.authorId}"> ${author.concat()}<a/></p>
                     </c:forEach>
                 </td>
                 <td>
@@ -62,11 +64,11 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
                 <td>${book.publishingYear}</td>
                 <td>
-                    <a href="/book/edit?id=${book.bookId}">Edit</a>
+                    <a href="/book/edit/${book.bookId}">Edit</a>
 
-                    <a href="/book/delete?id=${book.bookId}">Delete</a>
+                    <a href="/book/delete/${book.bookId}">Delete</a>
 
-                    <a href="/book/reserve?id=${book.bookId}">Reserve</a>
+                    <a href="/book/reserve/${book.bookId}/">Reserve</a>
                 </td>
             </tr>
         </c:forEach>

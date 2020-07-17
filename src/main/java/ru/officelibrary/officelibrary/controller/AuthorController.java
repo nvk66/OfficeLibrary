@@ -8,7 +8,9 @@ import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.service.AuthorService;
 import ru.officelibrary.officelibrary.service.BookService;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AuthorController {
@@ -20,13 +22,13 @@ public class AuthorController {
 
     @RequestMapping("/author")
     public ModelAndView authorHome() {
-        List<Author> listAuthor = authorService.getAll();
+        List<Author> listAuthor = authorService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         ModelAndView mav = new ModelAndView("author");
         mav.addObject("listAuthor", listAuthor);
         return mav;
     }
 
-    @GetMapping(value = "author/new")
+    @GetMapping(value = "/new")
     public ModelAndView newAuthorForm(ModelAndView model) {
         Author author = new Author();
         model.addObject("author", author);

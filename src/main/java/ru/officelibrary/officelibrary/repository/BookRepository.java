@@ -15,4 +15,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     @Query(value = "SELECT b FROM Book b WHERE b.authors IN :author", nativeQuery = true)
     List<Book> search(@Param("author") Set<Author> author);
+
+    @Query(value = "SELECT a FROM Author a WHERE a.authorId IN :ids")
+    Book findBookById(@Param("ids") String ids);
 }

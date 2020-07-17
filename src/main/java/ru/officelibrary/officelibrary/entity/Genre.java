@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "genres")
-public class Genre implements Serializable {
+public class Genre implements Serializable, Comparable<Genre>{
     @Id
 //    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,7 @@ public class Genre implements Serializable {
 
     @Column
     @NotNull
+//    @NotBlank
 //    @UniqueElements
     @Size(min = 3, max = 40)
     private String genreName;
@@ -43,6 +44,10 @@ public class Genre implements Serializable {
         this.genreId = genreId;
     }
 
+    @Override
+    public int compareTo(Genre genre) {
+        return this.genreName.toLowerCase().compareTo(genre.getGenreName().toLowerCase());
+    }
 //    @Override
 //    public String toString() {
 //        return "Genre [id=" + genreId + ", genreName=" + genreName + "]";

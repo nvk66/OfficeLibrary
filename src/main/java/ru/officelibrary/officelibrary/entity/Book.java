@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "books")
-public class Book {
+public class Book implements Comparable<Book>{
 //    Книга
 //    название
 //    год издания
@@ -88,5 +88,10 @@ public class Book {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    @Override
+    public int compareTo(Book book) {
+        return this.bookName.toLowerCase().compareTo(book.getBookName().toLowerCase());
     }
 }

@@ -53,4 +53,8 @@ public class BookService {
 //        return adminBookRepository.search(Collections.singleton(adminAuthorService.get(id)));
 //        return adminBookRepository.search(adminAuthorService.get(id));
     }
+
+    public Book findBookById(String ids){
+        return bookRepository.findBookById(ids);
+    }
 }

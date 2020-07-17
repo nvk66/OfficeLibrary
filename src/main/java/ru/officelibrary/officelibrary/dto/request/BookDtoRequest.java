@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDtoRequest {
+    private long bookId;
     private String bookName;
     private int publishingYear;
     private String[] genreIds;
@@ -43,5 +44,13 @@ public class BookDtoRequest {
 
     public void setAuthorIds(String[] authorIds) {
         this.authorIds = authorIds;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
     }
 }

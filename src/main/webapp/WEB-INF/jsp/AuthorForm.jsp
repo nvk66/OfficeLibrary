@@ -7,12 +7,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>New/Edit Author</title>
+    <%@include file="boot.jsp"%>
 </head>
 <body>
 <div align="center">
     <h2><a href="/author">Authors</a></h2>
     <h1>New/Edit Author</h1>
     <form:form action="save" method="post" modelAttribute="author">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
         <table>
             <form:hidden path="authorId"/>
             <tr>
@@ -36,9 +40,12 @@
                 <td><form:input path="biography" /></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" value="Save"></td>
+                <td colspan="2" align="center"><input type="submit" value="Save" class="btn btn-primary"></td>
             </tr>
         </table>
+            </div>
+        </div>
+    </div>
     </form:form>
 </div>
 </body>

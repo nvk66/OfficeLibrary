@@ -93,6 +93,10 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public String userInfo (){
+        return lastName + " " + name + " " + patronymicName;
+    }
+
     //    @Override
 //    public String toString() {
 //        return "User [id=" + userId + ", lastName=" + lastName + ", name=" + name +
