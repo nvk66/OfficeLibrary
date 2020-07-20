@@ -41,9 +41,7 @@ public class Author implements Serializable, Comparable<Author> {
     private String lastName;
 
     @Column
-    @NotNull
-    @NotBlank
-    @Size(min=2, max= 40)
+    @Size(max= 40)
     private String patronymicName;
 
     @Column

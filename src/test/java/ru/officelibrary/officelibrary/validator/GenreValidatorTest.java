@@ -43,8 +43,8 @@ class GenreValidatorTest {
         Assertions.assertEquals(0, error.getErrorCount());
         error = new BeanPropertyBindingResult(genre, "genre");
 
-        genre.setGenreName("GenreGenreGenreGenreGenreGenreGenreGenre");
+        genre.setGenreName("GenreGenreGenreGenreGenreGenreGenreGenrea");
         genreValidator.validate(genre, error);
-        Assertions.assertEquals(1, error.getErrorCount());
+        Assertions.assertEquals(2, error.getErrorCount());
     }
 }

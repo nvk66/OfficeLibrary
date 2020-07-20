@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import java.util.List;
 //import java.util.Map;
 //
-//@RestController
 @Controller
 public class MainController {
     //

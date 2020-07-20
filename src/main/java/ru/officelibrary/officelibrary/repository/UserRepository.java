@@ -10,4 +10,7 @@ import ru.officelibrary.officelibrary.entity.User;
 public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "SELECT u FROM User u WHERE u.userId IN :ids")
     User findUserById(@Param("ids") String ids);
+
+    @Query(value = "SELECT u FROM User u WHERE u.email = :email")
+    User findUserByEmail(@Param("email") String email);
 }

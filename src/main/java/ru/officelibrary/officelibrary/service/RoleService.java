@@ -25,8 +25,16 @@ public class RoleService {
         return (List<Role>) roleRepository.findAll();
     }
 
-    public Set<Role> findGenreByIdList(String [] ids){
+    public Set<Role> findRoleByIdList(String [] ids){
         return roleRepository.findRoleByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
+    }
+
+    public Role getRole(Long id){
+        return roleRepository.findById(id).get();
+    }
+
+    public Role getRole(String roleName){
+        return roleRepository.findRoleByRoleName(roleName);
     }
 
 }

@@ -4,9 +4,11 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
+import java.util.List;
 
 @Builder
 @Getter
@@ -30,7 +32,6 @@ public class User implements Serializable {
     private String lastName;
 
     @Column(name = "patronymic_name")
-    @NotNull
     private String patronymicName;
 
     @Column(name = "birth_date")
@@ -43,7 +44,20 @@ public class User implements Serializable {
                     CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role;
+    private List<Role> role;
+
+    @Column(name ="email")
+    @NotNull
+    @NotEmpty
+    @Size(min = 5, max = 50)
+    private String email;
+
+    @Column(name ="password")
+    @NotNull
+    @NotEmpty
+    @Size(min = 8, max = 32)
+    private String password;
+
 
     public long getUserId() {
         return userId;
@@ -85,16 +99,32 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public Set<Role> getRole() {
+    public List<Role> getRole() {
         return role;
     }
 
-    public void setRole(Set<Role> role) {
+    public void setRole(List<Role> role) {
         this.role = role;
     }
 
     public String userInfo (){
         return lastName + " " + name + " " + patronymicName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String login) {
+        this.email = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     //    @Override

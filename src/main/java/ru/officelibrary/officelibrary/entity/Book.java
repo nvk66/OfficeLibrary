@@ -14,11 +14,6 @@ import java.util.Set;
 @Setter
 @Table(name = "books")
 public class Book implements Comparable<Book>{
-//    Книга
-//    название
-//    год издания
-//    жанр
-
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +27,6 @@ public class Book implements Comparable<Book>{
     @NotNull
     private int publishingYear;
 
-    //наверное жанр тоже можно сделать через enum и загнать туда все жанры
     @Column
     @ManyToMany(fetch=FetchType.EAGER,
             cascade= {CascadeType.DETACH, CascadeType.MERGE,

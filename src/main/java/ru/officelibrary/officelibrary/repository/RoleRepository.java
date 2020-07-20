@@ -13,5 +13,8 @@ import java.util.Set;
 public interface RoleRepository extends CrudRepository<Role, Long> {
     @Query(value = "SELECT r FROM Role r WHERE r.roleId IN :ids")
     Set<Role> findRoleByIdList(@Param("ids") Collection<Long> ids);
+
+    @Query(value = "SELECT r FROM Role r WHERE LOWER(r.roleName)  = LOWER(:roleName)")
+    Role findRoleByRoleName(@Param("roleName") String roleName);
 }
 

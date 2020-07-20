@@ -7,10 +7,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>New/Edit User</title>
+    <title>Registration</title>
     <%@include file="boot.jsp" %>
 
-<%--    --%>
+    <%--    --%>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -21,13 +21,12 @@
             $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd', maxDate: '-3650' });
         } );
     </script>
-<%--    --%>
+    <%--    --%>
 </head>
 <body>
 <div align="center">
-    <h2><a href="/user">Users</a></h2>
-    <h1>New/Edit User</h1>
-    <form:form action="/" method="post" modelAttribute="user">
+    <h1>Registration</h1>
+    <form:form action="/registration" method="post" modelAttribute="user">
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -50,13 +49,16 @@
                             <td><form:input id="datepicker" path="birthDate"/></td>
                         </tr>
                         <tr>
-                            <td>Role: </td>
-                            <td>
-                                <form:select path="roleIds" items="${roleList}" multiple="true" itemLabel="roleName" itemValue="roleId"/>
-                            </td>
+                            <td>Email:</td>
+                            <td><form:input path="email"/></td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="center"><input type="submit" value="Save" class="btn btn-primary">
+                            <td>Password:</td>
+                            <td><form:input path="password"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <input type="submit" value="Save" class="btn btn-primary">
                             </td>
                         </tr>
                     </table>

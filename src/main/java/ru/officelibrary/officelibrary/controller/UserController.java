@@ -29,7 +29,6 @@ public class UserController {
 
     @GetMapping(value = "user/new")
     public ModelAndView newUserForm(ModelAndView model) {
-//        User user = new User();
         UserDtoRequest userDtoRequest = new UserDtoRequest();
         model.addObject("user", userDtoRequest);
         List<Role> roleList = roleService.roleList();
@@ -61,7 +60,7 @@ public class UserController {
         user.setName(userDtoRequest.getName());
         user.setPatronymicName(userDtoRequest.getPatronymicName());
         user.setBirthDate(userDtoRequest.getBirthDate());
-        user.setRole(roleService.findGenreByIdList(userDtoRequest.getRoleIds()));
+//        user.setRole(roleService.findRoleByIdList(userDtoRequest.getRoleIds()));
         if (user.getUserId() == 0) {
             userService.addUser(user);
         } else {
