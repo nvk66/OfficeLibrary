@@ -40,7 +40,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>
                     <a href="/genre/edit?id=${genre.genreId}">Edit</a>
 
-                    <a href="/genre/delete?id=${genre.genreId}">Delete</a>
+                    <a href="/genre/id=${genre.genreId}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.validation.BeanPropertyBindingResult;
 import ru.officelibrary.officelibrary.entity.User;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 class UserValidatorTest {
     UserValidator userValidator;
 
@@ -21,6 +24,7 @@ class UserValidatorTest {
         BeanPropertyBindingResult error = new BeanPropertyBindingResult(user, "user");
         user.setName("");
         user.setLastName("LastName");
+        user.setBirthDate(Date.valueOf(LocalDate.now().minusDays(3650)));
         userValidator.validate(user, error);
         Assertions.assertEquals(1, error.getErrorCount());
 
@@ -75,5 +79,11 @@ class UserValidatorTest {
         user.setPatronymicName("Я-Русский");
         userValidator.validate(user, error);
         Assertions.assertEquals(0, error.getErrorCount());
+
+        error = new BeanPropertyBindingResult(user, "user");
+        user.setBirthDate(Date.valueOf(LocalDate.now().minusDays(3653)));
+        Assertions.assertEquals(0, error.getErrorCount());
+
+
     }
 }

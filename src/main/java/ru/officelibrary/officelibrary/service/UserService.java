@@ -1,6 +1,8 @@
 package ru.officelibrary.officelibrary.service;
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.dto.request.UserDtoRequest;
@@ -8,6 +10,7 @@ import ru.officelibrary.officelibrary.entity.User;
 import ru.officelibrary.officelibrary.repository.RoleRepository;
 import ru.officelibrary.officelibrary.repository.UserRepository;
 
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class UserService {
     private final UserRepository userRepository;
 //    @Autowired
     private final RoleRepository roleRepository;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -56,7 +61,7 @@ public class UserService {
         User user = new User();
         user.setName(userDto.getName());
         user.setLastName(userDto.getLastName());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
         user.setRole(Collections.singletonList(roleRepository.findRoleByRoleName("User")));
         user.setPatronymicName(userDto.getPatronymicName());

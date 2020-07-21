@@ -4,6 +4,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.officelibrary.officelibrary.entity.Book;
 
+import java.util.Calendar;
+
 public class BookValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
@@ -19,12 +21,12 @@ public class BookValidator implements Validator {
             if (book.getBookName().length() < 1 || book.getBookName().length() > 200) {
                 errors.reject("name", "Message is too small or too long");
             }
-            if (!book.getBookName().matches("[a-zA-z0-9[\\u0401\\u0451\\u0410-\\u044f]\\- ,!?&@#$%^*()+_=\\\\\"']{2,200}")) {
+            if (!book.getBookName().matches("[a-zA-z0-9А-Яа-я\\- ,!?&@#$%^*()+_=\\\\\"']{2,200}")) {
                 errors.reject("name", "Input error");
             }
         }
-
-        if (book.getPublishingYear() < -2000 && book.getPublishingYear() > 2020){
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        if (book.getPublishingYear() < -2000 || book.getPublishingYear() > year){
             errors.reject("publishingYear", "Input error");
         }
     }

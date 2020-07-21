@@ -46,7 +46,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>${user.patronymicName}</td>
                 <td>${user.birthDate}</td>
                 <td>
-                    <c:forEach items="${user.role}" var="roles">
+                    <c:forEach items="${user.roles}" var="roles">
                         <p>${roles.roleName}</p>
                     </c:forEach>
                 </td>

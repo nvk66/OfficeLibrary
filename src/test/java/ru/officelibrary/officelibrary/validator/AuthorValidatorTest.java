@@ -100,5 +100,19 @@ class AuthorValidatorTest {
         author.setBiography("I was born in the heart of Siberia with an awesome smile &&&");
         authorValidator.validate(author, error);
         Assertions.assertEquals(1, error.getErrorCount());
+
+        error = new BeanPropertyBindingResult(author, "author");
+        author.setPatronymicName("Petro-Petro");
+        author.setBiography("I was born in the heart of Siberia with an awesome smile");
+        author.setBirthYear(2011);
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+
+        error = new BeanPropertyBindingResult(author, "author");
+        author.setPatronymicName("Petro-Petro");
+        author.setBiography("I was born in the heart of Siberia with an awesome smile");
+        author.setBirthYear(2009);
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(0, error.getErrorCount());
     }
 }

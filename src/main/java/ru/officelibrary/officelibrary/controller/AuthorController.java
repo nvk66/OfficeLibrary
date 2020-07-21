@@ -32,13 +32,13 @@ public class AuthorController {
     public ModelAndView newAuthorForm(ModelAndView model) {
         Author author = new Author();
         model.addObject("author", author);
-        model.setViewName("AuthorForm");
+        model.setViewName("form_history");
         return model;
     }
 
     @GetMapping("author/edit")
     public ModelAndView editAuthorForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("AuthorForm");
+        ModelAndView mav = new ModelAndView("form_history");
         Author author = authorService.get(id);
         mav.addObject("author", author);
         return mav;
@@ -60,4 +60,5 @@ public class AuthorController {
         authorService.deleteAuthor(id);
         return "redirect:/author";
     }
+
 }

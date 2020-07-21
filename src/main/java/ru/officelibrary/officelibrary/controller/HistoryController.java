@@ -31,7 +31,7 @@ public class HistoryController {
     public ModelAndView newGenreForm(ModelAndView model) {
         History history = new History();
         model.addObject("history", history);
-        model.setViewName("HistoryForm");
+        model.setViewName("from_history");
         return model;
     }
 

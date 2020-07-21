@@ -4,6 +4,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.officelibrary.officelibrary.entity.Author;
 
+import java.util.Calendar;
+
 public class AuthorValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
@@ -36,12 +38,13 @@ public class AuthorValidator implements Validator {
         }
 
         if (author.getPatronymicName() != null && !author.getPatronymicName().isEmpty()) {
-            if (!author.getPatronymicName().matches("[a-zA-z[\\u0401\\u0451\\u0410-\\u044f]\\-]{3,40}")) {
+            if (!author.getPatronymicName().matches("[a-zA-zА-Яа-я\\-]{3,40}")) {
                 errors.reject("patronymicName", "Input error");
             }
         }
 
-        if (author.getBirthYear() < -2000 || author.getBirthYear() > 2010){
+        int year = Calendar.getInstance().get(Calendar.YEAR) - 10;
+        if (author.getBirthYear() < -2000 || author.getBirthYear() > year){
             errors.reject("birthYear", "InputError");
         }
 

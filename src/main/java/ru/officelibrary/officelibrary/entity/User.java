@@ -55,7 +55,7 @@ public class User implements Serializable {
     @Column(name ="password")
     @NotNull
     @NotEmpty
-    @Size(min = 8, max = 32)
+    @Size(min = 8, max = 1000)
     private String password;
 
 
@@ -99,7 +99,7 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public List<Role> getRole() {
+    public List<Role> getRoles() {
         return role;
     }
 

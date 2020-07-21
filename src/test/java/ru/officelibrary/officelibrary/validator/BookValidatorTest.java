@@ -36,5 +36,11 @@ class BookValidatorTest {
         book.setBookName("Book & 9 1 0 !?@#$*&^");
         bookValidator.validate(book, error);
         Assertions.assertEquals(0, error.getErrorCount());
+
+        error = new BeanPropertyBindingResult(book, "book");
+        book.setBookName("Book & 9 1 0 !?@#$*&^");
+        book.setPublishingYear(2020);
+        bookValidator.validate(book, error);
+        Assertions.assertEquals(0, error.getErrorCount());
     }
 }

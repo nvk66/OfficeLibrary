@@ -40,5 +40,10 @@ public class UserValidator implements Validator {
                 errors.reject("patronymicName", "Input error");
             }
         }
+
+//        Date date = Date.valueOf(LocalDate.now().minusDays(3652));
+//        if (user.getBirthDate().after(date)){
+//            errors.reject("birthYear", "InputError");
+//        }
     }
 }

@@ -31,9 +31,8 @@ public class MyUserDetailsService implements UserDetailsService {
                     "No user found with username: "+ email);
         }
         return new org.springframework.security.core.userdetails.User
-                (user.getEmail(),
-                        user.getPassword().toLowerCase(), true, true,
-                        true, true, getAuthorities(user.getRole()));
+                (user.getEmail(), user.getPassword(), true, true,
+                        true, true, getAuthorities(user.getRoles()));
     }
 
     private static List<GrantedAuthority> getAuthorities (List<Role> roles) {

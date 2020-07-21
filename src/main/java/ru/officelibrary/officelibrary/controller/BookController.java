@@ -57,13 +57,13 @@ public class BookController {
         List<Author> authorList = authorService.getAll();
         model.addObject("genreList", genreList);
         model.addObject("authorList", authorList);
-        model.setViewName("BookForm");
+        model.setViewName("form_book");
         return model;
     }
 
     @GetMapping("book/edit")
     public ModelAndView editBookForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("BookForm");
+        ModelAndView mav = new ModelAndView("form_book");
         Book book = bookService.get(id);
         mav.addObject("book", book);
         return mav;
@@ -111,7 +111,7 @@ public class BookController {
         model.addObject("book", bookService.get(id));
         model.addObject("user", userService.getByID(6));
         model.addObject("status", "Busy");
-        model.setViewName("HistoryForm");
+        model.setViewName("from_history");
         return model;
     }
 

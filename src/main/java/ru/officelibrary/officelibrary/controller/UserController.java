@@ -33,13 +33,13 @@ public class UserController {
         model.addObject("user", userDtoRequest);
         List<Role> roleList = roleService.roleList();
         model.addObject("roleList", roleList);
-        model.setViewName("UserForm");
+        model.setViewName("form_user");
         return model;
     }
 
     @GetMapping("user/edit")
     public ModelAndView editUserForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("UserForm");
+        ModelAndView mav = new ModelAndView("form_user");
         User user = userService.getByID(id);
         UserDtoRequest userDtoRequest = new UserDtoRequest();
         userDtoRequest.setLastName(user.getLastName());
@@ -47,7 +47,7 @@ public class UserController {
         userDtoRequest.setName(user.getName());
         userDtoRequest.setBirthDate(user.getBirthDate());
         userDtoRequest.setUserId(user.getUserId());
-        userDtoRequest.setRoleIds((String[]) user.getRole().stream().map(Role::getRoleId).toArray());
+        userDtoRequest.setRoleIds((String[]) user.getRoles().stream().map(Role::getRoleId).toArray());
         mav.addObject("user", userDtoRequest);
         return mav;
     }
