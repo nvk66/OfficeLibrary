@@ -37,7 +37,7 @@ public class AuthorService {
     }
 
     public Set<Author> findAuthorByIdList(String [] ids){
-        return authorRepository.findAuthorByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
+        return authorRepository.findAuthorsByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
     }
 
 }

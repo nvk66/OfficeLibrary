@@ -24,7 +24,7 @@ public class GenreController {
     @Autowired
     private GenreValidator genreValidator;
 
-    @RequestMapping("/genre")
+    @GetMapping("/genre")
     public ModelAndView genreHome() {
         List<Genre> listGenre = genreService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         ModelAndView mav = new ModelAndView("genre");
@@ -32,7 +32,7 @@ public class GenreController {
         return mav;
     }
 
-    @GetMapping(value = "genre/new")
+    @RequestMapping(value = "genre/new")
     public ModelAndView newGenreForm(ModelAndView model, BindingResult result) {
         Genre genre = new Genre();
         model.addObject("genres", genre);
@@ -40,8 +40,8 @@ public class GenreController {
         return model;
     }
 
-    @GetMapping("genre/edit")
-    public ModelAndView editGenreForm(@RequestParam long id) {
+    @PutMapping("genre/edit/id={id}")
+    public ModelAndView editGenreForm(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("form_genre");
         Genre genre = genreService.getById(id);
         mav.addObject("genres", genre);
@@ -51,7 +51,7 @@ public class GenreController {
     @PostMapping(value = "genre/save")
     public ModelAndView saveGenre(@Valid @ModelAttribute Genre genre, BindingResult result, ModelAndView model) {
         genreValidator.validate(genre, result);
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             model.addObject("genres", genre);
             model.addObject("error", "Data was not updated");
             model.setViewName("form_genre");
@@ -65,7 +65,7 @@ public class GenreController {
                 }
                 genreService.addGenre(genre);
                 return new ModelAndView("redirect:/genre");
-            } catch (Exception e){
+            } catch (Exception e) {
                 model.addObject("genres", genre);
                 model.addObject("error", e.getMessage());
                 model.setViewName("form_genre");
@@ -80,8 +80,8 @@ public class GenreController {
 //        return "redirect:/genre";
 //    }
 
-    @DeleteMapping("genre/id={id}")
-    public String deleteGenreForm(@PathVariable Long id) {
+    @DeleteMapping("genre/{id}/")
+    public String deleteGenreForm(@PathVariable("id") Long id) {
         genreService.deleteGenre(id);
         return "redirect:/genre";
     }

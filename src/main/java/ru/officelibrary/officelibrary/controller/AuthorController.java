@@ -28,7 +28,7 @@ public class AuthorController {
         return mav;
     }
 
-    @GetMapping(value = "/new")
+    @RequestMapping(value = "/new")
     public ModelAndView newAuthorForm(ModelAndView model) {
         Author author = new Author();
         model.addObject("author", author);
@@ -55,8 +55,14 @@ public class AuthorController {
         return new ModelAndView("redirect:/author");
     }
 
-    @RequestMapping("author/delete")
-    public String deleteAuthor(@RequestParam long id) {
+//    @RequestMapping("author/delete")
+//    public String deleteAuthor(@RequestParam long id) {
+//        authorService.deleteAuthor(id);
+//        return "redirect:/author";
+//    }
+
+    @DeleteMapping("author/{id}")
+    public String deleteAuthor(@PathVariable long id) {
         authorService.deleteAuthor(id);
         return "redirect:/author";
     }

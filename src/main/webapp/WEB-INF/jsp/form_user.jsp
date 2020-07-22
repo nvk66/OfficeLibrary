@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
+<%@include file="all_tag_libs.jsp" %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -54,6 +56,14 @@
                             <td>
                                 <form:select path="roleIds" items="${roleList}" multiple="true" itemLabel="roleName" itemValue="roleId"/>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><form:input path="email"/></td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><form:password path="password"/></td>
                         </tr>
                         <tr>
                             <td colspan="2" align="center"><input type="submit" value="Save" class="btn btn-primary">

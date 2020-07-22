@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>Genre</title>
 </head>
@@ -21,7 +21,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     </td>
                 </tr>
                 <tr>
-                    <td>BookName: </td>
+                    <td>GenreName: </td>
                     <td>${genre.genreName}
                         <form:hidden path="genreName" /></td>
                 </tr>

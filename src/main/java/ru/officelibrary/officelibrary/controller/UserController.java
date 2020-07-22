@@ -60,7 +60,9 @@ public class UserController {
         user.setName(userDtoRequest.getName());
         user.setPatronymicName(userDtoRequest.getPatronymicName());
         user.setBirthDate(userDtoRequest.getBirthDate());
-//        user.setRole(roleService.findRoleByIdList(userDtoRequest.getRoleIds()));
+        user.setRole(roleService.findRoleByIdList(userDtoRequest.getRoleIds()));
+        user.setPassword(userDtoRequest.getPassword());
+        user.setEmail(userDtoRequest.getEmail());
         if (user.getUserId() == 0) {
             userService.addUser(user);
         } else {

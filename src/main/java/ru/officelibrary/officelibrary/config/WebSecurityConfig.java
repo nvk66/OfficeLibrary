@@ -29,38 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyUserDetailsService myUserDetailsService;
 
-//    @Autowired
-//    private DataSource dataSource;
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(passwordEncoder)
-//                .withUser("user").password(passwordEncoder.encode("123456")).roles("USER")
-//                .and()
-//                .withUser("admin").password(passwordEncoder.encode("123456")).roles("USER", "ADMIN");
-//    }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().passwordEncoder(passwordEncoder());
-//    }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)
-//            throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .withDefaultSchema();
-////                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
-////                .and()
-////                .withUser("admin").password(passwordEncoder().encode("password")).roles("USER", "ADMIN");
-//    }
-
-//    @Bean
-//    public JdbcUserDetailsManager jdbcUserDetailsManager() {
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
-
     @Bean
     public AuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider =
@@ -81,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/"/*, "/registration"*/).permitAll()
                 .antMatchers("/registration").anonymous()
-                .anyRequest().authenticated()
+                .anyRequest().authenticated()//authenticated//permitAll
                 .and()
                 .formLogin()
 //                .loginPage()
@@ -90,49 +58,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout=true")
+//                .logoutSuccessUrl("/login?logout=true")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .permitAll()
                 .and()
                 .csrf()
                 .disable();
     }
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("password")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
-
-//    private static final String ADMIN = "ADMIN";
-//    private static final String USER = "USER";
-//
-////    @Autowired
-//    private UserDetailsService userDetailsService;
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService);
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-////                .antMatchers("/admin").hasRole(ADMIN)
-////                .antMatchers("/user").hasAnyRole(ADMIN, USER)
-//                .antMatchers("/", "/login", "/registration").permitAll()
-//                .and().formLogin();
-//    }
-//
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
 }

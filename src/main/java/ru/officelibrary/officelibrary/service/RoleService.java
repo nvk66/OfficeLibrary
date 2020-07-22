@@ -7,7 +7,6 @@ import ru.officelibrary.officelibrary.entity.Role;
 import ru.officelibrary.officelibrary.repository.RoleRepository;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,7 +24,7 @@ public class RoleService {
         return (List<Role>) roleRepository.findAll();
     }
 
-    public Set<Role> findRoleByIdList(String [] ids){
+    public List<Role> findRoleByIdList(String [] ids){
         return roleRepository.findRoleByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
     }
 

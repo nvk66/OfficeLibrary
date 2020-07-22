@@ -49,7 +49,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>
                     <a href="/author/edit?id=${author.authorId}">Edit</a>
 
-                    <a href="/author/delete?id=${author.authorId}">Delete</a>
+                    <a href="/author/id=${author.authorId}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

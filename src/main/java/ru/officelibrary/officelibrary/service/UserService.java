@@ -23,11 +23,14 @@ public class UserService {
 //    @Autowired
     private final RoleRepository roleRepository;
 
+    private final RoleService roleService;
+
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, RoleService roleService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.roleService = roleService;
     }
 
     public User addUser(User user) {

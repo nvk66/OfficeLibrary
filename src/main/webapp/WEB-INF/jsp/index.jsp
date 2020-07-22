@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -15,8 +16,13 @@
     <div class="starter-template">
         <h1>Welcome to the E-library</h1>
     </div>
-    <a href="/login"><button type="button" class="btn btn-outline-primary">Login</button></a>
-    <a href="/registration"><button type="button" class="btn btn-outline-warning">Registration</button></a>
+    <security:authorize access="!hasAnyAuthority('User', 'Admin')">
+        <a href="/login"><button type="button" class="btn btn-outline-primary">Login</button></a>
+        <a href="/registration"><button type="button" class="btn btn-outline-warning">Registration</button></a>
+    </security:authorize>
+    <security:authorize access="hasAnyAuthority('User', 'Admin')">
+        <a href="/logout"><button type="button" class="btn btn-outline-primary">Logout</button></a>
+    </security:authorize>
 </div>
 <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </div>
