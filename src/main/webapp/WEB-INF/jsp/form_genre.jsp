@@ -1,9 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="all_tag_libs.jsp" %>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,12 +21,14 @@
             margin: 16px;
         }
     </style>
+    <%@include file="boot.jsp" %>
+
 </head>
 <body>
 <div align="center">
     <h2><a href="/genre">Genres</a></h2>
     <h1>New/Edit Genre</h1>
-    <form:form action="save" method="post" modelAttribute="genres">
+    <form:form action="/genre/save/" method="post" modelAttribute="genres">
         <form:errors path="*" cssClass="errorblock" element="div"/>
         <c:if test="${fn:length(error) > 0}">
             <div class="error">
@@ -48,17 +47,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="center"><input type="submit" value="Save" class="btn btn-primary">
+                            <td colspan="2" align="center">
+                                <input type="submit" value="Save" class="btn btn-primary">
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-        </div>
-        <sec:authorize access=""
     </form:form>
 </div>
 </body>

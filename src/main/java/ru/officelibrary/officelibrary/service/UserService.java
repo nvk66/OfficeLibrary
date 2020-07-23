@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.officelibrary.officelibrary.dto.request.UserDtoRequest;
+import ru.officelibrary.officelibrary.dto.UserDto;
 import ru.officelibrary.officelibrary.entity.User;
 import ru.officelibrary.officelibrary.repository.RoleRepository;
 import ru.officelibrary.officelibrary.repository.UserRepository;
@@ -57,7 +57,7 @@ public class UserService {
         return userRepository.findUserByEmail(email) != null;
     }
 
-    public User registerNewUserAccount(UserDtoRequest userDto) throws IllegalArgumentException{
+    public User registerNewUserAccount(UserDto userDto) throws IllegalArgumentException{
         if (isUserExists(userDto.getEmail())){
             throw new IllegalArgumentException("There is an account with that email address:" + userDto.getEmail());
         }

@@ -44,7 +44,7 @@ class UserValidatorTest {
         user.setName(null);
         user.setLastName("NameNameNameNameNameNameNameNameNameNamee");
         userValidator.validate(user, error);
-        Assertions.assertEquals(3, error.getErrorCount());
+        Assertions.assertEquals(2, error.getErrorCount());
 
         error = new BeanPropertyBindingResult(user, "user");
         user.setName("Anna-Maria");

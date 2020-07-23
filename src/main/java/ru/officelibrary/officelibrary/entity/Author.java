@@ -52,7 +52,7 @@ public class Author implements Serializable, Comparable<Author> {
     @NotNull
     @ToString.Exclude
     @NotBlank
-    @Size(min=40, max= 1000)
+    @Size(min=40, max= 10000)
     private String biography;
 
     public long getAuthorId() {

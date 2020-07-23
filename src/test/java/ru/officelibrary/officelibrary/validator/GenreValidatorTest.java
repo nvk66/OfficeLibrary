@@ -45,6 +45,6 @@ class GenreValidatorTest {
 
         genre.setGenreName("GenreGenreGenreGenreGenreGenreGenreGenrea");
         genreValidator.validate(genre, error);
-        Assertions.assertEquals(2, error.getErrorCount());
+        Assertions.assertEquals(1, error.getErrorCount());
     }
 }

@@ -1,15 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alexey
-  Date: 08.07.2020
-  Time: 08:56
-  To change this template use File | Settings | File Templates.
---%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>--%>
 <%@include file="all_tag_libs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,14 +9,14 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <title>Genre</title>
     <%@include file="boot.jsp" %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(".delete").restintag(optionsObj, function (data) {
-                console.log(data);
-            },
-            function (error) {
-                console.log(error);
-            });
-    </script>
+<%--    <script>--%>
+<%--        $(".delete").restintag(optionsObj, function (data) {--%>
+<%--                console.log(data);--%>
+<%--            },--%>
+<%--            function (error) {--%>
+<%--                console.log(error);--%>
+<%--            });--%>
+<%--    </script>--%>
 </head>
 <body>
 <div align="center">
@@ -36,7 +26,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <input type="text" name="keyword"/>
         <input type="submit" value="Search"/>
     </form>
-    <h3><a href="/genre/new">New Genre</a></h3>
+    <h3><a href="/genre/">New Genre</a></h3>
     <table border="1" cellpadding="5">
         <tr>
             <security:authorize access="hasAuthority('Admin')">
@@ -55,7 +45,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <td>${genre.genreName}</td>
                 <security:authorize access="hasAuthority('Admin')">
                     <td>
-                        <a href="/genre/edit/id=${genre.genreId}">Edit</a>
+                        <a href="/genre/edit/${genre.genreId}">Edit</a>
 
                         <a href="/genre/${genre.genreId}/">Delete</a>
                     </td>

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.officelibrary.officelibrary.dto.request.BookDtoRequest;
-import ru.officelibrary.officelibrary.dto.request.HistoryDtoRequest;
+import ru.officelibrary.officelibrary.dto.BookDto;
+import ru.officelibrary.officelibrary.dto.HistoryDto;
 import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
@@ -44,7 +44,7 @@ public class BookController {
 
     @GetMapping(value = "book/new")
     public ModelAndView newBookForm(ModelAndView model) {
-        BookDtoRequest bookDtoRequest = new BookDtoRequest();
+        BookDto bookDto = new BookDto();
 //        model.put("book", bookDtoRequest);
 //        List<Genre> genreList = genreService.getAll();
 //        List<Author> authorList = adminAuthorService.getAll();
@@ -52,7 +52,7 @@ public class BookController {
 //        model.put("authorList", authorList);
 //        return "new_book";
 //        Book book = new Book();
-        model.addObject("book", bookDtoRequest);
+        model.addObject("book", bookDto);
         List<Genre> genreList = genreService.getAll();
         List<Author> authorList = authorService.getAll();
         model.addObject("genreList", genreList);
@@ -99,15 +99,15 @@ public class BookController {
 //        history.setBook(bookService.get(id));
 //        history.setUser(userService.getByID(6));
 //        history.setStats("busy");
-        HistoryDtoRequest historyDtoRequest = new HistoryDtoRequest();
-        historyDtoRequest.setBook(String.valueOf(id));
-        historyDtoRequest.setUser(String.valueOf(6));
-        historyDtoRequest.setStats("busy");
+        HistoryDto historyDto = new HistoryDto();
+        historyDto.setBook(String.valueOf(id));
+        historyDto.setUser(String.valueOf(6));
+        historyDto.setStats("busy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
 //        history.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
-        historyDtoRequest.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
-        model.addObject("reservation", historyDtoRequest);
+        historyDto.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
+        model.addObject("reservation", historyDto);
         model.addObject("book", bookService.get(id));
         model.addObject("user", userService.getByID(6));
         model.addObject("status", "Busy");
@@ -116,7 +116,7 @@ public class BookController {
     }
 
     @PostMapping("/book/reserve/{id}/save")
-    public ModelAndView saveReservation(@ModelAttribute HistoryDtoRequest historyDtoRequest, @PathVariable long id) {
+    public ModelAndView saveReservation(@ModelAttribute HistoryDto historyDto, @PathVariable long id) {
 //        history.setBook(bookService.get(id));
 //        history.setUser(userService.getByID(6));
 //        history.setStats("busy");
@@ -124,12 +124,12 @@ public class BookController {
 //        Calendar calendar = Calendar.getInstance();
 //        history.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         History history = new History();
-        history.setUser(userService.getByID(Long.parseLong(historyDtoRequest.getUser())));
-        history.setBook(bookService.get(Long.parseLong(historyDtoRequest.getBook())));
-        history.setStartDate(historyDtoRequest.getStartDate());
-        history.setDueDate(historyDtoRequest.getDueDate());
-        history.setStats(historyDtoRequest.getStats());
-        history.setHistoryId(historyDtoRequest.getHistoryId());
+        history.setUser(userService.getByID(Long.parseLong(historyDto.getUser())));
+        history.setBook(bookService.get(Long.parseLong(historyDto.getBook())));
+        history.setStartDate(historyDto.getStartDate());
+        history.setDueDate(historyDto.getDueDate());
+        history.setStats(historyDto.getStats());
+        history.setHistoryId(historyDto.getHistoryId());
         if (history.getHistoryId() == 0) {
             historyService.addHistory(history);
         } else {

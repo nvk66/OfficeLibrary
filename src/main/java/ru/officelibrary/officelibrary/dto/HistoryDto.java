@@ -1,8 +1,8 @@
-package ru.officelibrary.officelibrary.dto.request;
+package ru.officelibrary.officelibrary.dto;
 
 import java.sql.Date;
 
-public class HistoryDtoRequest {
+public class HistoryDto {
     private long historyId;
     private String book;
     private String user;

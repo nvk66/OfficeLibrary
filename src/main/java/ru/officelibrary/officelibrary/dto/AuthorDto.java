@@ -1,4 +1,4 @@
-package ru.officelibrary.officelibrary.dto.request;
+package ru.officelibrary.officelibrary.dto;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorDtoRequest {
+public class AuthorDto {
     private String name;
     private String lastName;
     private String patronymicName;

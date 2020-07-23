@@ -1,4 +1,4 @@
-package ru.officelibrary.officelibrary.dto.request;
+package ru.officelibrary.officelibrary.dto;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.sql.Date;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDtoRequest {
+public class UserDto {
     private long userId;
     private String name;
     private String lastName;

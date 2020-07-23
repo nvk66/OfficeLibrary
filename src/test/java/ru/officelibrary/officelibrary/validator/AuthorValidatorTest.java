@@ -44,7 +44,7 @@ class AuthorValidatorTest {
         author.setLastName("NameNameNameNameNameNameNameNameNameNamee");
         author.setBiography("I was born in the heart of Siberia with an awesome smile");
         authorValidator.validate(author, error);
-        Assertions.assertEquals(3, error.getErrorCount());
+        Assertions.assertEquals(2, error.getErrorCount());
 
         error = new BeanPropertyBindingResult(author, "author");
         author.setName("Anna-Maria");

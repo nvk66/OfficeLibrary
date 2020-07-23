@@ -1,6 +1,6 @@
-package ru.officelibrary.officelibrary.dto.request;
+package ru.officelibrary.officelibrary.dto;
 
-public class RoleDtoRequest {
+public class RoleDto {
     private long roleId;
     private String roleName;
 

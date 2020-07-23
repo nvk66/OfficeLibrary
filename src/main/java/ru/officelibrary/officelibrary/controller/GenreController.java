@@ -32,15 +32,15 @@ public class GenreController {
         return mav;
     }
 
-    @RequestMapping(value = "genre/new")
+    @RequestMapping(value = "/genre/",  method={RequestMethod.POST, RequestMethod.GET})
     public ModelAndView newGenreForm(ModelAndView model, BindingResult result) {
         Genre genre = new Genre();
         model.addObject("genres", genre);
         model.setViewName("form_genre");
         return model;
     }
-
-    @PutMapping("genre/edit/id={id}")
+//
+    @RequestMapping(value = "/genre/edit/{id}", method={RequestMethod.PUT, RequestMethod.GET})
     public ModelAndView editGenreForm(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("form_genre");
         Genre genre = genreService.getById(id);
@@ -48,7 +48,7 @@ public class GenreController {
         return mav;
     }
 
-    @PostMapping(value = "genre/save")
+    @PostMapping(value = "/genre/save/")
     public ModelAndView saveGenre(@Valid @ModelAttribute Genre genre, BindingResult result, ModelAndView model) {
         genreValidator.validate(genre, result);
         if (result.hasErrors()) {
@@ -79,8 +79,8 @@ public class GenreController {
 //        genreService.deleteGenre(id);
 //        return "redirect:/genre";
 //    }
-
-    @DeleteMapping("genre/{id}/")
+//, method={RequestMethod.DELETE, RequestMethod.GET}
+    @RequestMapping(value = "genre/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
     public String deleteGenreForm(@PathVariable("id") Long id) {
         genreService.deleteGenre(id);
         return "redirect:/genre";

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-import ru.officelibrary.officelibrary.dto.request.UserDtoRequest;
+import ru.officelibrary.officelibrary.dto.UserDto;
 import ru.officelibrary.officelibrary.entity.User;
 import ru.officelibrary.officelibrary.service.UserService;
 
@@ -23,14 +23,14 @@ public class AuthorizationController {
 
     @GetMapping("/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
-        UserDtoRequest userDto = new UserDtoRequest();
+        UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "registration";
     }
 
     @PostMapping("/registration")
     public ModelAndView registerUserAccount
-            (@ModelAttribute("user") @Valid UserDtoRequest userDto,
+            (@ModelAttribute("user") @Valid UserDto userDto,
              HttpServletRequest request, Errors errors) {
         try {
             User registered = userService.registerNewUserAccount(userDto);
