@@ -3,6 +3,7 @@ package ru.officelibrary.officelibrary.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.officelibrary.officelibrary.dto.BookDto;
@@ -12,6 +13,7 @@ import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
 import ru.officelibrary.officelibrary.entity.History;
 import ru.officelibrary.officelibrary.service.*;
+import ru.officelibrary.officelibrary.validator.BookValidator;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -32,6 +34,9 @@ public class BookController {
     private UserService userService;
     @Autowired
     private HistoryService historyService;
+
+    @Autowired
+    private BookValidator bookValidator;
 
 
     @RequestMapping("/book")
@@ -70,14 +75,29 @@ public class BookController {
     }
 
     @PostMapping(value = "book/new/save")
-    public ModelAndView saveBook(@ModelAttribute Book book) {
-        if (book.getBookId() == 0) {
-            bookService.addBook(book);
+    public ModelAndView saveBook(@ModelAttribute Book book, BindingResult result, ModelAndView model) {
+        bookValidator.validate(book, result);
+        if (result.hasErrors()) {
+            model.addObject("books", book);
+            model.addObject("error", "Data was not updated");
+            model.setViewName("form_book");
+            return model;
         } else {
-            bookService.get(book.getBookId());
+            try {
+                if (book.getBookId() == 0) {
+                    bookService.addBook(book);
+                } else {
+                    bookService.get(book.getBookId());
+                }
+                bookService.addBook(book);
+                return new ModelAndView("redirect:/book");
+            } catch (Exception e) {
+                model.addObject("books", book);
+                model.addObject("error", e.getMessage());
+                model.setViewName("form_book");
+                return model;
+            }
         }
-        bookService.addBook(book);
-        return new ModelAndView("redirect:/book");
     }
 
     @RequestMapping("book/delete")

@@ -1,11 +1,13 @@
 package ru.officelibrary.officelibrary.validator;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.officelibrary.officelibrary.entity.Book;
 
 import java.util.Calendar;
 
+@Component
 public class BookValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {

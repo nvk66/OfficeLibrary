@@ -2,6 +2,7 @@ package ru.officelibrary.officelibrary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,8 +40,8 @@ public class GenreController {
         model.setViewName("form_genre");
         return model;
     }
-//
-    @RequestMapping(value = "/genre/edit/{id}", method={RequestMethod.PUT, RequestMethod.GET})
+
+    @RequestMapping(value = "/genre/edit/{id}/", method={RequestMethod.PUT, RequestMethod.GET})
     public ModelAndView editGenreForm(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("form_genre");
         Genre genre = genreService.getById(id);
@@ -79,10 +80,18 @@ public class GenreController {
 //        genreService.deleteGenre(id);
 //        return "redirect:/genre";
 //    }
-//, method={RequestMethod.DELETE, RequestMethod.GET}
-    @RequestMapping(value = "genre/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
+
+    @RequestMapping(value = "genre/delete/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
     public String deleteGenreForm(@PathVariable("id") Long id) {
         genreService.deleteGenre(id);
         return "redirect:/genre";
+    }
+
+    @RequestMapping("/genre/{id}")
+    public String viewGenre(@PathVariable long id, Model model) {
+        Genre genre = genreService.getById(id);
+        model.addAttribute("genre", genre);
+        model.addAttribute("book", bookService.findBookByGenre(genre));
+        return "selected_genre";
     }
 }

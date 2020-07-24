@@ -29,27 +29,14 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <h3><a href="/genre/">New Genre</a></h3>
     <table border="1" cellpadding="5">
         <tr>
-            <security:authorize access="hasAuthority('Admin')">
-                <th>ID</th>
-            </security:authorize>
+            <th>Action</th>
             <th>Name</th>
-            <security:authorize access="hasAuthority('Admin')">
-                <th>Action</th>
-            </security:authorize>
         </tr>
         <c:forEach items="${listGenre}" var="genre">
-            <tr>
-                <security:authorize access="hasAuthority('Admin')">
-                    <td>${genre.genreId}</td>
-                </security:authorize>
+            <tr onclick="window.location='http://localhost:8080/genre/${genre.genreId}/'">
+                <td width="30" height="30">
+                    <img src="/images/inspector.png" width="30" height="30"></td>
                 <td>${genre.genreName}</td>
-                <security:authorize access="hasAuthority('Admin')">
-                    <td>
-                        <a href="/genre/edit/${genre.genreId}">Edit</a>
-
-                        <a href="/genre/${genre.genreId}/">Delete</a>
-                    </td>
-                </security:authorize>
             </tr>
         </c:forEach>
     </table>

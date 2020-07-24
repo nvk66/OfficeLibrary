@@ -4,8 +4,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
+import ru.officelibrary.officelibrary.entity.Genre;
 import ru.officelibrary.officelibrary.repository.BookRepository;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -56,5 +58,16 @@ public class BookService {
 
     public Book findBookById(String ids){
         return bookRepository.findBookById(ids);
+    }
+
+
+    public List<Book> findBookByAuthor(Author author){
+        HashSet<Author> authors = new HashSet<>();
+        authors.add(author);
+        return bookRepository.findBookByAuthorsIn(authors);
+    }
+
+    public List<Book> findBookByGenre(Genre genre){
+        return bookRepository.findBookByGenresIn(Collections.singleton(genre));
     }
 }

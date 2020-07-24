@@ -10,7 +10,7 @@
 <div align="center">
     <h2><a href="/author">Authors</a></h2>
     <h1>New/Edit Author</h1>
-    <form:form action="save" method="post" modelAttribute="author">
+    <form:form action="/author/save/" method="post" modelAttribute="author">
     <div class="container-fluid">
         <div class="container">
             <div class="row">

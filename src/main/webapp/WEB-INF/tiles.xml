@@ -7,7 +7,7 @@
         <put-attribute name="body" value="" />
 <!--        <put-attribute name="footer" value="defaultFooter.jsp" />-->
     </definition>
-    <definition name="index" extends="template-def">
+    <definition name="home" extends="template-def">
         <put-attribute name="title" value="Welcome" />
         <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
     </definition>

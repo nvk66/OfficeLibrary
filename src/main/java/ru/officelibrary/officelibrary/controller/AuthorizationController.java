@@ -41,11 +41,6 @@ public class AuthorizationController {
         return new ModelAndView("user", "user", userDto);
     }
 
-//    @GetMapping("/login")
-//    public String showLoginForm(WebRequest request, Model model){
-//        return "login";
-//    }
-
     @PostMapping("/")
     public String afterLogin(){
         return "index";

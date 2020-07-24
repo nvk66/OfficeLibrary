@@ -1,6 +1,7 @@
 package ru.officelibrary.officelibrary.service;
 
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 
+@Log4j2
 @Service
 @Transactional
 public class UserService {
@@ -59,6 +61,7 @@ public class UserService {
 
     public User registerNewUserAccount(UserDto userDto) throws IllegalArgumentException{
         if (isUserExists(userDto.getEmail())){
+            log.error("There is an account with that email address:" + userDto.getEmail());
             throw new IllegalArgumentException("There is an account with that email address:" + userDto.getEmail());
         }
         User user = new User();

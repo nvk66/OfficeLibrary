@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
+import ru.officelibrary.officelibrary.entity.Genre;
 
 import java.util.List;
 import java.util.Set;
@@ -18,4 +19,8 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     @Query(value = "SELECT a FROM Author a WHERE a.authorId IN :ids")
     Book findBookById(@Param("ids") String ids);
+
+    List<Book> findBookByAuthorsIn(Set<Author> authors);
+
+    List<Book> findBookByGenresIn(Set<Genre> genres);
 }
