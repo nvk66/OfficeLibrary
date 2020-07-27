@@ -37,8 +37,8 @@ public class UserController {
         return model;
     }
 
-    @GetMapping("user/edit")
-    public ModelAndView editUserForm(@RequestParam long id) {
+    @GetMapping("user/edit/{id}/")
+    public ModelAndView editUserForm(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("form_user");
         User user = userService.getByID(id);
         UserDto userDto = new UserDto();
@@ -46,8 +46,8 @@ public class UserController {
         userDto.setPatronymicName(user.getPatronymicName());
         userDto.setName(user.getName());
         userDto.setBirthDate(user.getBirthDate());
-        userDto.setUserId(user.getUserId());
-        userDto.setRoleIds((String[]) user.getRoles().stream().map(Role::getRoleId).toArray());
+        userDto.setId(user.getId());
+        userDto.setRoleIds((String[]) user.getRoles().stream().map(Role::getId).toArray());
         mav.addObject("user", userDto);
         return mav;
     }
@@ -55,7 +55,7 @@ public class UserController {
     @PostMapping(value = "user/save")
     public ModelAndView saveUser(@ModelAttribute UserDto userDto) {
         User user = new User();
-        user.setUserId(userDto.getUserId());
+        user.setId(userDto.getId());
         user.setLastName(userDto.getLastName());
         user.setName(userDto.getName());
         user.setPatronymicName(userDto.getPatronymicName());
@@ -63,17 +63,17 @@ public class UserController {
         user.setRole(roleService.findRoleByIdList(userDto.getRoleIds()));
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        if (user.getUserId() == 0) {
+        if (user.getId() == 0) {
             userService.addUser(user);
         } else {
-            userService.getByID(user.getUserId());
+            userService.getByID(user.getId());
         }
         userService.addUser(user);
         return new ModelAndView("redirect:/user");
     }
 
-    @RequestMapping("user/delete")
-    public String deleteUserForm(@RequestParam long id) {
+    @RequestMapping("user/delete/{id}/")
+    public String deleteUserForm(@PathVariable long id) {
         userService.deleteUser(id);
         return "redirect:/user";
     }

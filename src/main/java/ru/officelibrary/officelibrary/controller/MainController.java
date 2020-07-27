@@ -46,7 +46,7 @@ public class MainController {
     @RequestMapping("/")
     public String welcome() {
 //        model.put("message", "Welcome");
-        return "index";
+        return "homePage";
     }
 }
 //

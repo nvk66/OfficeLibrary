@@ -12,20 +12,20 @@
         <table border="0" cellpadding="5">
             <tr>
                 <td>ID: </td>
-                <td>${book.bookId}
-                    <form:hidden path="bookId"/>
+                <td>${book.id}
+                    <form:hidden path="id"/>
                 </td>
             </tr>
             <tr>
                 <td>BookName: </td>
-                <td>${book.bookName}
-                    <form:hidden path="bookName" /></td>
+                <td>${book.name}
+                    <form:hidden path="name" /></td>
             </tr>
             <tr>
                 <td>Authors: </td>
                 <td>
                     <c:forEach items="${book.authors}" var="author">
-                        <a href="/book/search?id=${author.authorId}"> ${author.concat()}<a/>
+                        <a href="/book/search?id=${author.id}"> ${author.concat()}<a/>
                     </c:forEach>
 <%--                        ${book.authors}--%>
 <%--                    <form:hidden path="authors" />--%>
@@ -35,7 +35,7 @@
                 <td>Genres: </td>
                 <td>
                     <c:forEach items="${book.genres}" var="genres">
-                        ${genres.genreName}
+                        ${genres.name}
                     </c:forEach>
 <%--                        ${book.genres}--%>
 <%--                    <form:hidden path="genres" />--%>

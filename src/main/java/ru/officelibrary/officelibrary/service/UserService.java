@@ -20,9 +20,7 @@ import java.util.List;
 @Transactional
 public class UserService {
 
-//    @Autowired
     private final UserRepository userRepository;
-//    @Autowired
     private final RoleRepository roleRepository;
 
     private final RoleService roleService;

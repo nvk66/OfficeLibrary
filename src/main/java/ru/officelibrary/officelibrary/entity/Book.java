@@ -17,11 +17,11 @@ public class Book implements Comparable<Book>{
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long bookId;
+    private long id;
 
     @Column
     @NotNull
-    private String bookName;
+    private String name;
 
     @Column
     @NotNull
@@ -44,20 +44,20 @@ public class Book implements Comparable<Book>{
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
-    public long getBookId() {
-        return bookId;
+    public long getId() {
+        return id;
     }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public void setId(long bookId) {
+        this.id = bookId;
     }
 
-    public String getBookName() {
-        return bookName;
+    public String getName() {
+        return name;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setName(String bookName) {
+        this.name = bookName;
     }
 
     public int getPublishingYear() {
@@ -86,6 +86,6 @@ public class Book implements Comparable<Book>{
 
     @Override
     public int compareTo(Book book) {
-        return this.bookName.toLowerCase().compareTo(book.getBookName().toLowerCase());
+        return this.name.toLowerCase().compareTo(book.getName().toLowerCase());
     }
 }

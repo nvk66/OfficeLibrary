@@ -1,6 +1,6 @@
 <%@include file="all_tag_libs.jsp" %>
 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
 <html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,11 +39,11 @@
             <div class="container">
                 <div class="row">
                     <table>
-                        <form:hidden path="genreId"/>
+                        <form:hidden path="id"/>
                         <tr>
                             <td>Name:</td>
-                            <td><form:input path="genreName"/>
-                                <form:errors path="genreName" cssClass="error"/>
+                            <td><form:input path="name"/>
+                                <form:errors path="name" cssClass="error"/>
                             </td>
                         </tr>
                         <tr>

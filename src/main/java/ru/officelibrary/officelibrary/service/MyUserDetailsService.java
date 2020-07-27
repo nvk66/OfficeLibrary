@@ -38,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
     private static List<GrantedAuthority> getAuthorities (List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return authorities;
     }

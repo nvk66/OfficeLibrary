@@ -59,10 +59,10 @@ public class GenreController {
             return model;
         } else {
             try {
-                if (genre.getGenreId() == 0) {
+                if (genre.getId() == 0) {
                     genreService.addGenre(genre);
                 } else {
-                    genreService.getById(genre.getGenreId());
+                    genreService.getById(genre.getId());
                 }
                 genreService.addGenre(genre);
                 return new ModelAndView("redirect:/genre");

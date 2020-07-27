@@ -58,10 +58,10 @@ public class AuthorController {
             return model;
         } else {
             try {
-                if (author.getAuthorId() == 0) {
+                if (author.getId() == 0) {
                     authorService.addAuthor(author);
                 } else {
-                    authorService.get(author.getAuthorId());
+                    authorService.get(author.getId());
                 }
                 authorService.addAuthor(author);
                 return new ModelAndView("redirect:/author/");
@@ -73,12 +73,6 @@ public class AuthorController {
             }
         }
     }
-
-//    @RequestMapping("author/delete")
-//    public String deleteAuthor(@RequestParam long id) {
-//        authorService.deleteAuthor(id);
-//        return "redirect:/author";
-//    }
 
     @RequestMapping(value = "author/delete/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
     public String deleteAuthor(@PathVariable long id) {

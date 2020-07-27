@@ -11,6 +11,6 @@ import java.util.Set;
 
 @Repository
 public interface GenreRepository extends CrudRepository<Genre, Long> {
-    @Query(value = "SELECT g FROM Genre g WHERE g.genreId IN :ids")
+    @Query(value = "SELECT g FROM Genre g WHERE g.id IN :ids")
     Set<Genre> findGenreByIdList(@Param("ids") Collection<Long> ids);
 }

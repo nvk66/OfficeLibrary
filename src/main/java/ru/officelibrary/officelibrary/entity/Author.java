@@ -26,7 +26,7 @@ public class Author implements Serializable, Comparable<Author> {
     @NotNull
     @ToString.Exclude
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long authorId;
+    private long id;
 
     @Column
     @NotNull
@@ -55,12 +55,12 @@ public class Author implements Serializable, Comparable<Author> {
     @Size(min=40, max= 10000)
     private String biography;
 
-    public long getAuthorId() {
-        return authorId;
+    public long getId() {
+        return id;
     }
 
-    public void setAuthorId(long authorID) {
-        this.authorId = authorID;
+    public void setId(long authorID) {
+        this.id = authorID;
     }
 
     public String getName() {
@@ -102,12 +102,6 @@ public class Author implements Serializable, Comparable<Author> {
     public void setBiography(String biography) {
         this.biography = biography;
     }
-
-//    @Override
-//    public String toString() {
-//        return "Author [id=" + authorId + ", lastName=" + lastName + ", name=" + name +
-//                ", patronymicName=" + patronymicName + ", birthYear=" + birthYear + ", biography=" + biography + "]";
-//    }
 
     public String concat(){
         return this.lastName + " " + this.name + " " + this.patronymicName;

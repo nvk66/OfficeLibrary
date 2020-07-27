@@ -10,7 +10,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    private long userId;
+    private long id;
     private String name;
     private String lastName;
     private String patronymicName;
@@ -59,12 +59,12 @@ public class UserDto {
         this.roleIds = roleIds;
     }
 
-    public long getUserId() {
-        return userId;
+    public long getId() {
+        return id;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getEmail() {

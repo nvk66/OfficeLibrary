@@ -17,7 +17,7 @@ public class GenreValidator extends AbstractValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Genre genre = (Genre) o;
 
-        if (!checkName(genre.getGenreName())) {
+        if (!checkName(genre.getName())) {
             errors.reject("name", "Input error");
         }
     }

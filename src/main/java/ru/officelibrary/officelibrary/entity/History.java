@@ -17,16 +17,12 @@ public class History {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long historyId;
+    private long id;
 
-//    @NotNull
-//    @Column
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @NotNull
-//    @Column
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private Book book;
@@ -46,12 +42,12 @@ public class History {
     @Column
     private Date returnDate;
 
-    public long getHistoryId() {
-        return historyId;
+    public long getId() {
+        return id;
     }
 
-    public void setHistoryId(long historyID) {
-        this.historyId = historyID;
+    public void setId(long historyID) {
+        this.id = historyID;
     }
 
     public User getUser() {

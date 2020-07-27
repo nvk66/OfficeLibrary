@@ -27,7 +27,7 @@
             <div class="container">
                 <div class="row">
                     <table>
-                        <form:hidden path="userId"/>
+                        <form:hidden path="id"/>
                         <tr>
                             <td>LastName:</td>
                             <td><form:input path="lastName"/></td>

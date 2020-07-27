@@ -43,17 +43,10 @@ public class BookService {
         return (List<Book>) bookRepository.findAll();
     }
 
-//    public List<Book> search(Author author) {
-//        return adminBookRepository.search(author);
-//    }
-
     public List<Book> search(long id) {
-//        Collections.singleton(adminAuthorService.get(id));
         Set<Author> authors = new HashSet<>();
         authors.add(authorService.get(id));
         return bookRepository.search(authors);
-//        return adminBookRepository.search(Collections.singleton(adminAuthorService.get(id)));
-//        return adminBookRepository.search(adminAuthorService.get(id));
     }
 
     public Book findBookById(String ids){

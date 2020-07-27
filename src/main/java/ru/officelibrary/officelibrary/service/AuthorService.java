@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 @Service
 @Transactional
 public class AuthorService {
-//    @Autowired
     private final AuthorRepository authorRepository;
 
     public AuthorService(AuthorRepository authorRepository) {

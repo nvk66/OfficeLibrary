@@ -17,33 +17,33 @@ class GenreValidatorTest {
     @Test
     void validate() {
         Genre genre = new Genre();
-        genre.setGenreName("Non-fiction");
+        genre.setName("Non-fiction");
         BeanPropertyBindingResult error = new BeanPropertyBindingResult(genre, "genre");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
         String [] strings = {"Non-fiction", "ad", "add", "..1", "Привет", "GenreGenreGenreGenreGenreGenreGenreGenre"};
-        genre.setGenreName("ad");
+        genre.setName("ad");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(1, error.getErrorCount());
         error = new BeanPropertyBindingResult(genre, "genre");
 
-        genre.setGenreName("add");
+        genre.setName("add");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(0, error.getErrorCount());
         error = new BeanPropertyBindingResult(genre, "genre");
 
-        genre.setGenreName("..1");
+        genre.setName("..1");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(1, error.getErrorCount());
         error = new BeanPropertyBindingResult(genre, "genre");
 
-        genre.setGenreName("Привет");
+        genre.setName("Привет");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(0, error.getErrorCount());
         error = new BeanPropertyBindingResult(genre, "genre");
 
-        genre.setGenreName("GenreGenreGenreGenreGenreGenreGenreGenrea");
+        genre.setName("GenreGenreGenreGenreGenreGenreGenreGenrea");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(1, error.getErrorCount());
     }

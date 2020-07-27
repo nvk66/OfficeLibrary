@@ -11,10 +11,10 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
-    @Query(value = "SELECT r FROM Role r WHERE r.roleId IN :ids")
+    @Query(value = "SELECT r FROM Role r WHERE r.id IN :ids")
     List<Role> findRoleByIdList(@Param("ids") Collection<Long> ids);
 
-    @Query(value = "SELECT r FROM Role r WHERE LOWER(r.roleName)  = LOWER(:roleName)")
+    @Query(value = "SELECT r FROM Role r WHERE LOWER(r.name)  = LOWER(:roleName)")
     Role findRoleByRoleName(@Param("roleName") String roleName);
 }
 

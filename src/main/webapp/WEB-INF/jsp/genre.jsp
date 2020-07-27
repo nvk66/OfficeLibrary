@@ -9,34 +9,24 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <title>Genre</title>
     <%@include file="boot.jsp" %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<%--    <script>--%>
-<%--        $(".delete").restintag(optionsObj, function (data) {--%>
-<%--                console.log(data);--%>
-<%--            },--%>
-<%--            function (error) {--%>
-<%--                console.log(error);--%>
-<%--            });--%>
-<%--    </script>--%>
 </head>
 <body>
 <div align="center">
     <%@include file="navigation.jsp" %>
     <h2>Genre</h2>
-    <form method="get" action="search">
-        <input type="text" name="keyword"/>
-        <input type="submit" value="Search"/>
-    </form>
-    <h3><a href="/genre/">New Genre</a></h3>
+    <security:authorize access="hasAuthority('Admin')">
+        <h3><a href="/genre/">New Genre</a></h3>
+    </security:authorize>
     <table border="1" cellpadding="5">
         <tr>
             <th>Action</th>
             <th>Name</th>
         </tr>
         <c:forEach items="${listGenre}" var="genre">
-            <tr onclick="window.location='http://localhost:8080/genre/${genre.genreId}/'">
+            <tr onclick="window.location='http://localhost:8080/genre/${genre.id}/'">
                 <td width="30" height="30">
                     <img src="/images/inspector.png" width="30" height="30"></td>
-                <td>${genre.genreName}</td>
+                <td>${genre.name}</td>
             </tr>
         </c:forEach>
     </table>

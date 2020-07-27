@@ -29,8 +29,4 @@ public class HistoryService {
     public List<History> getAll(){
         return (List<History>) historyRepository.findAll();
     }
-
-//    public List<History> search(Long id) {
-//        return adminHistoryRepository.search(id);
-//    }
 }

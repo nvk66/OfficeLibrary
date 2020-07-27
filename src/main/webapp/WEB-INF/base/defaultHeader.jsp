@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%--<%@include file="boot.jsp" %>--%>
-<header>
+<%@include file="/WEB-INF/jsp/boot.jsp" %>
 <div align="center">
     <security:authorize access="hasAnyAuthority('User','Admin')">
         <a href="/#about">MainPage</a>
@@ -29,4 +28,3 @@
         </a>
     </security:authorize>
 </div>
-</header>

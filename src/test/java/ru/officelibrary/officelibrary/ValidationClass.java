@@ -7,8 +7,8 @@ public class ValidationClass {
     @Test
     public void testGenreValidation(){
         Genre genre = new Genre();
-        genre.setGenreId(1);
-        genre.setGenreName("привет");
+        genre.setId(1);
+        genre.setName("привет");
 //        Genre genre2 = new Genre(1, "a");
 //        Genre genre3= new Genre(1, "");
 //        Genre genre4 = new Genre(1, "gh");

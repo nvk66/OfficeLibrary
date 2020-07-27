@@ -23,7 +23,7 @@ public class GenreService {
 
     public boolean isGenreAlreadyExists(String genre){
         for (Genre genre1 : getAll()){
-            if (genre1.getGenreName().equals(genre)){
+            if (genre1.getName().equals(genre)){
                 return false;
             }
         }

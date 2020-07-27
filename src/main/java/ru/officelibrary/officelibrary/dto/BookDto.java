@@ -8,18 +8,18 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto {
-    private long bookId;
-    private String bookName;
+    private long id;
+    private String name;
     private int publishingYear;
     private String[] genreIds;
     private String[] authorIds;
 
-    public String getBookName() {
-        return bookName;
+    public String getName() {
+        return name;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getPublishingYear() {
@@ -46,11 +46,11 @@ public class BookDto {
         this.authorIds = authorIds;
     }
 
-    public long getBookId() {
-        return bookId;
+    public long getId() {
+        return id;
     }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -17,28 +17,28 @@ class BookValidatorTest {
     @Test
     void validate() {
         Book book = new Book();
-        book.setBookName("We");
+        book.setName("We");
         BeanPropertyBindingResult error = new BeanPropertyBindingResult(book, "book");
         bookValidator.validate(book, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
         error = new BeanPropertyBindingResult(book, "book");
-        book.setBookName("");
+        book.setName("");
         bookValidator.validate(book, error);
         Assertions.assertEquals(1, error.getErrorCount());
 
         error = new BeanPropertyBindingResult(book, "book");
-        book.setBookName(null);
+        book.setName(null);
         bookValidator.validate(book, error);
         Assertions.assertEquals(1, error.getErrorCount());
 
         error = new BeanPropertyBindingResult(book, "book");
-        book.setBookName("Book & 9 1 0 !?@#$*&^");
+        book.setName("Book & 9 1 0 !?@#$*&^");
         bookValidator.validate(book, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
         error = new BeanPropertyBindingResult(book, "book");
-        book.setBookName("Book & 9 1 0 !?@#$*&^");
+        book.setName("Book & 9 1 0 !?@#$*&^");
         book.setPublishingYear(2020);
         bookValidator.validate(book, error);
         Assertions.assertEquals(0, error.getErrorCount());

@@ -50,13 +50,6 @@ public class BookController {
     @GetMapping(value = "book/new")
     public ModelAndView newBookForm(ModelAndView model) {
         BookDto bookDto = new BookDto();
-//        model.put("book", bookDtoRequest);
-//        List<Genre> genreList = genreService.getAll();
-//        List<Author> authorList = adminAuthorService.getAll();
-//        model.put("genreList", genreList);
-//        model.put("authorList", authorList);
-//        return "new_book";
-//        Book book = new Book();
         model.addObject("book", bookDto);
         List<Genre> genreList = genreService.getAll();
         List<Author> authorList = authorService.getAll();
@@ -84,10 +77,10 @@ public class BookController {
             return model;
         } else {
             try {
-                if (book.getBookId() == 0) {
+                if (book.getId() == 0) {
                     bookService.addBook(book);
                 } else {
-                    bookService.get(book.getBookId());
+                    bookService.get(book.getId());
                 }
                 bookService.addBook(book);
                 return new ModelAndView("redirect:/book");
@@ -115,17 +108,12 @@ public class BookController {
 
     @GetMapping("/book/reserve/{id}/")
     public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
-//        History history = new History();
-//        history.setBook(bookService.get(id));
-//        history.setUser(userService.getByID(6));
-//        history.setStats("busy");
         HistoryDto historyDto = new HistoryDto();
         historyDto.setBook(String.valueOf(id));
         historyDto.setUser(String.valueOf(6));
         historyDto.setStats("busy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
-//        history.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         historyDto.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         model.addObject("reservation", historyDto);
         model.addObject("book", bookService.get(id));
@@ -137,23 +125,17 @@ public class BookController {
 
     @PostMapping("/book/reserve/{id}/save")
     public ModelAndView saveReservation(@ModelAttribute HistoryDto historyDto, @PathVariable long id) {
-//        history.setBook(bookService.get(id));
-//        history.setUser(userService.getByID(6));
-//        history.setStats("busy");
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Calendar calendar = Calendar.getInstance();
-//        history.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         History history = new History();
         history.setUser(userService.getByID(Long.parseLong(historyDto.getUser())));
         history.setBook(bookService.get(Long.parseLong(historyDto.getBook())));
         history.setStartDate(historyDto.getStartDate());
         history.setDueDate(historyDto.getDueDate());
         history.setStats(historyDto.getStats());
-        history.setHistoryId(historyDto.getHistoryId());
-        if (history.getHistoryId() == 0) {
+        history.setId(historyDto.getHistoryId());
+        if (history.getId() == 0) {
             historyService.addHistory(history);
         } else {
-            historyService.getById(history.getHistoryId());
+            historyService.getById(history.getId());
         }
         historyService.addHistory(history);
         return new ModelAndView("redirect:/book");

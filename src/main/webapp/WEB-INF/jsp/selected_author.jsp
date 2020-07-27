@@ -20,8 +20,8 @@
             <security:authorize access="hasAuthority('Admin')">
                 <tr>
                     <td>ID:</td>
-                    <td>${author.authorId}
-                        <form:hidden path="authorId"/>
+                    <td>${author.id}
+                        <form:hidden path="id"/>
                     </td>
                 </tr>
             </security:authorize>
@@ -54,11 +54,11 @@
         </table>
         </form:form>
         <security:authorize access="hasAuthority('Admin')">
-        <a href="/author/edit/${author.authorId}/">
+        <a href="/author/edit/${author.id}/">
             <button type="button" class="btn btn-outline-warning">Edit</button>
         </a>
 
-        <a href="/author/delete/${author.authorId}/">
+        <a href="/author/delete/${author.id}/">
             <button type="button" class="btn btn-outline-danger">Delete</button>
         </a>
         </security:authorize>
@@ -80,19 +80,19 @@
             <c:forEach items="${book}" var="book">
                 <tr>
                         <%--                <td>${book.bookId}</td>--%>
-                    <td onclick="window.location='http://localhost:8080/book/${book.bookId}/'">${book.bookName}</td>
+                    <td onclick="window.location='http://localhost:8080/book/${book.id}/'">${book.name}</td>
                     <td>
                         <c:forEach items="${book.authors}" var="author">
-                            <p><a href="/author/${author.authorId}">${author.concat()}</a></p>
+                            <p><a href="/author/${author.id}">${author.concat()}</a></p>
                         </c:forEach>
                     </td>
                     <td>
                         <c:forEach items="${book.genres}" var="genres">
-                            <p><a href="/author/${genres.genreId}">${genres.genreName}</a></p>
+                            <p><a href="/author/${genres.id}">${genres.name}</a></p>
                         </c:forEach>
                     </td>
                     <td>${book.publishingYear}</td>
-                    <td onclick="window.location='http://localhost:8080/book/reserve/${book.bookId}/'">
+                    <td onclick="window.location='http://localhost:8080/book/reserve/${book.id}/'">
                             <%--                        <a href="/book/reserve/${book.bookId}/">Reserve</a>--%>
                         <img src="images/reserve-1-550156.png" width="30" height="30">
                     </td>

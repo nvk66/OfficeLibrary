@@ -17,39 +17,32 @@ import java.io.Serializable;
 @Table(name = "genres")
 public class Genre implements Serializable, Comparable<Genre>{
     @Id
-//    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long genreId;
+    private long id;
 
     @Column
     @NotNull
-//    @NotBlank
-//    @UniqueElements
     @Size(min = 3, max = 40)
-    private String genreName;
+    private String name;
 
-    public String getGenreName() {
-        return genreName;
+    public String getName() {
+        return name;
     }
 
-    public void setGenreName(String genreName) {
-        this.genreName = genreName;
+    public void setName(String genreName) {
+        this.name = genreName;
     }
 
-    public long getGenreId() {
-        return genreId;
+    public long getId() {
+        return id;
     }
 
-    public void setGenreId(long genreId) {
-        this.genreId = genreId;
+    public void setId(long genreId) {
+        this.id = genreId;
     }
 
     @Override
     public int compareTo(Genre genre) {
-        return this.genreName.toLowerCase().compareTo(genre.getGenreName().toLowerCase());
+        return this.name.toLowerCase().compareTo(genre.getName().toLowerCase());
     }
-//    @Override
-//    public String toString() {
-//        return "Genre [id=" + genreId + ", genreName=" + genreName + "]";
-//    }
 }

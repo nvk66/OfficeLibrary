@@ -33,9 +33,9 @@
                         <tr>
                             <td>Book:</td>
                             <td>
-                                    ${book.bookName}
+                                    ${book.name}
 <%--                                <form:hidden path="book" />--%>
-                                <input type="hidden" value="${book.bookId}" name="book">
+                                <input type="hidden" value="${book.id}" name="book">
                             </td>
                         </tr>
                         <tr>

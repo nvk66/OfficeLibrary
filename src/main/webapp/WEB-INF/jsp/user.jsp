@@ -7,14 +7,12 @@
 </head>
 <body>
 <div align="center">
-    <%@include file="navigation.jsp"%>
+    <%@include file="navigation.jsp" %>
 
     <h2>User</h2>
-    <form method="get" action="search">
-        <input type="text" name="keyword" />
-        <input type="submit" value="Search" />
-    </form>
-    <h3><a href="/user/new/">New User</a></h3>
+    <security:authorize access="hasAuthority('Admin')">
+        <h3><a href="/user/new/">New User</a></h3>
+    </security:authorize>
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
@@ -28,20 +26,20 @@
         <%--        <jsp:useBean id="listBook" scope="request" type="java.util.List"/>--%>
         <c:forEach items="${listUser}" var="user">
             <tr>
-                <td>${user.userId}</td>
+                <td>${user.id}</td>
                 <td>${user.lastName}</td>
                 <td>${user.name}</td>
                 <td>${user.patronymicName}</td>
                 <td>${user.birthDate}</td>
                 <td>
                     <c:forEach items="${user.roles}" var="roles">
-                        <p>${roles.roleName}</p>
+                        <p>${roles.name}</p>
                     </c:forEach>
                 </td>
                 <td>
-                    <a href="/user/edit?id=${user.userId}">Edit</a>
+                    <a href="/user/edit/${user.id}/">Edit</a>
 
-                    <a href="/user/delete?id=${user.userId}">Delete</a>
+                    <a href="/user/delete/${user.id}/">Delete</a>
                 </td>
             </tr>
         </c:forEach>

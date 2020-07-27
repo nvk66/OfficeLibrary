@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
-    @Query(value = "SELECT a FROM Author a WHERE a.authorId IN :ids")
+    @Query(value = "SELECT a FROM Author a WHERE a.id IN :ids")
     Set<Author> findAuthorsByIdList(@Param("ids") Collection<Long> ids);
 
 }

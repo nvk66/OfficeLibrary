@@ -30,16 +30,16 @@
         <%--        <jsp:useBean id="listBook" scope="request" type="java.util.List"/>--%>
         <c:forEach items="${listHistory}" var="history">
             <tr>
-                <td>${history.historyId}</td>
+                <td>${history.id}</td>
                 <td>${history.user.userInfo()}</td>
-                <td>${history.book.bookName}</td>
+                <td>${history.book.name}</td>
                 <td>${history.stats}</td>
                 <td>${history.startDate}</td>
                 <td>${history.dueDate.toString()}</td>
                 <td>${history.returnDate}</td>
                 <td>
                     <c:if test="${history.stats.equalsIgnoreCase('Busy')}">
-                    <a href="/history/return/${history.historyId}">Return</a></td>
+                    <a href="/history/return/${history.id}">Return</a></td>
                 </c:if>
             </tr>
         </c:forEach>

@@ -1,18 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="template-def" template="/WEB-INF/jsp/defaultLayout.jsp">
-        <put-attribute name="title" value="" />
-        <put-attribute name="header" value="/WEB-INF/jsp/defaultHeader.jsp" />
-<!--        <put-attribute name="menu" value="defaultMenu.jsp" />-->
-        <put-attribute name="body" value="" />
-<!--        <put-attribute name="footer" value="defaultFooter.jsp" />-->
+
+    <!-- Base Define -->
+    <definition name="base.definition" template="/WEB-INF/layouts/classic.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/base/defaultHeader.jsp"/>
+<!--        <put-attribute name="menu" value="/WEB-INF/base/_menu.jsp"/>-->
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/base/defaultFooter.jsp"/>
     </definition>
-    <definition name="home" extends="template-def">
-        <put-attribute name="title" value="Welcome" />
-        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+
+    <!-- Home Page  -->
+    <definition name="homePage" extends="base.definition">
+        <put-attribute name="title" value="Home Page"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
     </definition>
-    <definition name="genre" extends="template-def">
-        <put-attribute name="title" value="Genre" />
-        <put-attribute name="body" value="/WEB-INF/jsp/genre.jsp" />
+
+    <!-- Genre Page -->
+    <definition name="genrePage" extends="base.definition">
+        <put-attribute name="title" value="Contact Us"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/genre.jsp"/>
     </definition>
+
+
 </tiles-definitions>
+
+        <!--<?xml version="1.0" encoding="utf-8"?>-->
+        <!--<tiles-definitions>-->
+        <!--    <definition name="template-def" template="/WEB-INF/jsp/defaultLayout.jsp">-->
+        <!--        <put-attribute name="title" value="" />-->
+        <!--        <put-attribute name="header" value="/WEB-INF/jsp/defaultHeader.jsp" />-->
+        <!--&lt;!&ndash;        <put-attribute name="menu" value="defaultMenu.jsp" />&ndash;&gt;-->
+        <!--        <put-attribute name="body" value="" />-->
+        <!--&lt;!&ndash;        <put-attribute name="footer" value="defaultFooter.jsp" />&ndash;&gt;-->
+        <!--    </definition>-->
+        <!--    <definition name="home" extends="template-def">-->
+        <!--        <put-attribute name="title" value="Welcome" />-->
+        <!--        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />-->
+        <!--    </definition>-->
+        <!--    <definition name="genre" extends="template-def">-->
+        <!--        <put-attribute name="title" value="Genre" />-->
+        <!--        <put-attribute name="body" value="/WEB-INF/jsp/genre.jsp" />-->
+        <!--    </definition>-->
+        <!--</tiles-definitions>-->
