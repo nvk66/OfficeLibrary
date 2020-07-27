@@ -4,45 +4,71 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-    <!-- Base Define -->
     <definition name="base.definition" template="/WEB-INF/layouts/classic.jsp">
         <put-attribute name="title" value=""/>
         <put-attribute name="header" value="/WEB-INF/base/defaultHeader.jsp"/>
-<!--        <put-attribute name="menu" value="/WEB-INF/base/_menu.jsp"/>-->
         <put-attribute name="body" value=""/>
         <put-attribute name="footer" value="/WEB-INF/base/defaultFooter.jsp"/>
     </definition>
 
-    <!-- Home Page  -->
     <definition name="homePage" extends="base.definition">
         <put-attribute name="title" value="Home Page"/>
         <put-attribute name="body" value="/WEB-INF/jsp/index.jsp"/>
     </definition>
 
-    <!-- Genre Page -->
     <definition name="genrePage" extends="base.definition">
-        <put-attribute name="title" value="Contact Us"/>
+        <put-attribute name="title" value="Genre"/>
         <put-attribute name="body" value="/WEB-INF/jsp/genre.jsp"/>
     </definition>
 
+    <definition name="genreFormPage" extends="base.definition">
+        <put-attribute name="title" value="Genre form"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/form_genre.jsp"/>
+    </definition>
+
+    <definition name="genreSelectedPage" extends="base.definition">
+        <put-attribute name="title" value="Genre view"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/selected_genre.jsp"/>
+    </definition>
+
+    <definition name="authorPage" extends="base.definition">
+        <put-attribute name="title" value="Authors"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/author.jsp"/>
+    </definition>
+
+    <definition name="authorFormPage" extends="base.definition">
+        <put-attribute name="title" value="Author form"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/form_author.jsp"/>
+    </definition>
+
+    <definition name="authorSelectedPage" extends="base.definition">
+        <put-attribute name="title" value="Author view"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/selected_author.jsp"/>
+    </definition>
+
+    <definition name="bookPage" extends="base.definition">
+        <put-attribute name="title" value="Books"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/book.jsp"/>
+    </definition>
+
+    <definition name="bookFormPage" extends="base.definition">
+        <put-attribute name="title" value="Book form"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/form_book.jsp"/>
+    </definition>
+
+    <definition name="bookSelectedPage" extends="base.definition">
+        <put-attribute name="title" value="Book view"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/selected_book.jsp"/>
+    </definition>
+
+    <definition name="historyPage" extends="base.definition">
+        <put-attribute name="title" value="Reservation History"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/history.jsp"/>
+    </definition>
+
+    <definition name="historyFormPage" extends="base.definition">
+        <put-attribute name="title" value="Reservation"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/form_history.jsp"/>
+    </definition>
 
 </tiles-definitions>
-
-        <!--<?xml version="1.0" encoding="utf-8"?>-->
-        <!--<tiles-definitions>-->
-        <!--    <definition name="template-def" template="/WEB-INF/jsp/defaultLayout.jsp">-->
-        <!--        <put-attribute name="title" value="" />-->
-        <!--        <put-attribute name="header" value="/WEB-INF/jsp/defaultHeader.jsp" />-->
-        <!--&lt;!&ndash;        <put-attribute name="menu" value="defaultMenu.jsp" />&ndash;&gt;-->
-        <!--        <put-attribute name="body" value="" />-->
-        <!--&lt;!&ndash;        <put-attribute name="footer" value="defaultFooter.jsp" />&ndash;&gt;-->
-        <!--    </definition>-->
-        <!--    <definition name="home" extends="template-def">-->
-        <!--        <put-attribute name="title" value="Welcome" />-->
-        <!--        <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />-->
-        <!--    </definition>-->
-        <!--    <definition name="genre" extends="template-def">-->
-        <!--        <put-attribute name="title" value="Genre" />-->
-        <!--        <put-attribute name="body" value="/WEB-INF/jsp/genre.jsp" />-->
-        <!--    </definition>-->
-        <!--</tiles-definitions>-->

@@ -28,7 +28,7 @@ public class GenreController {
     @GetMapping("/genre")
     public ModelAndView genreHome() {
         List<Genre> listGenre = genreService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        ModelAndView mav = new ModelAndView("genre");
+        ModelAndView mav = new ModelAndView("genrePage");
         mav.addObject("listGenre", listGenre);
         return mav;
     }
@@ -37,13 +37,13 @@ public class GenreController {
     public ModelAndView newGenreForm(ModelAndView model, BindingResult result) {
         Genre genre = new Genre();
         model.addObject("genres", genre);
-        model.setViewName("form_genre");
+        model.setViewName("genreFormPage");
         return model;
     }
 
     @RequestMapping(value = "/genre/edit/{id}/", method={RequestMethod.PUT, RequestMethod.GET})
     public ModelAndView editGenreForm(@PathVariable long id) {
-        ModelAndView mav = new ModelAndView("form_genre");
+        ModelAndView mav = new ModelAndView("genreFormPage");
         Genre genre = genreService.getById(id);
         mav.addObject("genres", genre);
         return mav;
@@ -55,7 +55,7 @@ public class GenreController {
         if (result.hasErrors()) {
             model.addObject("genres", genre);
             model.addObject("error", "Data was not updated");
-            model.setViewName("form_genre");
+            model.setViewName("genreFormPage");
             return model;
         } else {
             try {
@@ -65,11 +65,11 @@ public class GenreController {
                     genreService.getById(genre.getId());
                 }
                 genreService.addGenre(genre);
-                return new ModelAndView("redirect:/genre");
+                return new ModelAndView("genrePage");
             } catch (Exception e) {
                 model.addObject("genres", genre);
                 model.addObject("error", e.getMessage());
-                model.setViewName("form_genre");
+                model.setViewName("genreFormPage");
                 return model;
             }
         }
@@ -84,7 +84,7 @@ public class GenreController {
     @RequestMapping(value = "genre/delete/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
     public String deleteGenreForm(@PathVariable("id") Long id) {
         genreService.deleteGenre(id);
-        return "redirect:/genre";
+        return "genrePage";
     }
 
     @RequestMapping("/genre/{id}")
@@ -92,6 +92,6 @@ public class GenreController {
         Genre genre = genreService.getById(id);
         model.addAttribute("genre", genre);
         model.addAttribute("book", bookService.findBookByGenre(genre));
-        return "selected_genre";
+        return "genreSelectedPage";
     }
 }

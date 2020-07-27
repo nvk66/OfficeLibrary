@@ -22,7 +22,7 @@ public class HistoryController {
     @RequestMapping("history")
     public ModelAndView historyHome() {
         List<History> listHistory = historyService.getAll();
-        ModelAndView mav = new ModelAndView("history");
+        ModelAndView mav = new ModelAndView("historyPage");
         mav.addObject("listHistory", listHistory);
         return mav;
     }
@@ -31,7 +31,7 @@ public class HistoryController {
     public ModelAndView newGenreForm(ModelAndView model) {
         History history = new History();
         model.addObject("history", history);
-        model.setViewName("from_history");
+        model.setViewName("historyFormPage");
         return model;
     }
 
@@ -43,7 +43,7 @@ public class HistoryController {
         Calendar calendar = Calendar.getInstance();
         history.setReturnDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         historyService.addHistory(history);
-        return "redirect:/history";
+        return "historyPage";
     }
 
 }

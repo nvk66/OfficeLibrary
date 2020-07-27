@@ -1,11 +1,4 @@
 <%@include file="all_tag_libs.jsp" %>
-<%@include file="boot.jsp" %>
-
-<html>
-<head>
-    <title>Book</title>
-</head>
-<body>
 
 <div align="center">
     <div align="left">
@@ -104,7 +97,5 @@
         <H5>Unfortunately ${author.concat()} has no books in our library</H5>
         </c:otherwise>
         </c:choose>
-
-
-</body>
-</html>
+    </div>
+</div>

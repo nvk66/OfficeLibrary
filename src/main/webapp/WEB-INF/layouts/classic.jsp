@@ -1,29 +1,26 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title><tiles:getAsString name="title" /></title>
+    <title><tiles:getAsString name="title"/></title>
 </head>
 
 <body>
 <table width="100%">
     <tr>
         <td colspan="2">
-            <tiles:insertAttribute name="header" />
+            <tiles:insertAttribute name="header"/>
         </td>
     </tr>
     <tr>
-<%--        <td width="20%" nowrap="nowrap">--%>
-<%--            <tiles:insertAttribute name="menu" />--%>
-<%--        </td>--%>
-        <td width="80%">
-            <tiles:insertAttribute name="body" />
+        <td width="80%" style="padding-bottom: 100px; padding-top: 60px">
+            <tiles:insertAttribute name="body"/>
         </td>
     </tr>
     <tr>
-        <td colspan="2">
-            <tiles:insertAttribute name="footer" />
-        </td>
+        <div>
+                <tiles:insertAttribute name="footer"/>
+        </div>
     </tr>
 </table>
 </body>

@@ -1,15 +1,4 @@
-
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>User</title>
-    <%@include file="boot.jsp" %>
-
-</head>
-<body>
 <div align="center">
-    <%@include file="navigation.jsp" %>
-
     <h2>User</h2>
     <form method="get" action="search">
         <input type="text" name="keyword"/>
@@ -45,6 +34,3 @@
         </c:forEach>
     </table>
 </div>
-</body>
-</html>
-

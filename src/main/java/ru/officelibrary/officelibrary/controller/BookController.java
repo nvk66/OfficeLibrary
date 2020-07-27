@@ -42,12 +42,12 @@ public class BookController {
     @RequestMapping("/book")
     public ModelAndView bookHome() {
         List<Book> listBook = bookService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        ModelAndView mav = new ModelAndView("book");
+        ModelAndView mav = new ModelAndView("bookPage");
         mav.addObject("listBook", listBook);
         return mav;
     }
 
-    @GetMapping(value = "book/new")
+    @GetMapping(value = "book/new/")
     public ModelAndView newBookForm(ModelAndView model) {
         BookDto bookDto = new BookDto();
         model.addObject("book", bookDto);
@@ -55,13 +55,13 @@ public class BookController {
         List<Author> authorList = authorService.getAll();
         model.addObject("genreList", genreList);
         model.addObject("authorList", authorList);
-        model.setViewName("form_book");
+        model.setViewName("bookFormPage");
         return model;
     }
 
     @GetMapping("book/edit")
     public ModelAndView editBookForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("form_book");
+        ModelAndView mav = new ModelAndView("bookFormPage");
         Book book = bookService.get(id);
         mav.addObject("book", book);
         return mav;
@@ -73,7 +73,7 @@ public class BookController {
         if (result.hasErrors()) {
             model.addObject("books", book);
             model.addObject("error", "Data was not updated");
-            model.setViewName("form_book");
+            model.setViewName("bookFormPage");
             return model;
         } else {
             try {
@@ -83,11 +83,11 @@ public class BookController {
                     bookService.get(book.getId());
                 }
                 bookService.addBook(book);
-                return new ModelAndView("redirect:/book");
+                return new ModelAndView("bookPage");
             } catch (Exception e) {
                 model.addObject("books", book);
                 model.addObject("error", e.getMessage());
-                model.setViewName("form_book");
+                model.setViewName("bookFormPage");
                 return model;
             }
         }
@@ -96,7 +96,7 @@ public class BookController {
     @RequestMapping("book/delete")
     public String deleteBook(@RequestParam long id) {
         bookService.deleteBook(id);
-        return "redirect:/book";
+        return "bookPage";
     }
 
     @RequestMapping("/book/{id}")
@@ -138,6 +138,6 @@ public class BookController {
             historyService.getById(history.getId());
         }
         historyService.addHistory(history);
-        return new ModelAndView("redirect:/book");
+        return new ModelAndView("bookPage");
     }
 }

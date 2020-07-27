@@ -1,26 +1,18 @@
-
 <%@include file="all_tag_libs.jsp" %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', maxDate: '0', minDate: '0'});
+    });
+    $(function () {
+        $("#datepicker1").datepicker({dateFormat: 'yy-mm-dd', maxDate: '+14', minDate: '+1'});
+    });
+</script>
 
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>New/Edit Reservation</title>
-    <%@include file="boot.jsp" %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', maxDate: '0', minDate: '0'});
-        });
-        $(function () {
-            $("#datepicker1").datepicker({dateFormat: 'yy-mm-dd', maxDate: '+14', minDate: '+1'});
-        });
-    </script>
-</head>
-<body>
 <div align="center">
     <h2><a href="/history">History</a></h2>
     <h1>New/Edit Reservation</h1>
@@ -34,14 +26,14 @@
                             <td>Book:</td>
                             <td>
                                     ${book.name}
-<%--                                <form:hidden path="book" />--%>
+                                    <%--                                <form:hidden path="book" />--%>
                                 <input type="hidden" value="${book.id}" name="book">
                             </td>
                         </tr>
                         <tr>
                             <td>User:</td>
                             <td>
-                                ${user.userInfo()}
+                                    ${user.userInfo()}
                                 <form:hidden path="user"/></td>
                         </tr>
                         <tr>
@@ -68,6 +60,4 @@
         </div>
     </form:form>
 </div>
-</body>
-</html>
 

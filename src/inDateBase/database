@@ -1,0 +1,139 @@
+CREATE TABLE IF NOT EXISTS books
+(
+    bookID SERIAL PRIMARY KEY ,
+    bookName  VARCHAR(200) NOT NULL ,
+    genreID BIGINT NOT NULL ,
+    authorID BIGINT  NOT NULL
+);
+
+DROP TABLE authors;
+
+CREATE TABLE IF NOT EXISTS authors
+(
+    authorID BIGSERIAL PRIMARY KEY ,
+    lastName VARCHAR(40) NOT NULL ,
+    name  VARCHAR(40) NOT NULL ,
+    patronymicName VARCHAR(40) NOT NULL ,
+    birthYear INT  NOT NULL,
+    biography VARCHAR(1000) NOT NULL
+);
+
+DROP TABLE genres;
+
+CREATE TABLE IF NOT EXISTS genres
+(
+    genreID BIGSERIAL PRIMARY KEY ,
+    genreName VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS books
+(
+    bookID SERIAL PRIMARY KEY ,
+    bookName  VARCHAR(200) NOT NULL ,
+    genres INT[] NOT NULL ,
+    authorID BIGINT  NOT NULL
+);
+
+DROP TABLE books;
+
+CREATE TABLE IF NOT EXISTS books
+(
+    bookID BIGSERIAL PRIMARY KEY ,
+    bookName  VARCHAR(200) NOT NULL ,
+    genres BIGINT NOT NULL ,
+    authorID BIGINT  NOT NULL
+);
+
+ALTER TABLE books ADD FOREIGN KEY (genres) REFERENCES genres(genreID) ON DELETE CASCADE;
+
+ALTER TABLE books ADD FOREIGN KEY (authorID) REFERENCES authors(authorID) ON DELETE CASCADE;
+
+CREATE TYPE status AS ENUM ('Busy', 'Free');
+
+DROP TABLE history;
+
+CREATE TABLE IF NOT EXISTS history
+(
+    historyID BIGSERIAL PRIMARY KEY NOT NULL ,
+    bookID BIGINT NOT NULL ,
+    userID BIGINT NOT NULL ,
+    status status NOT NULL
+);
+
+ALTER TABLE history ADD FOREIGN KEY (userID) REFERENCES users(userid) ON DELETE CASCADE;
+
+ALTER TABLE history ADD FOREIGN KEY (bookID) REFERENCES books(bookID) ON DELETE CASCADE;
+
+
+ALTER TABLE books ADD FOREIGN KEY (bookName) REFERENCES history(bookID) ON DELETE CASCADE;
+
+ALTER TABLE users RENAME role_id TO role_role_id;
+;
+
+drop table history;
+
+CREATE TABLE history(
+    history_id bigserial not null primary key ,
+    user_id bigint not null ,
+    book_id bigint not null ,
+    status status not null ,
+    start_date date not null ,
+    return_date date not null
+);
+
+CREATE TABLE book_genre(
+    id bigserial primary key not null ,
+    book_id bigint not null,
+    genre_id bigint not null
+);
+
+CREATE TABLE book_author(
+    id bigserial primary key not null,
+    book_id bigint not null,
+    author_id bigint not null
+);
+
+create table user_role(
+    id bigserial primary key not null,
+    user_id bigint not null ,
+    role_id bigint not null
+);
+
+CREATE TABLE IF NOT EXISTS role
+(
+    role_id BIGSERIAL PRIMARY KEY NOT NULL ,
+    name VARCHAR(10) NOT NULL
+);
+
+ALTER TABLE books ADD COLUMN publishing_year bigint not null ;
+ALTER TABLE history DROP COLUMN return_date;
+ALTER TABLE users DROP COLUMN role_role_id;
+;
+
+ALTER TABLE users RENAME role_role_id TO role;
+
+ALTER TABLE users ADD COLUMN role_role_id bigint ;
+
+ALTER TABLE role ADD COLUMN role bigint not null ;
+
+ALTER TABLE books DROP COLUMN authors;
+
+DROP TABLE role;
+
+CREATE TABLE role(
+    role_id BIGSERIAL NOT NULL PRIMARY KEY ,
+    role_name VARCHAR(10) NOT NULL
+);
+
+ALTER TABLE users DROP COLUMN role_id;
+
+ALTER TABLE role RENAME COLUMN id TO role_id;
+
+ALTER TABLE users DROP COLUMN role_role_id;
+
+
+ALTER TABLE history DROP COLUMN stats;
+
+ALTER TABLE history ADD COLUMN stats VARCHAR(10);
+
+

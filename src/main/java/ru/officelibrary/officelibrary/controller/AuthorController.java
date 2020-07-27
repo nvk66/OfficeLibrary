@@ -27,7 +27,7 @@ public class AuthorController {
     @RequestMapping("/author/")
     public ModelAndView authorHome() {
         List<Author> listAuthor = authorService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        ModelAndView mav = new ModelAndView("author");
+        ModelAndView mav = new ModelAndView("authorPage");
         mav.addObject("listAuthor", listAuthor);
         return mav;
     }
@@ -36,13 +36,13 @@ public class AuthorController {
     public ModelAndView newAuthorForm(ModelAndView model) {
         Author author = new Author();
         model.addObject("author", author);
-        model.setViewName("form_author");
+        model.setViewName("authorFormPage");
         return model;
     }
 
     @GetMapping("author/edit/{id}/")
     public ModelAndView editAuthorForm(@PathVariable long id) {
-        ModelAndView mav = new ModelAndView("form_author");
+        ModelAndView mav = new ModelAndView("authorFormPage");
         Author author = authorService.get(id);
         mav.addObject("author", author);
         return mav;
@@ -54,7 +54,7 @@ public class AuthorController {
         if (result.hasErrors()) {
             model.addObject("authors", author);
             model.addObject("error", "Data was not updated");
-            model.setViewName("form_author");
+            model.setViewName("authorFormPage");
             return model;
         } else {
             try {
@@ -64,11 +64,11 @@ public class AuthorController {
                     authorService.get(author.getId());
                 }
                 authorService.addAuthor(author);
-                return new ModelAndView("redirect:/author/");
+                return new ModelAndView("authorPage");
             } catch (Exception e){
                 model.addObject("authors", author);
                 model.addObject("error", e.getMessage());
-                model.setViewName("form_author");
+                model.setViewName("authorFormPage");
                 return model;
             }
         }
@@ -77,7 +77,7 @@ public class AuthorController {
     @RequestMapping(value = "author/delete/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
     public String deleteAuthor(@PathVariable long id) {
         authorService.deleteAuthor(id);
-        return "redirect:/author";
+        return "authorPage";
     }
 
     @RequestMapping("/author/{id}/")
@@ -85,7 +85,7 @@ public class AuthorController {
         Author author = authorService.get(id);
         model.addAttribute("author", author);
         model.addAttribute("book", bookService.findBookByAuthor(author));
-        return "selected_author";
+        return "authorSelectedPage";
     }
 
 }

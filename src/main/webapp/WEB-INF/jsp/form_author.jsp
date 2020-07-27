@@ -1,27 +1,19 @@
 <%@include file="all_tag_libs.jsp" %>
+<style>
+    .error {
+        color: #ff0000;
+    }
 
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>New/Edit Author</title>
-    <style>
-        .error {
-            color: #ff0000;
-        }
-
-        .errorblock {
-            color: #000;
-            background-color: #ffEEEE;
-            border: 3px solid #ff0000;
-            padding: 8px;
-            margin: 16px;
-        }
-    </style>
-    <%@include file="boot.jsp" %>
-</head>
-<body>
+    .errorblock {
+        color: #000;
+        background-color: #ffEEEE;
+        border: 3px solid #ff0000;
+        padding: 8px;
+        margin: 16px;
+    }
+</style>
 <div align="center">
-    <h2><a href="/author">Authors</a></h2>
+    <h2><a href="/author/">Authors</a></h2>
     <h1>New/Edit Author</h1>
     <form:form action="/author/save/" method="post" modelAttribute="author">
         <form:errors path="*" cssClass="errorblock" element="div"/>
@@ -80,5 +72,3 @@
         </div>
     </form:form>
 </div>
-</body>
-</html>

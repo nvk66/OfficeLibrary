@@ -1,26 +1,17 @@
 <%@include file="all_tag_libs.jsp" %>
+<style>
+    .error {
+        color: #ff0000;
+    }
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>New/Edit Book</title>
-    <style>
-        .error {
-            color: #ff0000;
-        }
-
-        .errorblock {
-            color: #000;
-            background-color: #ffEEEE;
-            border: 3px solid #ff0000;
-            padding: 8px;
-            margin: 16px;
-        }
-    </style>
-    <%@include file="boot.jsp" %>
-</head>
+    .errorblock {
+        color: #000;
+        background-color: #ffEEEE;
+        border: 3px solid #ff0000;
+        padding: 8px;
+        margin: 16px;
+    }
+</style>
 <body>
 <div align="center">
     <h2><a href="/book">Books</a></h2>
@@ -77,6 +68,4 @@
         </div>
     </form:form>
 </div>
-</body>
-</html>
 
