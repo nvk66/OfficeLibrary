@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 class UserValidatorTest {
-    UserValidator userValidator;
+    private UserValidator userValidator;
     private User user = new User();
     private BeanPropertyBindingResult error = new BeanPropertyBindingResult(user, "user");
 

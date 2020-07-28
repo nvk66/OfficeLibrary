@@ -7,7 +7,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import ru.officelibrary.officelibrary.entity.Book;
 
 class BookValidatorTest {
-    BookValidator bookValidator;
+    private BookValidator bookValidator;
 
     @BeforeEach
     void setUp() {
