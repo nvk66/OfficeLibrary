@@ -1,6 +1,5 @@
 package ru.officelibrary.officelibrary.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.Role;
@@ -13,11 +12,10 @@ import java.util.stream.Stream;
 @Service
 @Transactional
 public class RoleService {
-    @Autowired
-    private static RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public RoleService(RoleRepository roleRepository) {
-        RoleService.roleRepository = roleRepository;
+        this.roleRepository = roleRepository;
     }
 
     public List<Role> roleList() {

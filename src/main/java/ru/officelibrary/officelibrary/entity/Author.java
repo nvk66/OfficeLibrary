@@ -17,10 +17,6 @@ import java.io.Serializable;
 @Setter
 @Table(name = "authors")
 public class Author implements Serializable, Comparable<Author> {
-//    Автор
-//    ФИО
-//    год рождение
-//    биография
 
     @Id
     @NotNull

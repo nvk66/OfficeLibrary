@@ -1,6 +1,5 @@
 package ru.officelibrary.officelibrary.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.Genre;
@@ -14,8 +13,7 @@ import java.util.stream.Stream;
 @Service
 @Transactional
 public class GenreService {
-    @Autowired
-    private GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
     public GenreService(GenreRepository genreRepository) {
         this.genreRepository = genreRepository;
@@ -31,6 +29,10 @@ public class GenreService {
     }
 
     public Genre addGenre(Genre genre){
+        return genreRepository.save(genre);
+    }
+
+    public Genre updateGenre(Genre genre){
         return genreRepository.save(genre);
     }
 

@@ -1,6 +1,5 @@
 package ru.officelibrary.officelibrary.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +15,16 @@ import java.util.List;
 
 @Controller
 public class HistoryController {
-    @Autowired
-    private HistoryService historyService;
+    private final HistoryService historyService;
+
+    public HistoryController(HistoryService historyService) {
+        this.historyService = historyService;
+    }
 
     @RequestMapping("history")
     public ModelAndView historyHome() {
         List<History> listHistory = historyService.getAll();
-        ModelAndView mav = new ModelAndView("historyPage");
+        ModelAndView mav = new ModelAndView("history");
         mav.addObject("listHistory", listHistory);
         return mav;
     }
@@ -31,7 +33,7 @@ public class HistoryController {
     public ModelAndView newGenreForm(ModelAndView model) {
         History history = new History();
         model.addObject("history", history);
-        model.setViewName("historyFormPage");
+        model.setViewName("from_history");
         return model;
     }
 
@@ -43,7 +45,7 @@ public class HistoryController {
         Calendar calendar = Calendar.getInstance();
         history.setReturnDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         historyService.addHistory(history);
-        return "historyPage";
+        return "redirect:/history";
     }
 
 }

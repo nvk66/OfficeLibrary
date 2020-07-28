@@ -1,6 +1,5 @@
 package ru.officelibrary.officelibrary.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.History;
@@ -11,8 +10,7 @@ import java.util.List;
 @Service
 @Transactional
 public class HistoryService {
-    @Autowired
-    private HistoryRepository historyRepository;
+    private final HistoryRepository historyRepository;
 
     public HistoryService(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;

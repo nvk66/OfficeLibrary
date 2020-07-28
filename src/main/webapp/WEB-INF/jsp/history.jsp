@@ -1,10 +1,11 @@
+<%@include file="all_tag_libs.jsp"%>
 <div align="center">
     <h2>User</h2>
     <form method="get" action="search">
         <input type="text" name="keyword"/>
         <input type="submit" value="Search"/>
     </form>
-    <h3><a href="/user/new/">New User</a></h3>
+    <h3><a href="/history/new/">Create new reservation</a></h3>
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>

@@ -8,111 +8,127 @@ import ru.officelibrary.officelibrary.entity.Author;
 
 class AuthorValidatorTest {
 
-    AuthorValidator authorValidator;
+    private AuthorValidator authorValidator;
+    private Author author = new Author();
+    private BeanPropertyBindingResult error = new BeanPropertyBindingResult(author, "author");
 
     @BeforeEach
     void setUp() {
         authorValidator = new AuthorValidator();
+        author.setName("Name");
+        author.setLastName("LastName");
+        author.setBiography("I was born in the heart of Siberia with an awesome smile");
     }
 
     @Test
-    void validate() {
-        Author author = new Author();
-        BeanPropertyBindingResult error = new BeanPropertyBindingResult(author, "author");
+    public void nameValidator(){
+        error = new BeanPropertyBindingResult(author, "author");
         author.setName("");
-        author.setLastName("LastName");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
         authorValidator.validate(author, error);
         Assertions.assertEquals(1, error.getErrorCount());
 
-        error = new BeanPropertyBindingResult(author, "author");
         author.setName("Name");
-        author.setLastName("");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
-        authorValidator.validate(author, error);
-        Assertions.assertEquals(1, error.getErrorCount());
-
         error = new BeanPropertyBindingResult(author, "author");
-        author.setName("Name");
-        author.setLastName(null);
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
         authorValidator.validate(author, error);
-        Assertions.assertEquals(1, error.getErrorCount());
+        Assertions.assertEquals(0, error.getErrorCount());
 
-        error = new BeanPropertyBindingResult(author, "author");
         author.setName(null);
+        error = new BeanPropertyBindingResult(author, "author");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+
+        author.setName("Anna-Maria");
+        error = new BeanPropertyBindingResult(author, "author");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(0, error.getErrorCount());
+
+        author.setName("Ab");
+        error = new BeanPropertyBindingResult(author, "author");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+
         author.setLastName("NameNameNameNameNameNameNameNameNameNamee");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
+        error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
         Assertions.assertEquals(2, error.getErrorCount());
+    }
 
+    @Test
+    public void lastNameValidator(){
         error = new BeanPropertyBindingResult(author, "author");
-        author.setName("Anna-Maria");
-        author.setLastName("LastName");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
+        author.setLastName("");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+
+        author.setLastName("Name");
+        error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
+        author.setLastName(null);
         error = new BeanPropertyBindingResult(author, "author");
-        author.setName("Abu");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+
+        author.setLastName("Anna-Maria");
+        error = new BeanPropertyBindingResult(author, "author");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(0, error.getErrorCount());
+
         author.setLastName("Ab");
+        error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
         Assertions.assertEquals(1, error.getErrorCount());
 
+        author.setLastName("NameNameNameNameNameNameNameNameNameNamee");
         error = new BeanPropertyBindingResult(author, "author");
-        author.setName("Abu");
-        author.setLastName("Abu");
-        author.setPatronymicName("");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
         authorValidator.validate(author, error);
-        Assertions.assertEquals(0, error.getErrorCount());
+        Assertions.assertEquals(1, error.getErrorCount());
+    }
 
-        error = new BeanPropertyBindingResult(author, "author");
+    @Test
+    public void patNameValidator(){
         author.setPatronymicName(null);
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
+        error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
+        author.setPatronymicName("null");
         error = new BeanPropertyBindingResult(author, "author");
-        author.setPatronymicName("Petro-Petro");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
         authorValidator.validate(author, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
+        author.setPatronymicName("as");
         error = new BeanPropertyBindingResult(author, "author");
-        author.setPatronymicName("Я-Русский");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+
+        author.setPatronymicName("NameNameNameNameNameNameNameNameNameNamee");
+        error = new BeanPropertyBindingResult(author, "author");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(1, error.getErrorCount());
+    }
+
+    @Test
+    public void bioValidator(){
+        author.setBiography("I was born in the heart of Siberia with an awesome smile");
+        error = new BeanPropertyBindingResult(author, "author");
+        authorValidator.validate(author, error);
+        Assertions.assertEquals(0, error.getErrorCount());
+
         author.setBiography("I was born in the heart of Siberia \" with an awesome smile");
+        error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
-        error = new BeanPropertyBindingResult(author, "author");
-        author.setBiography("");
-        authorValidator.validate(author, error);
-        Assertions.assertEquals(1, error.getErrorCount());
-
-        error = new BeanPropertyBindingResult(author, "author");
         author.setBiography(null);
+        error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
         Assertions.assertEquals(1, error.getErrorCount());
 
+        author.setBiography("null");
         error = new BeanPropertyBindingResult(author, "author");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile &&&");
         authorValidator.validate(author, error);
-        Assertions.assertEquals(1, error.getErrorCount());
-
-        error = new BeanPropertyBindingResult(author, "author");
-        author.setPatronymicName("Petro-Petro");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
-        author.setBirthYear(2011);
-        authorValidator.validate(author, error);
-        Assertions.assertEquals(1, error.getErrorCount());
-
-        error = new BeanPropertyBindingResult(author, "author");
-        author.setPatronymicName("Petro-Petro");
-        author.setBiography("I was born in the heart of Siberia with an awesome smile");
-        author.setBirthYear(2009);
-        authorValidator.validate(author, error);
-        Assertions.assertEquals(0, error.getErrorCount());
+        Assertions.assertEquals(2, error.getErrorCount());
     }
 }

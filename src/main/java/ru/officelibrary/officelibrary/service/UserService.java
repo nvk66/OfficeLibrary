@@ -22,9 +22,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
     private final RoleService roleService;
-
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository, RoleService roleService) {
@@ -59,7 +57,7 @@ public class UserService {
 
     public User registerNewUserAccount(UserDto userDto) throws IllegalArgumentException{
         if (isUserExists(userDto.getEmail())){
-            log.error("There is an account with that email address:" + userDto.getEmail());
+            log.error("There is an account with that email address:{}", userDto.getEmail());
             throw new IllegalArgumentException("There is an account with that email address:" + userDto.getEmail());
         }
         User user = new User();

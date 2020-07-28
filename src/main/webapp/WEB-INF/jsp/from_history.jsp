@@ -26,7 +26,6 @@
                             <td>Book:</td>
                             <td>
                                     ${book.name}
-                                    <%--                                <form:hidden path="book" />--%>
                                 <input type="hidden" value="${book.id}" name="book">
                             </td>
                         </tr>

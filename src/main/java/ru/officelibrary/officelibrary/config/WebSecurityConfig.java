@@ -22,12 +22,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final MyUserDetailsService myUserDetailsService;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    MyUserDetailsService myUserDetailsService;
+    public WebSecurityConfig(UserService userService, MyUserDetailsService myUserDetailsService) {
+        this.userService = userService;
+        this.myUserDetailsService = myUserDetailsService;
+    }
 
     @Bean
     public AuthenticationProvider daoAuthenticationProvider() {
@@ -49,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/"/*, "/registration"*/, "/images/*").permitAll()
                 .antMatchers("/registration").anonymous()
-                .anyRequest().authenticated()//authenticated//permitAll
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/", true)

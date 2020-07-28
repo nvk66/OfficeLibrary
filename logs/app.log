@@ -1,0 +1,22 @@
+2020-07-23 11:49:59,038 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2020-07-23 11:49:59,102 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 34 mappings in 'requestMappingHandlerMapping'
+2020-07-23 11:49:59,128 DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2020-07-23 11:49:59,140 DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2020-07-23 11:50:41,711 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2020-07-23 11:50:41,758 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 34 mappings in 'requestMappingHandlerMapping'
+2020-07-23 11:50:41,783 DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2020-07-23 11:50:41,791 DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2020-07-23 11:50:47,739 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-23 11:50:47,739 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Detected StandardServletMultipartResolver
+2020-07-23 11:50:47,746 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2020-07-23 11:50:47,746 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 7 ms
+2020-07-23 11:50:47,764 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] GET "/", parameters={}
+2020-07-23 11:50:47,767 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-1] Mapped to ru.officelibrary.officelibrary.controller.MainController#welcome()
+2020-07-23 11:50:47,782 DEBUG org.springframework.web.servlet.view.ContentNegotiatingViewResolver [http-nio-8080-exec-1] Selected 'text/html' given [text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8]
+2020-07-23 11:50:47,783 DEBUG org.springframework.web.servlet.view.JstlView [http-nio-8080-exec-1] View name 'mainPage.view', model {}
+2020-07-23 11:50:47,785 DEBUG org.springframework.web.servlet.view.JstlView [http-nio-8080-exec-1] Forwarding to [/WEB-INF/jsp/mainPage.view.jsp]
+2020-07-23 11:50:47,796 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed 404 NOT_FOUND
+2020-07-23 11:50:47,798 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] "ERROR" dispatch for GET "/error", parameters={}
+2020-07-23 11:50:47,799 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-1] Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2020-07-23 11:50:47,808 DEBUG org.springframework.web.servlet.view.ContentNegotiatingViewResolver [http-nio-8080-exec-1] Selected 'text/html' given [text/html, text/html;q=0.8]
+2020-07-23 11:50:47,812 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Exiting from "ERROR" dispatch, status 404

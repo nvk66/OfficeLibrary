@@ -7,31 +7,50 @@
             width: 100%;
             height: 60px;
             background-color: lightcyan">
-    <div align="center" style="margin-top: 10px">
-        <security:authorize access="hasAnyAuthority('User','Admin')">
-            <a href="/#about">MainPage</a>
-            <a href="/genre">Genre</a>
-            <a href="/book/">Book</a>
-            <a href="/author/">Author</a>
-        </security:authorize>
-        <security:authorize access="hasAnyAuthority('Admin')">
-            <a href="/history/">History</a>
-            <a href="/user/">User</a>
-        </security:authorize>
-    </div>
-    <div align="right">
-        <security:authorize access="!hasAnyAuthority('User', 'Admin')">
-            <a href="/login">
-                <button type="button" class="btn btn-outline-primary">Login</button>
-            </a>
-            <a href="/registration">
-                <button type="button" class="btn btn-outline-warning">Registration</button>
-            </a>
-        </security:authorize>
-        <security:authorize access="hasAnyAuthority('User', 'Admin')">
-            <a href="/logout">
-                <button type="button" class="btn btn-outline-primary">Logout</button>
-            </a>
-        </security:authorize>
-    </div>
+    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse " id="collapsingNavbar3">
+            <ul class="navbar-nav justify-content-center">
+                <security:authorize access="hasAnyAuthority('User','Admin')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#about">MainPage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre">Genre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/book/">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/author/">Author</a>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasAnyAuthority('Admin')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history/">History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/">User</a>
+                    </li>
+                </security:authorize>
+            </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <security:authorize access="!hasAnyAuthority('User', 'Admin')">
+                    <li class="nav-item rounded border">
+                        <a class="nav-link bg-success text-white" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item rounded border">
+                        <a class="nav-link bg-info text-white" href="/registration">Registration</a>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasAnyAuthority('User', 'Admin')">
+                    <li class="nav-item rounded border">
+                        <a class="nav-link bg-danger text-white" href="/logout">Logout</a>
+                    </li>
+                </security:authorize>
+            </ul>
+        </div>
+    </nav>
 </div>

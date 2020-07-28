@@ -1,6 +1,6 @@
 package ru.officelibrary.officelibrary.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,14 +16,18 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Controller
 public class GenreController {
-    @Autowired
-    private BookService bookService;
-    @Autowired
-    private GenreService genreService;
-    @Autowired
-    private GenreValidator genreValidator;
+    private final BookService bookService;
+    private final GenreService genreService;
+    private final GenreValidator genreValidator;
+
+    public GenreController(BookService bookService, GenreService genreService, GenreValidator genreValidator) {
+        this.bookService = bookService;
+        this.genreService = genreService;
+        this.genreValidator = genreValidator;
+    }
 
     @GetMapping("/genre")
     public ModelAndView genreHome() {
@@ -33,7 +37,7 @@ public class GenreController {
         return mav;
     }
 
-    @RequestMapping(value = "/genre/",  method={RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/genre/", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView newGenreForm(ModelAndView model, BindingResult result) {
         Genre genre = new Genre();
         model.addObject("genres", genre);
@@ -41,7 +45,7 @@ public class GenreController {
         return model;
     }
 
-    @RequestMapping(value = "/genre/edit/{id}/", method={RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/genre/edit/{id}/", method = {RequestMethod.PUT, RequestMethod.GET})
     public ModelAndView editGenreForm(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("genreFormPage");
         Genre genre = genreService.getById(id);
@@ -54,37 +58,26 @@ public class GenreController {
         genreValidator.validate(genre, result);
         if (result.hasErrors()) {
             model.addObject("genres", genre);
-            model.addObject("error", "Data was not updated");
+            model.addObject("error", "Input error");
             model.setViewName("genreFormPage");
             return model;
-        } else {
-            try {
-                if (genre.getId() == 0) {
-                    genreService.addGenre(genre);
-                } else {
-                    genreService.getById(genre.getId());
-                }
-                genreService.addGenre(genre);
-                return new ModelAndView("genrePage");
-            } catch (Exception e) {
-                model.addObject("genres", genre);
-                model.addObject("error", e.getMessage());
-                model.setViewName("genreFormPage");
-                return model;
-            }
+        }
+        try {
+            genreService.addGenre(genre);
+            return genreHome();
+        } catch (Exception e) {
+            log.error("There was an exception in attempt to save genre");
+            model.addObject("genres", genre);
+            model.addObject("error", e.getMessage());
+            model.setViewName("genreFormPage");
+            return model;
         }
     }
 
-//    @RequestMapping("genre/delete")
-//    public String deleteGenreForm(@RequestParam long id) {
-//        genreService.deleteGenre(id);
-//        return "redirect:/genre";
-//    }
-
-    @RequestMapping(value = "genre/delete/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteGenreForm(@PathVariable("id") Long id) {
+    @RequestMapping(value = "genre/delete/{id}/", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public ModelAndView deleteGenreForm(@PathVariable("id") Long id) {
         genreService.deleteGenre(id);
-        return "genrePage";
+        return genreHome();
     }
 
     @RequestMapping("/genre/{id}")

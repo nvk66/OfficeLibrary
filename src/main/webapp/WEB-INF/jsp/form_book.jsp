@@ -38,8 +38,8 @@
                         <tr>
                             <td>Genres:</td>
                             <td>
-                                <form:select path="genreIds" items="${genreList}" multiple="true" itemValue="genreId"
-                                             itemLabel="genreName">
+                                <form:select path="genreIds" items="${genreList}" multiple="true" itemValue="id"
+                                             itemLabel="name">
                                 </form:select>
                             </td>
                         </tr>
@@ -47,7 +47,7 @@
                             <td>Authors:</td>
                             <td>
                                 <form:select path="authorIds" items="${authorList}" multiple="true" itemLabel="lastName"
-                                             itemValue="authorId">
+                                             itemValue="id">
                                 </form:select>
                             </td>
                         </tr>

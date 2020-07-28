@@ -1,6 +1,6 @@
 package ru.officelibrary.officelibrary.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,14 +15,18 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Controller
 public class AuthorController {
-    @Autowired
-    private BookService bookService;
-    @Autowired
-    private AuthorService authorService;
-    @Autowired
-    private AuthorValidator authorValidator;
+    private final BookService bookService;
+    private final AuthorService authorService;
+    private final AuthorValidator authorValidator;
+
+    public AuthorController(BookService bookService, AuthorService authorService, AuthorValidator authorValidator) {
+        this.bookService = bookService;
+        this.authorService = authorService;
+        this.authorValidator = authorValidator;
+    }
 
     @RequestMapping("/author/")
     public ModelAndView authorHome() {
@@ -32,7 +36,7 @@ public class AuthorController {
         return mav;
     }
 
-    @RequestMapping(value = "/author/new/",  method={RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/author/new/", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView newAuthorForm(ModelAndView model) {
         Author author = new Author();
         model.addObject("author", author);
@@ -53,31 +57,26 @@ public class AuthorController {
         authorValidator.validate(author, result);
         if (result.hasErrors()) {
             model.addObject("authors", author);
-            model.addObject("error", "Data was not updated");
+            model.addObject("error", "Input error");
             model.setViewName("authorFormPage");
             return model;
-        } else {
-            try {
-                if (author.getId() == 0) {
-                    authorService.addAuthor(author);
-                } else {
-                    authorService.get(author.getId());
-                }
-                authorService.addAuthor(author);
-                return new ModelAndView("authorPage");
-            } catch (Exception e){
-                model.addObject("authors", author);
-                model.addObject("error", e.getMessage());
-                model.setViewName("authorFormPage");
-                return model;
-            }
+        }
+        try {
+            authorService.addAuthor(author);
+            return authorHome();
+        } catch (Exception e) {
+            log.error("There was an exception in attempt to save author");
+            model.addObject("authors", author);
+            model.addObject("error", e.getMessage());
+            model.setViewName("authorFormPage");
+            return model;
         }
     }
 
-    @RequestMapping(value = "author/delete/{id}/", method={RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteAuthor(@PathVariable long id) {
+    @RequestMapping(value = "author/delete/{id}/", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public ModelAndView deleteAuthor(@PathVariable long id) {
         authorService.deleteAuthor(id);
-        return "authorPage";
+        return authorHome();
     }
 
     @RequestMapping("/author/{id}/")

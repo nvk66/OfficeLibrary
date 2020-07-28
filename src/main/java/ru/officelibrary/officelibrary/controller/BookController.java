@@ -1,6 +1,6 @@
 package ru.officelibrary.officelibrary.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,27 +22,30 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Controller
 public class BookController {
-    @Autowired
-    private BookService bookService;
-    @Autowired
-    private AuthorService authorService;
-    @Autowired
-    private GenreService genreService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private HistoryService historyService;
+    private final BookService bookService;
+    private final AuthorService authorService;
+    private final GenreService genreService;
+    private final UserService userService;
+    private final HistoryService historyService;
+    private final BookValidator bookValidator;
 
-    @Autowired
-    private BookValidator bookValidator;
-
+    public BookController(BookService bookService, AuthorService authorService, GenreService genreService,
+                          UserService userService, HistoryService historyService, BookValidator bookValidator) {
+        this.bookService = bookService;
+        this.authorService = authorService;
+        this.genreService = genreService;
+        this.userService = userService;
+        this.historyService = historyService;
+        this.bookValidator = bookValidator;
+    }
 
     @RequestMapping("/book")
     public ModelAndView bookHome() {
         List<Book> listBook = bookService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        ModelAndView mav = new ModelAndView("bookPage");
+        ModelAndView mav = new ModelAndView("book");
         mav.addObject("listBook", listBook);
         return mav;
     }
@@ -55,13 +58,13 @@ public class BookController {
         List<Author> authorList = authorService.getAll();
         model.addObject("genreList", genreList);
         model.addObject("authorList", authorList);
-        model.setViewName("bookFormPage");
+        model.setViewName("form_book");
         return model;
     }
 
     @GetMapping("book/edit")
     public ModelAndView editBookForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("bookFormPage");
+        ModelAndView mav = new ModelAndView("form_book");
         Book book = bookService.get(id);
         mav.addObject("book", book);
         return mav;
@@ -72,31 +75,26 @@ public class BookController {
         bookValidator.validate(book, result);
         if (result.hasErrors()) {
             model.addObject("books", book);
-            model.addObject("error", "Data was not updated");
-            model.setViewName("bookFormPage");
+            model.addObject("error", "Input error");
+            model.setViewName("form_book");
             return model;
-        } else {
-            try {
-                if (book.getId() == 0) {
-                    bookService.addBook(book);
-                } else {
-                    bookService.get(book.getId());
-                }
-                bookService.addBook(book);
-                return new ModelAndView("bookPage");
-            } catch (Exception e) {
-                model.addObject("books", book);
-                model.addObject("error", e.getMessage());
-                model.setViewName("bookFormPage");
-                return model;
-            }
+        }
+        try {
+            bookService.addBook(book);
+            return bookHome();
+        } catch (Exception e) {
+            log.error("There was an exception in attempt to save book");
+            model.addObject("books", book);
+            model.addObject("error", e.getMessage());
+            model.setViewName("form_book");
+            return model;
         }
     }
 
     @RequestMapping("book/delete")
-    public String deleteBook(@RequestParam long id) {
+    public ModelAndView deleteBook(@RequestParam long id) {
         bookService.deleteBook(id);
-        return "bookPage";
+        return bookHome();
     }
 
     @RequestMapping("/book/{id}")
@@ -104,7 +102,6 @@ public class BookController {
         model.addAttribute("book", bookService.get(id));
         return "selected_book";
     }
-
 
     @GetMapping("/book/reserve/{id}/")
     public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
@@ -138,6 +135,6 @@ public class BookController {
             historyService.getById(history.getId());
         }
         historyService.addHistory(history);
-        return new ModelAndView("bookPage");
+        return new ModelAndView("redirect:/book");
     }
 }

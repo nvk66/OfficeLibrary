@@ -16,11 +16,8 @@ import java.util.Set;
 @Transactional
 public class BookService {
 
-//    @Autowired
-    private static BookRepository bookRepository;
-
-//    @Autowired
-    private static AuthorService authorService;
+    private final  BookRepository bookRepository;
+    private final  AuthorService authorService;
 
     public BookService(BookRepository bookRepository, AuthorService authorService) {
         this.bookRepository = bookRepository;
