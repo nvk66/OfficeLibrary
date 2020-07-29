@@ -104,11 +104,14 @@ public class BookController {
         return "bookSelectedPage";
     }
 
+    @ExceptionHandler(Exception.class)
     @GetMapping("/book/reserve/{id}/")
-    public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
+    public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id, Exception ex) {
         HistoryDto historyDto = new HistoryDto();
         if(bookService.get(id).getStats().equals("Busy")){
-
+            model.setViewName("reservationError");
+            model.addObject("message", ex.getMessage());
+            return model;
         }
         historyDto.setBook(String.valueOf(id));
         long userId = userService.getUserId();

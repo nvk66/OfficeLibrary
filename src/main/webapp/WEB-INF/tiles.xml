@@ -71,4 +71,9 @@
         <put-attribute name="body" value="/WEB-INF/jsp/from_history.jsp"/>
     </definition>
 
+    <definition name="reservationError" extends="base.definition">
+        <put-attribute name="title" value="Error page"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/errorpage.jsp"/>
+    </definition>
+
 </tiles-definitions>
