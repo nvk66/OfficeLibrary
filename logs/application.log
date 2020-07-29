@@ -181,3 +181,28 @@ ${LOG_PATTERN}${LOG_PATTERN}${LOG_PATTERN}${LOG_PATTERN}${LOG_PATTERN}2020-07-28
 2020-07-29T12:27:44.059+0600 DEBUG Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
 2020-07-29T12:27:44.060+0600 INFO No active profile set, falling back to default profiles: default
 2020-07-29T12:27:47.178+0600 INFO Started OfficelibraryApplication in 3.356 seconds (JVM running for 4.176)
+2020-07-29T13:05:27.044+0600 INFO application started
+2020-07-29T13:05:27.324+0600 INFO Starting OfficelibraryApplication on MacBook-Pro-Alexey.local with PID 15980 (/Users/alexey/IdeaProjects/officelibrary/target/classes started by alexey in /Users/alexey/IdeaProjects/officelibrary)
+2020-07-29T13:05:27.326+0600 DEBUG Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+2020-07-29T13:05:27.326+0600 INFO No active profile set, falling back to default profiles: default
+2020-07-29T13:05:30.144+0600 INFO Started OfficelibraryApplication in 3.042 seconds (JVM running for 3.83)
+2020-07-29T13:10:43.786+0600 INFO application started
+2020-07-29T13:10:44.155+0600 INFO Starting OfficelibraryApplication on MacBook-Pro-Alexey.local with PID 16049 (/Users/alexey/IdeaProjects/officelibrary/target/classes started by alexey in /Users/alexey/IdeaProjects/officelibrary)
+2020-07-29T13:10:44.158+0600 DEBUG Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+2020-07-29T13:10:44.159+0600 INFO No active profile set, falling back to default profiles: default
+2020-07-29T13:10:47.307+0600 INFO Started OfficelibraryApplication in 3.459 seconds (JVM running for 4.354)
+2020-07-29T13:12:47.154+0600 INFO application started
+2020-07-29T13:12:47.437+0600 INFO Starting OfficelibraryApplication on MacBook-Pro-Alexey.local with PID 16096 (/Users/alexey/IdeaProjects/officelibrary/target/classes started by alexey in /Users/alexey/IdeaProjects/officelibrary)
+2020-07-29T13:12:47.439+0600 DEBUG Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+2020-07-29T13:12:47.440+0600 INFO No active profile set, falling back to default profiles: default
+2020-07-29T13:12:50.503+0600 INFO Started OfficelibraryApplication in 3.291 seconds (JVM running for 4.082)
+2020-07-29T13:13:33.721+0600 INFO application started
+2020-07-29T13:13:34.003+0600 INFO Starting OfficelibraryApplication on MacBook-Pro-Alexey.local with PID 16119 (/Users/alexey/IdeaProjects/officelibrary/target/classes started by alexey in /Users/alexey/IdeaProjects/officelibrary)
+2020-07-29T13:13:34.005+0600 DEBUG Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+2020-07-29T13:13:34.006+0600 INFO No active profile set, falling back to default profiles: default
+2020-07-29T13:13:36.782+0600 INFO Started OfficelibraryApplication in 3.005 seconds (JVM running for 3.769)
+2020-07-29T13:15:16.106+0600 INFO application started
+2020-07-29T13:15:16.441+0600 INFO Starting OfficelibraryApplication on MacBook-Pro-Alexey.local with PID 16144 (/Users/alexey/IdeaProjects/officelibrary/target/classes started by alexey in /Users/alexey/IdeaProjects/officelibrary)
+2020-07-29T13:15:16.443+0600 DEBUG Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+2020-07-29T13:15:16.444+0600 INFO No active profile set, falling back to default profiles: default
+2020-07-29T13:15:19.422+0600 INFO Started OfficelibraryApplication in 3.253 seconds (JVM running for 4.274)

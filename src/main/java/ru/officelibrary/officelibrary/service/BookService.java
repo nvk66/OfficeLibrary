@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
+import ru.officelibrary.officelibrary.exception.ReservationException;
 import ru.officelibrary.officelibrary.repository.BookRepository;
 
 import java.util.Collections;
@@ -64,6 +65,6 @@ public class BookService {
     public boolean isItPossibleToBookABook(long id) throws Exception {
         if (get(id).getStats().equals("Free"))
             return true;
-        else throw new Exception("Someone has already taken it");
+        else throw new ReservationException(id, "Someone has already taken it");
     }
 }

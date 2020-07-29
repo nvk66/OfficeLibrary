@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Log4j2
 @Controller
-public class BookController {
+public class BookController extends ExceptionHandlerController{
     private final BookService bookService;
     private final AuthorService authorService;
     private final GenreService genreService;
@@ -104,16 +104,13 @@ public class BookController {
         return "bookSelectedPage";
     }
 
-    @ExceptionHandler(Exception.class)
     @GetMapping("/book/reserve/{id}/")
     public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
         HistoryDto historyDto = new HistoryDto();
         try{
             bookService.isItPossibleToBookABook(id);
         } catch (Exception exception){
-            model.setViewName("reservationError");
-            model.addObject("message", exception.getMessage());
-            return model;
+            impossibleToBookABook(exception);
         }
         historyDto.setBook(String.valueOf(id));
         long userId = userService.getUserId();
