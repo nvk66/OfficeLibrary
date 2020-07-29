@@ -22,12 +22,6 @@ class GenreValidatorTest {
         genreValidator.validate(genre, error);
         Assertions.assertEquals(0, error.getErrorCount());
 
-        String [] strings = {"Non-fiction", "ad", "add", "..1", "Привет", "GenreGenreGenreGenreGenreGenreGenreGenre"};
-        genre.setName("ad");
-        genreValidator.validate(genre, error);
-        Assertions.assertEquals(1, error.getErrorCount());
-        error = new BeanPropertyBindingResult(genre, "genre");
-
         genre.setName("add");
         genreValidator.validate(genre, error);
         Assertions.assertEquals(0, error.getErrorCount());

@@ -17,7 +17,7 @@
             <tr>
                 <td width="30" height="30" onclick="window.location='http://localhost:8080/author/${book.id}/'">
                     <img src="/images/inspector.png" width="30" height="30"></td>
-                <td onclick="window.location='http://localhost:8080/author/${book.id}/'">${book.name}</td>
+                <td onclick="window.location='http://localhost:8080/book/${book.id}/'">${book.name}</td>
                 <td>
                     <c:forEach items="${book.authors}" var="author">
                         <p><a href="/author/${author.id}/">${author.concat()}</a></p>

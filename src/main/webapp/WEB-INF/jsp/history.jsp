@@ -14,7 +14,6 @@
             <th>ReturnDate</th>
             <th>Actions</th>
         </tr>
-        <%--        <jsp:useBean id="listBook" scope="request" type="java.util.List"/>--%>
         <c:forEach items="${listHistory}" var="history">
             <tr>
                 <td>${history.id}</td>

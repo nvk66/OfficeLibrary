@@ -27,4 +27,8 @@ public class HistoryService {
     public List<History> getAll(){
         return (List<History>) historyRepository.findAll();
     }
+
+    public List<History> findAllByStatsEqualsBusy(){
+        return historyRepository.findAllByStatsEquals("Busy");
+    }
 }

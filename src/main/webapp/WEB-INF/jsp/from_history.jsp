@@ -14,8 +14,7 @@
 </script>
 
 <div align="center">
-    <h2><a href="/history">History</a></h2>
-    <h1>New/Edit Reservation</h1>
+    <h1>New Reservation</h1>
     <form:form action="save" method="post" modelAttribute="reservation">
         <div class="container-fluid">
             <div class="container">

@@ -2,6 +2,8 @@ package ru.officelibrary.officelibrary.service;
 
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -51,6 +53,10 @@ public class UserService {
         return userRepository.findUserById(ids);
     }
 
+    public User findUserByEmail(String email){
+        return userRepository.findUserByEmail(email);
+    }
+
     private boolean isUserExists(String email){
         return userRepository.findUserByEmail(email) != null;
     }
@@ -69,5 +75,16 @@ public class UserService {
         user.setPatronymicName(userDto.getPatronymicName());
         user.setBirthDate(userDto.getBirthDate());
         return userRepository.save(user);
+    }
+
+    public long getUserId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = null;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return findUserByEmail(username).getId();
     }
 }

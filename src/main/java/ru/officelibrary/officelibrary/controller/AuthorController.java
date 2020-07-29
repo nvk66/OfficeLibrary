@@ -37,15 +37,15 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/author/new/", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView newAuthorForm(ModelAndView model) {
+    public ModelAndView createNewAuthor(ModelAndView model) {
         Author author = new Author();
         model.addObject("author", author);
         model.setViewName("authorFormPage");
         return model;
     }
 
-    @GetMapping("author/edit/{id}/")
-    public ModelAndView editAuthorForm(@PathVariable long id) {
+    @RequestMapping(value = "author/edit/{id}/", method = {RequestMethod.PUT, RequestMethod.GET})
+    public ModelAndView editAuthor(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("authorFormPage");
         Author author = authorService.get(id);
         mav.addObject("author", author);

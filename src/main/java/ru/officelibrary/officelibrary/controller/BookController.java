@@ -51,7 +51,7 @@ public class BookController {
     }
 
     @GetMapping(value = "book/new/")
-    public ModelAndView newBookForm(ModelAndView model) {
+    public ModelAndView createNewBook(ModelAndView model) {
         BookDto bookDto = new BookDto();
         model.addObject("book", bookDto);
         List<Genre> genreList = genreService.getAll();
@@ -63,7 +63,7 @@ public class BookController {
     }
 
     @GetMapping("book/edit")
-    public ModelAndView editBookForm(@RequestParam long id) {
+    public ModelAndView editBook(@RequestParam long id) {
         ModelAndView mav = new ModelAndView("bookFormPage");
         Book book = bookService.get(id);
         mav.addObject("book", book);
@@ -100,23 +100,24 @@ public class BookController {
     @RequestMapping("/book/{id}")
     public String viewBook(@PathVariable long id, Model model) {
         model.addAttribute("book", bookService.get(id));
-        return "selected_book";
+        return "bookSelectedPage";
     }
 
     @GetMapping("/book/reserve/{id}/")
     public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
         HistoryDto historyDto = new HistoryDto();
         historyDto.setBook(String.valueOf(id));
-        historyDto.setUser(String.valueOf(6));
+        long userId = userService.getUserId();
+        historyDto.setUser(String.valueOf(userId));
         historyDto.setStats("busy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         historyDto.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
         model.addObject("reservation", historyDto);
         model.addObject("book", bookService.get(id));
-        model.addObject("user", userService.getByID(6));
+        model.addObject("user", userService.getByID(userId));
         model.addObject("status", "Busy");
-        model.setViewName("from_history");
+        model.setViewName("historyFormPage");
         return model;
     }
 

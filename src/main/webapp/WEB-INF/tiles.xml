@@ -68,7 +68,7 @@
 
     <definition name="historyFormPage" extends="base.definition">
         <put-attribute name="title" value="Reservation"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/form_history.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/from_history.jsp"/>
     </definition>
 
 </tiles-definitions>

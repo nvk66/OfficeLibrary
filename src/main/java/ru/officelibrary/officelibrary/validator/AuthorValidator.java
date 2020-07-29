@@ -9,6 +9,9 @@ import java.util.Calendar;
 
 @Component
 public class AuthorValidator extends AbstractValidator implements Validator {
+    private final int minLength = 40;
+    private final int maxLength = 10000;
+
     @Override
     public boolean supports(Class<?> aClass) {
         return Author.class.equals(aClass);
@@ -38,10 +41,10 @@ public class AuthorValidator extends AbstractValidator implements Validator {
         if (author.getBiography() == null || author.getBiography().isEmpty()) {
             errors.reject("biography", "Empty message");
         } else {
-            if (author.getBiography().length() < 40 || author.getBiography().length() > 10000) {
+            if (author.getBiography().length() < minLength || author.getBiography().length() > maxLength) {
                 errors.reject("name", "Message is too small or too long");
             }
-            if (!author.getBiography().matches("[a-zA-zА-Яа-я0-9\\\\.,!?+-\\\\\"' ]{40,10000}")) {
+            if (!author.getBiography().matches("[a-zA-zА-Яа-я0-9\\\\.,!?+-\\\\\"' ]+")) {
                 errors.reject("name", "Input error");
             }
         }

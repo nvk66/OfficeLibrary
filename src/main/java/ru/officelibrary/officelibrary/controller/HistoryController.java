@@ -30,7 +30,7 @@ public class HistoryController {
     }
 
     @GetMapping(value = "history/new")
-    public ModelAndView newGenreForm(ModelAndView model) {
+    public ModelAndView newReservation(ModelAndView model) {
         History history = new History();
         model.addObject("history", history);
         model.setViewName("from_history");
@@ -38,7 +38,7 @@ public class HistoryController {
     }
 
     @GetMapping(value = "history/return/{id}")
-    public String deleteGenreForm(@PathVariable String id) {
+    public String returnBook(@PathVariable String id) {
         History history = historyService.getById(Long.parseLong(id));
         history.setStats("Free");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

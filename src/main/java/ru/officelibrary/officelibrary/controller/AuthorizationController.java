@@ -26,7 +26,7 @@ public class AuthorizationController {
     }
 
     @GetMapping("/registration")
-    public String showRegistrationForm(WebRequest request, Model model) {
+    public String registration(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "registration";

@@ -38,7 +38,7 @@ public class GenreController {
     }
 
     @RequestMapping(value = "/genre/", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView newGenreForm(ModelAndView model, BindingResult result) {
+    public ModelAndView createNewGenre(ModelAndView model, BindingResult result) {
         Genre genre = new Genre();
         model.addObject("genres", genre);
         model.setViewName("genreFormPage");
@@ -46,7 +46,7 @@ public class GenreController {
     }
 
     @RequestMapping(value = "/genre/edit/{id}/", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ModelAndView editGenreForm(@PathVariable long id) {
+    public ModelAndView editGenre(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("genreFormPage");
         Genre genre = genreService.getById(id);
         mav.addObject("genres", genre);

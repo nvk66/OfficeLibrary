@@ -129,6 +129,6 @@ class AuthorValidatorTest {
         author.setBiography("null");
         error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
-        Assertions.assertEquals(2, error.getErrorCount());
+        Assertions.assertEquals(1, error.getErrorCount());
     }
 }

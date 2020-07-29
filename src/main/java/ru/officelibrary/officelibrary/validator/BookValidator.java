@@ -9,6 +9,8 @@ import java.util.Calendar;
 
 @Component
 public class BookValidator implements Validator {
+    private final int maxLength = 200;
+
     @Override
     public boolean supports(Class<?> aClass) {
         return Book.class.equals(aClass);
@@ -20,10 +22,10 @@ public class BookValidator implements Validator {
         if (book.getName() == null || book.getName().isEmpty()) {
             errors.reject("name", "Empty message");
         } else {
-            if (book.getName().length() < 1 || book.getName().length() > 200) {
+            if (book.getName().length() > maxLength) {
                 errors.reject("name", "Message is too small or too long");
             }
-            if (!book.getName().matches("[a-zA-z0-9А-Яа-я\\- ,!?&@#$%^*()+_=\\\\\"']{2,200}")) {
+            if (!book.getName().matches("[a-zA-z0-9А-Яа-я\\- ,!?&@#$%^*()+_=\\\\\"']+")) {
                 errors.reject("name", "Input error");
             }
         }

@@ -1,7 +1,11 @@
 package ru.officelibrary.officelibrary.validator;
 
 public abstract class AbstractValidator {
-    protected static String patternForName = "[a-zA-zА-Яа-я\\-]{3,40}";
+
+    private final int minLength = 3;
+    private final int maxLength = 40;
+
+    protected static String patternForName = "[a-zA-zА-Яа-я\\-]+";
 
     public String getPatternForName() {
         return patternForName;
@@ -15,7 +19,7 @@ public abstract class AbstractValidator {
         if (string == null || string.isEmpty()) {
             return false;
         } else {
-            if (string.length() < 2 || string.length() > 40) {
+            if (string.length() < minLength || string.length() > maxLength) {
                 return false;
             }
             return string.matches(patternForName);
@@ -24,6 +28,9 @@ public abstract class AbstractValidator {
 
     protected boolean checkPatName(String string) {
         if (string != null && !string.isEmpty()) {
+            if (string.length() < minLength || string.length() > maxLength) {
+                return false;
+            }
             return string.matches(patternForName);
         }
         return true;
