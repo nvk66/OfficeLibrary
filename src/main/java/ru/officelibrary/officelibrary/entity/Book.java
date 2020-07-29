@@ -44,6 +44,9 @@ public class Book implements Comparable<Book>{
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
+    @Column
+    private String stats;
+
     public long getId() {
         return id;
     }
@@ -82,6 +85,14 @@ public class Book implements Comparable<Book>{
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    public String getStats() {
+        return stats;
+    }
+
+    public void setStats(String stats) {
+        this.stats = stats;
     }
 
     @Override

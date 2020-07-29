@@ -62,8 +62,8 @@ public class BookController {
         return model;
     }
 
-    @GetMapping("book/edit")
-    public ModelAndView editBook(@RequestParam long id) {
+    @GetMapping("book/edit/{id}")
+    public ModelAndView editBook(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("bookFormPage");
         Book book = bookService.get(id);
         mav.addObject("book", book);
@@ -80,6 +80,7 @@ public class BookController {
             return model;
         }
         try {
+            book.setStats("Free");
             bookService.addBook(book);
             return bookHome();
         } catch (Exception e) {
@@ -91,8 +92,8 @@ public class BookController {
         }
     }
 
-    @RequestMapping("book/delete")
-    public ModelAndView deleteBook(@RequestParam long id) {
+    @RequestMapping("book/delete/{id}")
+    public ModelAndView deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);
         return bookHome();
     }
@@ -106,10 +107,14 @@ public class BookController {
     @GetMapping("/book/reserve/{id}/")
     public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
         HistoryDto historyDto = new HistoryDto();
+        if(bookService.get(id).getStats().equals("Busy")){
+
+        }
         historyDto.setBook(String.valueOf(id));
         long userId = userService.getUserId();
         historyDto.setUser(String.valueOf(userId));
         historyDto.setStats("busy");
+        bookService.get(id).setStats("Busy");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         historyDto.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
