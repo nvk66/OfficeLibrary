@@ -106,11 +106,13 @@ public class BookController {
 
     @ExceptionHandler(Exception.class)
     @GetMapping("/book/reserve/{id}/")
-    public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id, Exception ex) {
+    public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
         HistoryDto historyDto = new HistoryDto();
-        if(bookService.get(id).getStats().equals("Busy")){
+        try{
+            bookService.isItPossibleToBookABook(id);
+        } catch (Exception exception){
             model.setViewName("reservationError");
-            model.addObject("message", ex.getMessage());
+            model.addObject("message", exception.getMessage());
             return model;
         }
         historyDto.setBook(String.valueOf(id));

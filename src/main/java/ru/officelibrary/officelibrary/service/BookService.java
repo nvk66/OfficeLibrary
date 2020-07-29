@@ -60,4 +60,10 @@ public class BookService {
     public List<Book> findBookByGenre(Genre genre){
         return bookRepository.findBookByGenresIn(Collections.singleton(genre));
     }
+
+    public boolean isItPossibleToBookABook(long id) throws Exception {
+        if (get(id).getStats().equals("Free"))
+            return true;
+        else throw new Exception("Someone has already taken it");
+    }
 }
