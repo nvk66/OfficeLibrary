@@ -12,6 +12,7 @@ import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
 import ru.officelibrary.officelibrary.entity.History;
+import ru.officelibrary.officelibrary.exception.ReservationException;
 import ru.officelibrary.officelibrary.service.*;
 import ru.officelibrary.officelibrary.validator.BookValidator;
 
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Log4j2
 @Controller
-public class BookController extends ExceptionHandlerController{
+public class BookController {
     private final BookService bookService;
     private final AuthorService authorService;
     private final GenreService genreService;
@@ -105,12 +106,10 @@ public class BookController extends ExceptionHandlerController{
     }
 
     @GetMapping("/book/reserve/{id}/")
-    public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) {
+    public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) throws ReservationException {
         HistoryDto historyDto = new HistoryDto();
-        try{
-            bookService.isItPossibleToBookABook(id);
-        } catch (Exception exception){
-            impossibleToBookABook(exception);
+        if (!bookService.isItPossibleToBookABook(id)) {
+            throw new ReservationException();
         }
         historyDto.setBook(String.valueOf(id));
         long userId = userService.getUserId();

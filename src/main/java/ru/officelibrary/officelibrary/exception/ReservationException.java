@@ -2,11 +2,14 @@ package ru.officelibrary.officelibrary.exception;
 
 public class ReservationException extends Exception{
     private long id;
-    private String message;
+    private String errMessage;
 
-    public ReservationException(long id, String message) {
+    public ReservationException(long id, String errMessage) {
         this.id = id;
-        this.message = message;
+        this.errMessage = errMessage;
+    }
+
+    public ReservationException() {
     }
 
     public long getId() {
@@ -19,10 +22,10 @@ public class ReservationException extends Exception{
 
     @Override
     public String getMessage() {
-        return message;
+        return errMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setErrMessage(String errMessage) {
+        this.errMessage = errMessage;
     }
 }

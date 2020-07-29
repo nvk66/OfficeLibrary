@@ -62,9 +62,9 @@ public class BookService {
         return bookRepository.findBookByGenresIn(Collections.singleton(genre));
     }
 
-    public boolean isItPossibleToBookABook(long id) throws Exception {
+    public boolean isItPossibleToBookABook(long id) throws ReservationException {
         if (get(id).getStats().equals("Free"))
             return true;
-        else throw new ReservationException(id, "Someone has already taken it");
+        else throw new ReservationException(id, "Someone has already taken book ");
     }
 }
