@@ -24,7 +24,7 @@ public class HistoryController {
     @RequestMapping("history")
     public ModelAndView historyHome() {
         List<History> listHistory = historyService.getAll();
-        ModelAndView mav = new ModelAndView("history");
+        ModelAndView mav = new ModelAndView("historyPage");
         mav.addObject("listHistory", listHistory);
         return mav;
     }

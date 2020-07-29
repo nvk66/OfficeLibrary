@@ -1,9 +1,6 @@
-<script>
-    var author = document.getElementById('searchAuthor');
-    author.val();
-</script>
+<%@include file="all_tag_libs.jsp" %>
+<%@include file="boot.jsp" %>
 <div align="center">
-    <%@include file="navigation.jsp" %>
     <h2>Books</h2>
     <security:authorize access="hasAuthority('Admin')">
         <h3><a href="/book/new/">New Book</a></h3>
@@ -23,12 +20,12 @@
                 <td onclick="window.location='http://localhost:8080/author/${book.id}/'">${book.name}</td>
                 <td>
                     <c:forEach items="${book.authors}" var="author">
-                        <p><a href="/author/${author.id}">${author.concat()}</a></p>
+                        <p><a href="/author/${author.id}/">${author.concat()}</a></p>
                     </c:forEach>
                 </td>
                 <td>
                     <c:forEach items="${book.genres}" var="genres">
-                        <p><a href="/author/${genres.id}">${genres.name}</a></p>
+                        <p><a href="/author/${genres.id}/">${genres.name}</a></p>
                     </c:forEach>
                 </td>
 

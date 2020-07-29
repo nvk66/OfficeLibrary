@@ -45,7 +45,7 @@ public class BookController {
     @RequestMapping("/book")
     public ModelAndView bookHome() {
         List<Book> listBook = bookService.getAll().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
-        ModelAndView mav = new ModelAndView("book");
+        ModelAndView mav = new ModelAndView("bookPage");
         mav.addObject("listBook", listBook);
         return mav;
     }
@@ -58,13 +58,13 @@ public class BookController {
         List<Author> authorList = authorService.getAll();
         model.addObject("genreList", genreList);
         model.addObject("authorList", authorList);
-        model.setViewName("form_book");
+        model.setViewName("bookFormPage");
         return model;
     }
 
     @GetMapping("book/edit")
     public ModelAndView editBookForm(@RequestParam long id) {
-        ModelAndView mav = new ModelAndView("form_book");
+        ModelAndView mav = new ModelAndView("bookFormPage");
         Book book = bookService.get(id);
         mav.addObject("book", book);
         return mav;
@@ -76,7 +76,7 @@ public class BookController {
         if (result.hasErrors()) {
             model.addObject("books", book);
             model.addObject("error", "Input error");
-            model.setViewName("form_book");
+            model.setViewName("bookFormPage");
             return model;
         }
         try {
@@ -86,7 +86,7 @@ public class BookController {
             log.error("There was an exception in attempt to save book");
             model.addObject("books", book);
             model.addObject("error", e.getMessage());
-            model.setViewName("form_book");
+            model.setViewName("bookFormPage");
             return model;
         }
     }
@@ -135,6 +135,6 @@ public class BookController {
             historyService.getById(history.getId());
         }
         historyService.addHistory(history);
-        return new ModelAndView("redirect:/book");
+        return bookHome();
     }
 }
