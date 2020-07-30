@@ -81,4 +81,19 @@
         <put-attribute name="body" value="/WEB-INF/jsp/search.jsp"/>
     </definition>
 
+    <definition name="userPage" extends="base.definition">
+        <put-attribute name="title" value="Books"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/user.jsp"/>
+    </definition>
+
+    <definition name="userFormPage" extends="base.definition">
+        <put-attribute name="title" value="Book form"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/form_user.jsp"/>
+    </definition>
+
+    <definition name="userSelectedPage" extends="base.definition">
+        <put-attribute name="title" value="Book view"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/selected_user.jsp"/>
+    </definition>
+
 </tiles-definitions>

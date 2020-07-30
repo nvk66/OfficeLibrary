@@ -29,8 +29,7 @@ public class Book implements Comparable<Book>{
 
     @Column
     @ManyToMany(fetch=FetchType.EAGER,
-            cascade= {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH})
+            cascade= {CascadeType.ALL})
     @JoinTable(name = "book_genre", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     @NotNull
@@ -38,8 +37,7 @@ public class Book implements Comparable<Book>{
 
     @NotNull
     @ManyToMany(fetch=FetchType.EAGER,
-            cascade= {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH})
+            cascade= {CascadeType.ALL})
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;

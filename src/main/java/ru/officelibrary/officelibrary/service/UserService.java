@@ -87,4 +87,17 @@ public class UserService {
         }
         return findUserByEmail(username).getId();
     }
+
+    public User createUser(UserDto userDto){
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setLastName(userDto.getLastName());
+        user.setName(userDto.getName());
+        user.setPatronymicName(userDto.getPatronymicName());
+        user.setBirthDate(userDto.getBirthDate());
+        user.setRole(roleService.findRoleByIdList(userDto.getRoleIds()));
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setEmail(userDto.getEmail());
+        return user;
+    }
 }

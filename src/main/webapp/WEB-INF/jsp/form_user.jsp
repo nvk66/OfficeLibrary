@@ -24,7 +24,7 @@
 <div align="center">
     <h2><a href="/user">Users</a></h2>
     <h1>New/Edit User</h1>
-    <form:form action="/" method="post" modelAttribute="user">
+    <form:form action="/user/save" method="post" modelAttribute="user">
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -49,7 +49,7 @@
                         <tr>
                             <td>Role: </td>
                             <td>
-                                <form:select path="roleIds" items="${roleList}" multiple="true" itemLabel="roleName" itemValue="roleId"/>
+                                <form:select path="roleIds" items="${roleList}" multiple="true" itemLabel="name" itemValue="id"/>
                             </td>
                         </tr>
                         <tr>

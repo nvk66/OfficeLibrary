@@ -17,11 +17,11 @@ import java.io.Serializable;
 @Table(name = "genres")
 public class Genre implements Serializable, Comparable<Genre>{
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    @NotNull
     @Size(min = 3, max = 40)
     private String name;
 

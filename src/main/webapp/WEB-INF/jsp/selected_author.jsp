@@ -59,7 +59,7 @@
         <p></p>
         <%--            <td colspan="2"><input type="button" value="Edit"></td>--%>
         <%--            <td colspan="2"><input type="button" value="Delete"></td>--%>
-        <h5>Books of greatest ${author.concat()}</h5>
+        <h5>Books of greatest ${author.fullName()}</h5>
         <c:choose>
             <c:when test="${book.size() gt 0}">
                 <table border="1" cellpadding="5">
@@ -77,7 +77,7 @@
                             <td onclick="window.location='http://localhost:8080/book/${book.id}/'">${book.name}</td>
                             <td>
                                 <c:forEach items="${book.authors}" var="author">
-                                    <p><a href="/author/${author.id}">${author.concat()}</a></p>
+                                    <p><a href="/author/${author.id}">${author.fullName()}</a></p>
                                 </c:forEach>
                             </td>
                             <td>
@@ -95,7 +95,7 @@
                 </table>
             </c:when>
             <c:otherwise>
-                <H5>Unfortunately ${author.concat()} has no books in our library</H5>
+                <H5>Unfortunately ${author.fullName()} has no books in our library</H5>
             </c:otherwise>
         </c:choose>
     </div>

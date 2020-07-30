@@ -1,5 +1,6 @@
 package ru.officelibrary.officelibrary.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,26 +15,27 @@ import javax.persistence.*;
 public class Role {
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column
     private String name;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long roleId) {
-        this.id = roleId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String roleName) {
-        this.name = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

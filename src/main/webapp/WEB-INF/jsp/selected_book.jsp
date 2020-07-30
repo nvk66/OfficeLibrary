@@ -28,7 +28,7 @@
                 <td>${book.authors}
                     <form:hidden path="name"/>
                     <c:forEach items="${book.authors}" var="author">
-                        <p><a href="/author/${author.id}/">${author.concat()}</a></p>
+                        <p><a href="/author/${author.id}/">${author.fullName()}</a></p>
                     </c:forEach>
                 </td>
             </tr>

@@ -1,14 +1,6 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>User</title>
-    <%@include file="boot.jsp" %>
+<%@include file="all_tag_libs.jsp"%>
 
-</head>
-<body>
 <div align="center">
-    <%@include file="navigation.jsp" %>
-
     <h2>User</h2>
     <security:authorize access="hasAuthority('Admin')">
         <h3><a href="/user/new/">New User</a></h3>
@@ -23,7 +15,6 @@
             <th>Role</th>
             <th>Actions</th>
         </tr>
-        <%--        <jsp:useBean id="listBook" scope="request" type="java.util.List"/>--%>
         <c:forEach items="${listUser}" var="user">
             <tr>
                 <td>${user.id}</td>
@@ -45,5 +36,3 @@
         </c:forEach>
     </table>
 </div>
-</body>
-</html>

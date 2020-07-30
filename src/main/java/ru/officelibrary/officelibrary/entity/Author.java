@@ -4,7 +4,6 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -20,19 +19,14 @@ public class Author implements Serializable, Comparable<Author> {
 
     @Id
     @NotNull
-    @ToString.Exclude
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    @NotNull
-    @NotBlank
     @Size(min=2, max= 40)
     private String name;
 
     @Column
-    @NotNull
-    @NotBlank
     @Size(min=2, max= 40)
     private String lastName;
 
@@ -45,9 +39,6 @@ public class Author implements Serializable, Comparable<Author> {
     private int birthYear;
 
     @Column
-    @NotNull
-    @ToString.Exclude
-    @NotBlank
     @Size(min=40, max= 10000)
     private String biography;
 
@@ -99,12 +90,12 @@ public class Author implements Serializable, Comparable<Author> {
         this.biography = biography;
     }
 
-    public String concat(){
+    public String fullName(){
         return this.lastName + " " + this.name + " " + this.patronymicName;
     }
 
     @Override
     public int compareTo(Author author) {
-        return this.concat().toLowerCase().compareTo(author.concat().toLowerCase());
+        return this.fullName().toLowerCase().compareTo(author.fullName().toLowerCase());
     }
 }

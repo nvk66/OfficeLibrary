@@ -4,5 +4,5 @@
 <div align="center">
 <h3>Sorry an exception occurred!</h3>
 
-Exception is: ${message} ${id}
+    Exception is: <p class="text-primary">${message} ${id}</p>
 </div>

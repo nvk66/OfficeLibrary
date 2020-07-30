@@ -63,7 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf()
-                .disable()
-                .rememberMe().key("uniqueAndSecret");
+                .disable();
     }
 }

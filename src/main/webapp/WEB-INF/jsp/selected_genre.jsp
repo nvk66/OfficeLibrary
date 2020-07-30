@@ -36,7 +36,7 @@
             <button type="button" class="btn btn-outline-warning">Edit</button>
         </a>
 
-        <a href="/genre/delete/${genre.id}/">
+        <a methods="POST" href="/genre/delete/${genre.id}/">
             <button type="button" class="btn btn-outline-danger">Delete</button>
         </a>
     </security:authorize>
@@ -60,7 +60,7 @@
                         <td onclick="window.location='http://localhost:8080/book/${book.id}/'">${book.name}</td>
                         <td>
                             <c:forEach items="${book.authors}" var="author">
-                                <p><a href="/author/${author.id}">${author.concat()}</a></p>
+                                <p><a href="/author/${author.id}">${author.fullName()}</a></p>
                             </c:forEach>
                         </td>
                         <td>

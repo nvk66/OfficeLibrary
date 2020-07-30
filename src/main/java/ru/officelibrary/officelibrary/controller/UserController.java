@@ -13,8 +13,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private final  RoleService roleService;
-    private final  UserService userService;
+    private final RoleService roleService;
+    private final UserService userService;
 
     public UserController(RoleService roleService, UserService userService) {
         this.roleService = roleService;
@@ -24,7 +24,7 @@ public class UserController {
     @RequestMapping("/user")
     public ModelAndView userHome() {
         List<User> listUser = userService.userList();
-        ModelAndView mav = new ModelAndView("user");
+        ModelAndView mav = new ModelAndView("userPage");
         mav.addObject("listUser", listUser);
         return mav;
     }
@@ -35,13 +35,13 @@ public class UserController {
         model.addObject("user", userDto);
         List<Role> roleList = roleService.roleList();
         model.addObject("roleList", roleList);
-        model.setViewName("form_user");
+        model.setViewName("userFormPage");
         return model;
     }
 
     @GetMapping("user/edit/{id}/")
     public ModelAndView editUserForm(@PathVariable long id) {
-        ModelAndView mav = new ModelAndView("form_user");
+        ModelAndView mav = new ModelAndView("userFormPage");
         User user = userService.getByID(id);
         UserDto userDto = new UserDto();
         userDto.setLastName(user.getLastName());
@@ -56,27 +56,14 @@ public class UserController {
 
     @PostMapping(value = "user/save")
     public ModelAndView saveUser(@ModelAttribute UserDto userDto) {
-        User user = new User();
-        user.setId(userDto.getId());
-        user.setLastName(userDto.getLastName());
-        user.setName(userDto.getName());
-        user.setPatronymicName(userDto.getPatronymicName());
-        user.setBirthDate(userDto.getBirthDate());
-        user.setRole(roleService.findRoleByIdList(userDto.getRoleIds()));
-        user.setPassword(userDto.getPassword());
-        user.setEmail(userDto.getEmail());
-        if (user.getId() == 0) {
-            userService.addUser(user);
-        } else {
-            userService.getByID(user.getId());
-        }
+        User user = userService.createUser(userDto);
         userService.addUser(user);
-        return new ModelAndView("redirect:/user");
+        return userHome();
     }
 
     @RequestMapping("user/delete/{id}/")
-    public String deleteUserForm(@PathVariable long id) {
+    public ModelAndView deleteUserForm(@PathVariable long id) {
         userService.deleteUser(id);
-        return "redirect:/user";
+        return userHome();
     }
 }

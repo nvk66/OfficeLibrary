@@ -73,7 +73,8 @@ public class BookController {
     }
 
     @PostMapping(value = "book/new/save")
-    public ModelAndView saveBook(@ModelAttribute Book book, BindingResult result, ModelAndView model) {
+    public ModelAndView saveBook(@ModelAttribute BookDto bookDto, BindingResult result, ModelAndView model) {
+        Book book = bookService.bookCreation(bookDto);
         bookValidator.validate(book, result);
         if (result.hasErrors()) {
             model.addObject("books", book);

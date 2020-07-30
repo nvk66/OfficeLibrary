@@ -2,6 +2,7 @@ package ru.officelibrary.officelibrary.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.officelibrary.officelibrary.dto.BookDto;
 import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
@@ -20,10 +21,12 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final AuthorService authorService;
+    private final GenreService genreService;
 
-    public BookService(BookRepository bookRepository, AuthorService authorService) {
+    public BookService(BookRepository bookRepository, AuthorService authorService, GenreService genreService) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
+        this.genreService = genreService;
     }
 
     public Book addBook(Book book) {
@@ -74,6 +77,15 @@ public class BookService {
             throw new SearchException(name, "Unfortunately our library has no book with name ");
         }
         return bookRepository.findBookByNameEquals(name);
+    }
+
+    public Book bookCreation(BookDto bookDto){
+        Book book = new Book();
+        book.setName(bookDto.getName());
+        book.setPublishingYear(bookDto.getPublishingYear());
+        book.setGenres(genreService.findGenreByIdList(bookDto.getGenreIds()));
+        book.setAuthors(authorService.findAuthorByIdList(bookDto.getAuthorIds()));
+        return book;
     }
 
 }
