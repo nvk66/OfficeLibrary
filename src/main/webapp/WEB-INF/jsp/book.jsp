@@ -5,6 +5,11 @@
     <security:authorize access="hasAuthority('Admin')">
         <h3><a href="/book/new/">New Book</a></h3>
     </security:authorize>
+    <form method="get" action="search">
+        <input type="text" name="keyword" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+        style="width: 100px"/>
+        <input type="submit" value="Search" class="btn btn-outline-info"/>
+    </form>
     <table border="1" cellpadding="5">
         <tr>
             <th>Actions</th>
@@ -15,7 +20,7 @@
         </tr>
         <c:forEach items="${listBook}" var="book">
             <tr>
-                <td width="30" height="30" onclick="window.location='http://localhost:8080/author/${book.id}/'">
+                <td width="30" height="30" onclick="window.location='http://localhost:8080/book/${book.id}/'">
                     <img src="/images/inspector.png" width="30" height="30"></td>
                 <td onclick="window.location='http://localhost:8080/book/${book.id}/'">${book.name}</td>
                 <td>

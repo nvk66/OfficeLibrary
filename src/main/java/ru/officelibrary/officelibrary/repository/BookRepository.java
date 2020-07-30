@@ -23,4 +23,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     List<Book> findBookByAuthorsIn(Set<Author> authors);
 
     List<Book> findBookByGenresIn(Set<Genre> genres);
+
+    List<Book> findBookByNameEquals(String name);
 }

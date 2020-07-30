@@ -76,4 +76,9 @@
         <put-attribute name="body" value="/WEB-INF/jsp/errorpage.jsp"/>
     </definition>
 
+    <definition name="searchResult" extends="base.definition">
+        <put-attribute name="title" value="Search results"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/search.jsp"/>
+    </definition>
+
 </tiles-definitions>

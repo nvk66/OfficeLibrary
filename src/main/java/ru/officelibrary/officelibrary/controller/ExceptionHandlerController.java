@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.exception.ReservationException;
+import ru.officelibrary.officelibrary.exception.SearchException;
 import ru.officelibrary.officelibrary.service.BookService;
 
 @Log4j2
@@ -23,12 +24,22 @@ public class ExceptionHandlerController {
     public ModelAndView impossibleToBookABook(ReservationException e){
         String errorMessage = e.getMessage();
         Book book = bookService.get(e.getId());
-//        long id = e.getId();
         log.error(errorMessage, e);
         ModelAndView model = new ModelAndView();
         model.setViewName(errorView);
         model.addObject("message", errorMessage);
-        model.addObject("id", book);
+        model.addObject("id", book.getName());
+        return model;
+    }
+
+    @ExceptionHandler(SearchException.class)
+    public ModelAndView impossibleToFindABook(SearchException e){
+        String errorMessage = e.getErrMessage();
+        log.error(errorMessage, e);
+        ModelAndView model = new ModelAndView();
+        model.setViewName(errorView);
+        model.addObject("message", errorMessage);
+        model.addObject("id", e.getSearchRequest());
         return model;
     }
 }

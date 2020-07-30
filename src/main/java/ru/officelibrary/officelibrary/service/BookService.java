@@ -6,6 +6,7 @@ import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
 import ru.officelibrary.officelibrary.exception.ReservationException;
+import ru.officelibrary.officelibrary.exception.SearchException;
 import ru.officelibrary.officelibrary.repository.BookRepository;
 
 import java.util.Collections;
@@ -17,27 +18,27 @@ import java.util.Set;
 @Transactional
 public class BookService {
 
-    private final  BookRepository bookRepository;
-    private final  AuthorService authorService;
+    private final BookRepository bookRepository;
+    private final AuthorService authorService;
 
     public BookService(BookRepository bookRepository, AuthorService authorService) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
     }
 
-    public Book addBook(Book book){
+    public Book addBook(Book book) {
         return bookRepository.save(book);
     }
 
-    public void deleteBook(long id){
+    public void deleteBook(long id) {
         bookRepository.delete(get(id));
     }
 
-    public Book get(long id){
+    public Book get(long id) {
         return bookRepository.findById(id).get();
     }
 
-    public List<Book> getAll(){
+    public List<Book> getAll() {
         return (List<Book>) bookRepository.findAll();
     }
 
@@ -47,18 +48,18 @@ public class BookService {
         return bookRepository.search(authors);
     }
 
-    public Book findBookById(String ids){
+    public Book findBookById(String ids) {
         return bookRepository.findBookById(ids);
     }
 
 
-    public List<Book> findBookByAuthor(Author author){
+    public List<Book> findBookByAuthor(Author author) {
         HashSet<Author> authors = new HashSet<>();
         authors.add(author);
         return bookRepository.findBookByAuthorsIn(authors);
     }
 
-    public List<Book> findBookByGenre(Genre genre){
+    public List<Book> findBookByGenre(Genre genre) {
         return bookRepository.findBookByGenresIn(Collections.singleton(genre));
     }
 
@@ -67,4 +68,12 @@ public class BookService {
             return true;
         else throw new ReservationException(id, "Someone has already taken book ");
     }
+
+    public List<Book> findBookByNameEquals(String name) throws SearchException {
+        if (bookRepository.findBookByNameEquals(name).isEmpty()) {
+            throw new SearchException(name, "Unfortunately our library has no book with name ");
+        }
+        return bookRepository.findBookByNameEquals(name);
+    }
+
 }

@@ -13,6 +13,7 @@ import ru.officelibrary.officelibrary.entity.Book;
 import ru.officelibrary.officelibrary.entity.Genre;
 import ru.officelibrary.officelibrary.entity.History;
 import ru.officelibrary.officelibrary.exception.ReservationException;
+import ru.officelibrary.officelibrary.exception.SearchException;
 import ru.officelibrary.officelibrary.service.*;
 import ru.officelibrary.officelibrary.validator.BookValidator;
 
@@ -125,6 +126,14 @@ public class BookController {
         model.addObject("status", "Busy");
         model.setViewName("historyFormPage");
         return model;
+    }
+
+    @RequestMapping("/book/search")
+    public ModelAndView search(@RequestParam String keyword) throws SearchException {
+        List<Book> result = bookService.findBookByNameEquals(keyword);
+        ModelAndView mav = new ModelAndView("searchResult");
+        mav.addObject("result", result);
+        return mav;
     }
 
     @PostMapping("/book/reserve/{id}/save")
