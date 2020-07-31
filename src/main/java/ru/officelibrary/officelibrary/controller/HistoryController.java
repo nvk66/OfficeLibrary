@@ -5,12 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ru.officelibrary.officelibrary.common.BookStatus;
 import ru.officelibrary.officelibrary.entity.History;
 import ru.officelibrary.officelibrary.service.HistoryService;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -38,14 +36,12 @@ public class HistoryController {
     }
 
     @GetMapping(value = "history/return/{id}")
-    public String returnBook(@PathVariable String id) {
+    public ModelAndView returnBook(@PathVariable String id) {
         History history = historyService.getById(Long.parseLong(id));
-        history.setStats("Free");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-        history.setReturnDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
+        history.setStats(String.valueOf(BookStatus.FREE));
+        history.setReturnDate(historyService.getCurrentDate());
         historyService.addHistory(history);
-        return "redirect:/history";
+        return historyHome();
     }
 
 }

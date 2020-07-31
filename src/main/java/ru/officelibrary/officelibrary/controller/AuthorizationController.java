@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ru.officelibrary.officelibrary.dto.UserDto;
-import ru.officelibrary.officelibrary.entity.User;
 import ru.officelibrary.officelibrary.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,10 +33,9 @@ public class AuthorizationController {
 
     @PostMapping("/registration")
     public ModelAndView registerUserAccount
-            (@ModelAttribute("user") @Valid UserDto userDto,
-             HttpServletRequest request, Errors errors) {
+            (@ModelAttribute("user") @Valid UserDto userDto, HttpServletRequest request, Errors errors) {
         try {
-            User registered = userService.registerNewUserAccount(userDto);
+            userService.registerNewUserAccount(userDto);
         } catch (Exception uaeEx) {
             log.error("There was an exception in attempt to save user");
             return new ModelAndView().addObject("message",

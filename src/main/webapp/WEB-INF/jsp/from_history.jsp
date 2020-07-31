@@ -35,11 +35,6 @@
                                 <form:hidden path="user"/></td>
                         </tr>
                         <tr>
-                            <td>Status:</td>
-                            <td>${status}
-                                <form:hidden path="stats"/></td>
-                        </tr>
-                        <tr>
                             <td>StartDate:</td>
                             <td>${reservation.startDate}
                                 <form:hidden id="datepicker" path="startDate"/></td>

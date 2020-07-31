@@ -5,7 +5,7 @@ public abstract class AbstractValidator {
     private final int minLength = 3;
     private final int maxLength = 40;
 
-    protected static String patternForName = "[a-zA-zА-Яа-я\\-]+";
+    private static String patternForName = "[a-zA-zА-Яа-я\\-]+";
 
     public String getPatternForName() {
         return patternForName;

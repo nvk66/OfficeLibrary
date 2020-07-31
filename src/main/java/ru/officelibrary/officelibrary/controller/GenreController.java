@@ -40,7 +40,7 @@ public class GenreController {
     @RequestMapping(value = "/genre/", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView createNewGenre(ModelAndView model, BindingResult result) {
         Genre genre = new Genre();
-        model.addObject("genres", genre);
+        model.addObject("genre", genre);
         model.setViewName("genreFormPage");
         return model;
     }

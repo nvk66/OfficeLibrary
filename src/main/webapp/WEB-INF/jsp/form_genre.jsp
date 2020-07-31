@@ -20,7 +20,7 @@
 <div align="center">
     <h2><a href="/genre">Genres</a></h2>
     <h1>New/Edit Genre</h1>
-    <form:form action="/genre/save/" method="post" modelAttribute="genres">
+    <form:form action="/genre/save/" method="post" modelAttribute="genre">
         <form:errors path="*" cssClass="errorblock" element="div"/>
         <c:if test="${fn:length(error) > 0}">
             <div class="error">

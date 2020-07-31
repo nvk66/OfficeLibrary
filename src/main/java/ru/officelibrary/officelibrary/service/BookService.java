@@ -2,6 +2,7 @@ package ru.officelibrary.officelibrary.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.officelibrary.officelibrary.common.BookStatus;
 import ru.officelibrary.officelibrary.dto.BookDto;
 import ru.officelibrary.officelibrary.entity.Author;
 import ru.officelibrary.officelibrary.entity.Book;
@@ -67,24 +68,28 @@ public class BookService {
     }
 
     public boolean isItPossibleToBookABook(long id) throws ReservationException {
-        if (get(id).getStats().equals("Free"))
+        if (get(id).getStats().equals(String.valueOf(BookStatus.FREE))) {
             return true;
-        else throw new ReservationException(id, "Someone has already taken book ");
+        } else {
+            throw new ReservationException(id, "Someone has already taken book ");
+        }
     }
 
     public List<Book> findBookByNameEquals(String name) throws SearchException {
         if (bookRepository.findBookByNameEquals(name).isEmpty()) {
             throw new SearchException(name, "Unfortunately our library has no book with name ");
+        } else {
+            return bookRepository.findBookByNameEquals(name);
         }
-        return bookRepository.findBookByNameEquals(name);
     }
 
-    public Book bookCreation(BookDto bookDto){
+    public Book bookCreation(BookDto bookDto) {
         Book book = new Book();
         book.setName(bookDto.getName());
         book.setPublishingYear(bookDto.getPublishingYear());
         book.setGenres(genreService.findGenreByIdList(bookDto.getGenreIds()));
         book.setAuthors(authorService.findAuthorByIdList(bookDto.getAuthorIds()));
+        book.setStats(String.valueOf(BookStatus.FREE));
         return book;
     }
 

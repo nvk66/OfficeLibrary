@@ -56,7 +56,7 @@ public class AuthorController {
     public ModelAndView saveAuthor(@ModelAttribute Author author, BindingResult result, ModelAndView model) {
         authorValidator.validate(author, result);
         if (result.hasErrors()) {
-            model.addObject("authors", author);
+            model.addObject("author", author);
             model.addObject("error", "Input error");
             model.setViewName("authorFormPage");
             return model;
@@ -66,7 +66,7 @@ public class AuthorController {
             return authorHome();
         } catch (Exception e) {
             log.error("There was an exception in attempt to save author");
-            model.addObject("authors", author);
+            model.addObject("author", author);
             model.addObject("error", e.getMessage());
             model.setViewName("authorFormPage");
             return model;

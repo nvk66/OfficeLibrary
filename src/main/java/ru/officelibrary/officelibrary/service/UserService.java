@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.officelibrary.officelibrary.dto.UserDto;
+import ru.officelibrary.officelibrary.entity.Role;
 import ru.officelibrary.officelibrary.entity.User;
 import ru.officelibrary.officelibrary.repository.RoleRepository;
 import ru.officelibrary.officelibrary.repository.UserRepository;
@@ -99,5 +100,16 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
         return user;
+    }
+
+    public UserDto getUserDto(User user){
+        UserDto userDto = new UserDto();
+        userDto.setLastName(user.getLastName());
+        userDto.setPatronymicName(user.getPatronymicName());
+        userDto.setName(user.getName());
+        userDto.setBirthDate(user.getBirthDate());
+        userDto.setId(user.getId());
+        userDto.setRoleIds((String[]) user.getRoles().stream().map(Role::getId).toArray());
+        return userDto;
     }
 }

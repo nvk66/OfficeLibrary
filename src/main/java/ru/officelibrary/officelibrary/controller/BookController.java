@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.officelibrary.officelibrary.common.BookStatus;
 import ru.officelibrary.officelibrary.dto.BookDto;
 import ru.officelibrary.officelibrary.dto.HistoryDto;
 import ru.officelibrary.officelibrary.entity.Author;
@@ -17,9 +18,6 @@ import ru.officelibrary.officelibrary.exception.SearchException;
 import ru.officelibrary.officelibrary.service.*;
 import ru.officelibrary.officelibrary.validator.BookValidator;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -109,22 +107,16 @@ public class BookController {
 
     @GetMapping("/book/reserve/{id}/")
     public ModelAndView newReservationForm(ModelAndView model, @PathVariable long id) throws ReservationException {
+        bookService.isItPossibleToBookABook(id);
         HistoryDto historyDto = new HistoryDto();
-        if (!bookService.isItPossibleToBookABook(id)) {
-            throw new ReservationException();
-        }
         historyDto.setBook(String.valueOf(id));
-        long userId = userService.getUserId();
-        historyDto.setUser(String.valueOf(userId));
-        historyDto.setStats("busy");
-        bookService.get(id).setStats("Busy");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-        historyDto.setStartDate(Date.valueOf(simpleDateFormat.format(calendar.getTime())));
+        historyDto.setUser(String.valueOf(userService.getUserId()));
+        historyDto.setStats(String.valueOf(BookStatus.BUSY));
+        historyDto.setStartDate(historyService.getCurrentDate());
+        bookService.get(id).setStats(String.valueOf(BookStatus.BUSY));
         model.addObject("reservation", historyDto);
         model.addObject("book", bookService.get(id));
-        model.addObject("user", userService.getByID(userId));
-        model.addObject("status", "Busy");
+        model.addObject("user", userService.getByID(userService.getUserId()));
         model.setViewName("historyFormPage");
         return model;
     }
@@ -139,18 +131,7 @@ public class BookController {
 
     @PostMapping("/book/reserve/{id}/save")
     public ModelAndView saveReservation(@ModelAttribute HistoryDto historyDto, @PathVariable long id) {
-        History history = new History();
-        history.setUser(userService.getByID(Long.parseLong(historyDto.getUser())));
-        history.setBook(bookService.get(Long.parseLong(historyDto.getBook())));
-        history.setStartDate(historyDto.getStartDate());
-        history.setDueDate(historyDto.getDueDate());
-        history.setStats(historyDto.getStats());
-        history.setId(historyDto.getHistoryId());
-        if (history.getId() == 0) {
-            historyService.addHistory(history);
-        } else {
-            historyService.getById(history.getId());
-        }
+        History history = historyService.createHistoryRecord(historyDto, id);
         historyService.addHistory(history);
         return bookHome();
     }

@@ -42,15 +42,7 @@ public class UserController {
     @GetMapping("user/edit/{id}/")
     public ModelAndView editUserForm(@PathVariable long id) {
         ModelAndView mav = new ModelAndView("userFormPage");
-        User user = userService.getByID(id);
-        UserDto userDto = new UserDto();
-        userDto.setLastName(user.getLastName());
-        userDto.setPatronymicName(user.getPatronymicName());
-        userDto.setName(user.getName());
-        userDto.setBirthDate(user.getBirthDate());
-        userDto.setId(user.getId());
-        userDto.setRoleIds((String[]) user.getRoles().stream().map(Role::getId).toArray());
-        mav.addObject("user", userDto);
+        mav.addObject("user", userService.getUserDto(userService.getByID(id)));
         return mav;
     }
 
