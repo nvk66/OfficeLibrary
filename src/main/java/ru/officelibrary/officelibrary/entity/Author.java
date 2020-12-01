@@ -23,15 +23,15 @@ public class Author implements Serializable, Comparable<Author> {
     private long id;
 
     @Column
-    @Size(min=2, max= 40)
+    @Size(min = 2, max = 40)
     private String name;
 
     @Column
-    @Size(min=2, max= 40)
+    @Size(min = 2, max = 40)
     private String lastName;
 
     @Column
-    @Size(max= 40)
+    @Size(max = 40)
     private String patronymicName;
 
     @Column
@@ -39,7 +39,7 @@ public class Author implements Serializable, Comparable<Author> {
     private int birthYear;
 
     @Column
-    @Size(min=40, max= 10000)
+    @Size(min = 40, max = 10000)
     private String biography;
 
     public long getId() {
@@ -90,7 +90,7 @@ public class Author implements Serializable, Comparable<Author> {
         this.biography = biography;
     }
 
-    public String fullName(){
+    public String fullName() {
         return this.lastName + " " + this.name + " " + this.patronymicName;
     }
 

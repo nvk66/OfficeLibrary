@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "genres")
-public class Genre implements Serializable, Comparable<Genre>{
+public class Genre implements Serializable, Comparable<Genre> {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)

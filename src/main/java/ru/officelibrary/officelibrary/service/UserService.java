@@ -46,24 +46,24 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
-    public User getByID(long id){
+    public User getByID(long id) {
         return userRepository.findById(id).get();
     }
 
-    public User findUserByIdId(String ids){
+    public User findUserByIdId(String ids) {
         return userRepository.findUserById(ids);
     }
 
-    public User findUserByEmail(String email){
+    public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
 
-    private boolean isUserExists(String email){
+    private boolean isUserExists(String email) {
         return userRepository.findUserByEmail(email) != null;
     }
 
-    public User registerNewUserAccount(UserDto userDto) throws IllegalArgumentException{
-        if (isUserExists(userDto.getEmail())){
+    public User registerNewUserAccount(UserDto userDto) throws IllegalArgumentException {
+        if (isUserExists(userDto.getEmail())) {
             log.error("There is an account with that email address:{}", userDto.getEmail());
             throw new IllegalArgumentException("There is an account with that email address:" + userDto.getEmail());
         }
@@ -78,18 +78,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public long getUserId(){
+    public long getUserId() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = null;
         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
         } else {
             username = principal.toString();
         }
         return findUserByEmail(username).getId();
     }
 
-    public User createUser(UserDto userDto){
+    public User createUser(UserDto userDto) {
         User user = new User();
         user.setId(userDto.getId());
         user.setLastName(userDto.getLastName());
@@ -102,7 +102,7 @@ public class UserService {
         return user;
     }
 
-    public UserDto getUserDto(User user){
+    public UserDto getUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setLastName(user.getLastName());
         userDto.setPatronymicName(user.getPatronymicName());

@@ -45,7 +45,7 @@ public class AuthorizationController {
     }
 
     @PostMapping("/")
-    public String afterLogin(){
+    public String afterLogin() {
         return "index";
     }
 }

@@ -30,7 +30,7 @@ public class BookValidator implements Validator {
             }
         }
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        if (book.getPublishingYear() < -2000 || book.getPublishingYear() > year){
+        if (book.getPublishingYear() < -2000 || book.getPublishingYear() > year) {
             errors.reject("publishingYear", "Input error");
         }
     }

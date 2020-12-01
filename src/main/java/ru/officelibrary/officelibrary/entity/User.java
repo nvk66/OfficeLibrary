@@ -39,20 +39,20 @@ public class User implements Serializable {
     private Date birthDate;
 
     @NotNull
-    @ManyToMany(fetch=FetchType.EAGER,
-            cascade= {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
                     CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> role;
 
-    @Column(name ="email")
+    @Column(name = "email")
     @NotNull
     @NotEmpty
     @Size(min = 5, max = 50)
     private String email;
 
-    @Column(name ="password")
+    @Column(name = "password")
     @NotNull
     @NotEmpty
     @Size(min = 8, max = 1000)
@@ -107,7 +107,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String userInfo (){
+    public String userInfo() {
         return lastName + " " + name + " " + patronymicName;
     }
 

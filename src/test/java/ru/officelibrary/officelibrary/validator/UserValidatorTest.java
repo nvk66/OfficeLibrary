@@ -19,7 +19,7 @@ class UserValidatorTest {
     }
 
     @Test
-    public void nameValidator(){
+    public void nameValidator() {
         error = new BeanPropertyBindingResult(user, "user");
         user.setName("");
         userValidator.validate(user, error);
@@ -52,7 +52,7 @@ class UserValidatorTest {
     }
 
     @Test
-    public void lastNameValidator(){
+    public void lastNameValidator() {
         error = new BeanPropertyBindingResult(user, "user");
         user.setLastName("");
         userValidator.validate(user, error);
@@ -85,7 +85,7 @@ class UserValidatorTest {
     }
 
     @Test
-    public void patNameValidator(){
+    public void patNameValidator() {
         user.setPatronymicName(null);
         error = new BeanPropertyBindingResult(user, "user");
         userValidator.validate(user, error);

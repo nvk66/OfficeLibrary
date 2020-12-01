@@ -19,23 +19,23 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    public Author addAuthor(Author author){
+    public Author addAuthor(Author author) {
         return authorRepository.save(author);
     }
 
-    public void deleteAuthor(long id){
+    public void deleteAuthor(long id) {
         authorRepository.delete(get(id));
     }
 
-    public Author get(long id){
+    public Author get(long id) {
         return authorRepository.findById(id).get();
     }
 
-    public List<Author> getAll(){
+    public List<Author> getAll() {
         return (List<Author>) authorRepository.findAll();
     }
 
-    public Set<Author> findAuthorByIdList(String [] ids){
+    public Set<Author> findAuthorByIdList(String[] ids) {
         return authorRepository.findAuthorsByIdList(Stream.of(ids).map(Long::valueOf).collect(Collectors.toList()));
     }
 

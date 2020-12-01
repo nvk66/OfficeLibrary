@@ -21,7 +21,7 @@ class AuthorValidatorTest {
     }
 
     @Test
-    public void nameValidator(){
+    public void nameValidator() {
         error = new BeanPropertyBindingResult(author, "author");
         author.setName("");
         authorValidator.validate(author, error);
@@ -54,7 +54,7 @@ class AuthorValidatorTest {
     }
 
     @Test
-    public void lastNameValidator(){
+    public void lastNameValidator() {
         error = new BeanPropertyBindingResult(author, "author");
         author.setLastName("");
         authorValidator.validate(author, error);
@@ -87,7 +87,7 @@ class AuthorValidatorTest {
     }
 
     @Test
-    public void patNameValidator(){
+    public void patNameValidator() {
         author.setPatronymicName(null);
         error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);
@@ -110,7 +110,7 @@ class AuthorValidatorTest {
     }
 
     @Test
-    public void bioValidator(){
+    public void bioValidator() {
         author.setBiography("I was born in the heart of Siberia with an awesome smile");
         error = new BeanPropertyBindingResult(author, "author");
         authorValidator.validate(author, error);

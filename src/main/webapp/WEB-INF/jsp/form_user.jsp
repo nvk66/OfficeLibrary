@@ -1,4 +1,3 @@
-
 <%@include file="all_tag_libs.jsp" %>
 
 <html>
@@ -7,18 +6,18 @@
     <title>New/Edit User</title>
     <%@include file="boot.jsp" %>
 
-<%--    --%>
+    <%--    --%>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd', maxDate: '-3650' });
-        } );
+        $(function () {
+            $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', maxDate: '-3650'});
+        });
     </script>
-<%--    --%>
+    <%--    --%>
 </head>
 <body>
 <div align="center">
@@ -47,9 +46,10 @@
                             <td><form:input id="datepicker" path="birthDate"/></td>
                         </tr>
                         <tr>
-                            <td>Role: </td>
+                            <td>Role:</td>
                             <td>
-                                <form:select path="roleIds" items="${roleList}" multiple="true" itemLabel="name" itemValue="id"/>
+                                <form:select path="roleIds" items="${roleList}" multiple="true" itemLabel="name"
+                                             itemValue="id"/>
                             </td>
                         </tr>
                         <tr>

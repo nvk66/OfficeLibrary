@@ -24,7 +24,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(ReservationException.class)
-    public ModelAndView impossibleToBookABook(ReservationException e){
+    public ModelAndView impossibleToBookABook(ReservationException e) {
         String errorMessage = e.getMessage();
         Book book = bookService.get(e.getId());
         logger.error(errorMessage, e);
@@ -36,7 +36,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(SearchException.class)
-    public ModelAndView impossibleToFindABook(SearchException e){
+    public ModelAndView impossibleToFindABook(SearchException e) {
         String errorMessage = e.getErrMessage();
         logger.error(errorMessage, e);
         ModelAndView model = new ModelAndView();

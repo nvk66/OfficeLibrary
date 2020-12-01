@@ -1,4 +1,4 @@
-<%@include file="all_tag_libs.jsp"%>
+<%@include file="all_tag_libs.jsp" %>
 <div align="center">
     <h2>Authors</h2>
     <security:authorize access="hasAuthority('Admin')">

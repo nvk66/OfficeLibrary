@@ -6,8 +6,9 @@
         <h3><a href="/book/new/">New Book</a></h3>
     </security:authorize>
     <form method="get" action="search">
-        <input type="text" name="keyword" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-        style="width: 100px"/>
+        <input type="text" name="keyword" class="form-control" aria-label="Small"
+               aria-describedby="inputGroup-sizing-sm"
+               style="width: 100px"/>
         <input type="submit" value="Search" class="btn btn-outline-info"/>
     </form>
     <table border="1" cellpadding="5">

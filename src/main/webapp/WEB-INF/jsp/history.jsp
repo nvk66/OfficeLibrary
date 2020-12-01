@@ -1,5 +1,5 @@
-<%@include file="all_tag_libs.jsp"%>
-<%@include file="boot.jsp"%>
+<%@include file="all_tag_libs.jsp" %>
+<%@include file="boot.jsp" %>
 <div align="center">
     <h2>Reservation History</h2>
     <h3><a href="/history/new/">Create new reservation</a></h3>

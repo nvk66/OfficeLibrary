@@ -1,6 +1,6 @@
 package ru.officelibrary.officelibrary.exception;
 
-public class SearchException extends Exception{
+public class SearchException extends Exception {
     private String searchRequest;
     private String errMessage;
 

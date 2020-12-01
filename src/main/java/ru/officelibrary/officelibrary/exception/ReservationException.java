@@ -1,6 +1,6 @@
 package ru.officelibrary.officelibrary.exception;
 
-public class ReservationException extends Exception{
+public class ReservationException extends Exception {
     private long id;
     private String errMessage;
 

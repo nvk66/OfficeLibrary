@@ -28,14 +28,14 @@ public class MyUserDetailsService implements UserDetailsService {
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(
-                    "No user found with username: "+ email);
+                    "No user found with username: " + email);
         }
         return new org.springframework.security.core.userdetails.User
                 (user.getEmail(), user.getPassword(), true, true,
                         true, true, getAuthorities(user.getRoles()));
     }
 
-    private static List<GrantedAuthority> getAuthorities (List<Role> roles) {
+    private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));

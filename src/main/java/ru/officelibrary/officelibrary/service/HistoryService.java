@@ -26,29 +26,29 @@ public class HistoryService {
         this.bookService = bookService;
     }
 
-    public History addHistory(History history){
+    public History addHistory(History history) {
         return historyRepository.save(history);
     }
 
-    public History getById(long id){
+    public History getById(long id) {
         return historyRepository.findById(id).get();
     }
 
-    public List<History> getAll(){
+    public List<History> getAll() {
         return (List<History>) historyRepository.findAll();
     }
 
-    public List<History> findAllByStatsEqualsBusy(){
+    public List<History> findAllByStatsEqualsBusy() {
         return historyRepository.findAllByStatsEquals(String.valueOf(BookStatus.BUSY));
     }
 
-    public Date getCurrentDate(){
+    public Date getCurrentDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         Calendar calendar = Calendar.getInstance();
         return Date.valueOf(simpleDateFormat.format(calendar.getTime()));
     }
 
-    public History createHistoryRecord(HistoryDto historyDto, long id){
+    public History createHistoryRecord(HistoryDto historyDto, long id) {
         History history = new History();
         history.setUser(userService.getByID(Long.parseLong(historyDto.getUser())));
         history.setBook(bookService.get(id));
